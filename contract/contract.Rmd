@@ -6,9 +6,58 @@ output: github_document
 
 ## Goals:
 
-* What are our team goals for this project?
-* What do we want to accomplish?
-* What skills do we want to develop or refine?
+DCS 210: Programing for Data Analysis and Visualization
+Annie Li, Ethan Wu, and Matt Clayton
+Professor Baker
+October 2021
+Team Contract
+
+Team Goals:
+Learn more about a topic that interests all group members
+Create something that we are all proud of 
+Help each other grow as students and coders :)
+
+What Do We Want To Accomplish?:
+To effectively convey a correlation between variables in a dataset to the audience
+Communicate data in a way that makes sense 
+Make it easy for any audience to understand our results
+Significantly enhance our own understanding of the material
+
+Skills We Want To Develop/Refine:
+Presenting data in the best way possible 
+Communicating data to an audience that has less knowledge about the topic than we do as the researchers
+Optimizing time spent on code and intended result
+Code formatting
+A better understanding of how to visualize data
+
+Team Expectations:
+Get work done on time, and avoid waiting until the last minute
+Schedule meetings ahead of time and be prepared to bring ideas to every meeting
+Communicate via text group chat and notify each other if any new changes were made
+Respect each other’s ideas and give constructive criticism
+
+
+Policies and Procedures:
+
+* What rules can we agree on to help us meet our goals and expectations?
+To respect the team expectations
+Check in with each other via email or text throughout the week
+Show up to group meetings, if unable to do so, notify the group beforehand 
+
+Consequences:
+
+* How will we address non-performance regarding these goals, expectations, policies and procedures?
+
+Constant nagging from other teammates
+An extra call or text
+More in-person meetings
+Tell them to look at the team expectations
+More in-person meetings
+More nagging
+
+
+Signatures: Ethan Wu, Matt Clayton, Annie Li
+		
 
 ## Expectations:
 
