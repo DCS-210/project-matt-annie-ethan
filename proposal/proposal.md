@@ -7,8 +7,12 @@ library(tidyverse)
 library(broom)
 ```
 
-## 1\. Introduction
+## 1. Introduction
 
-## 2\. Data
+## 2. Data
 
-## 3\. Data analysis plan
+``` r
+alldata <- read_csv("filtereddata.csv")
+```
+
+## 3. Data analysis plan

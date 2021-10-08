@@ -15,6 +15,9 @@ library(broom)
 
 ## 2. Data
 
+```{r load-data, message = FALSE}
+alldata <- read_csv("filtereddata.csv")
+```
 
 
 ## 3. Data analysis plan
