@@ -17,6 +17,10 @@ library(broom)
 
 ```{r load-data, message = FALSE}
 alldata <- read_csv("filtereddata.csv")
+alldataunfiltered <- read_csv("unfiltereddata.csv")
+
+glimpse(alldata)
+glimpse(alldataunfiltered) #includes data for all exoplanets
 ```
 
 
