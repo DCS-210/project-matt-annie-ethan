@@ -12,8 +12,8 @@ library(broom)
 ## 2. Data
 
 ``` r
-alldata <- read_csv("filtereddata.csv")
-alldataunfiltered <- read_csv("unfiltereddata.csv")
+alldata <- read_csv("/cloud/project/data/filtereddata.csv")
+alldataunfiltered <- read_csv("/cloud/project/data/unfiltereddata.csv")
 
 glimpse(alldata)
 ```
