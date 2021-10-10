@@ -11,6 +11,28 @@ library(broom)
 
 ## 1. Introduction
 
+General research question: What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration? Do trends suggest that we diverge and discover an infinite number of exoplanets or do they converge to a finite number? If they converge, what is that number?
+
+
+Sub questions: 
+
+1. How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility, distance from earth, and….)?
+
+2. How does the number of discoveries vary across countries and how does the result relate to the country’s gdp?
+
+3. Has the average distance of exoplanet discovery increased over time, and if so, can we expect to see the pace of discovery decrease in the future due to the constraints of our current technology?
+
+4. Comparing earth’s temperature/surface gravity/eccentricity with that of the exoplanets - possibly something related to habitability?
+
+5. Is the rate at which we invent new technology for finding exoplanets increasing or decreasing?
+
+6. How much are exoplanet discoveries affected by new technology?
+
+7 . How many discoveries can we expect in the near future? 5-20 years? given the current pace of discovery, and the possibility of innovative technological advancements? 
+
+The data set that we have chosen to use is NASA Exoplanet Archives Planet Systems dataset. Our data comes from The Planetary Systems Composite Parameters Planet Data table that is publicly available on the NASA Exoplanet Archive website. The data sets consist of a compilation of system, stellar, and planetary parameters for known confirmed exoplanets, and we have chosen 23 variables that we believe will be relevant to answering our research question (e.g. discovery year, discovery facility, planet radius, and distance from earth). We decided to use this data to create two data frames for our project where one includes unfiltered data with missing values under many variables except the discovery year, and the other one includes filtered data for all 23 variables. These data include stellar parameters (such as positions and magnitude), exoplanet parameters (such as masses and orbital parameters), and discovery/characterization data (such as radial velocity curves and photometric light curves).
+
+The data that we are using is a compilation of data from many different exoplanet transit survey programs from all around the world (and over the world!). Some of the programs utilize facilities that are based on the ground, while others utilize facilities/machinery that are located in space. Some of the most notable programs include the Kepler space mission (Kepler public service data), the K2 space mission (K2 public service data), and the CoRoT space mission (CoRot exoplanet survey data).
 
 
 ## 2. Data
@@ -26,5 +48,42 @@ glimpse(alldataunfiltered) #includes data for all exoplanets
 
 ## 3. Data analysis plan
 
+### Outcome and Predictor Variables
 
+Y = number of exoplanets discovered each year, X = disc_year, use group by & summarise
+
+Other explanatory variables may include average distance of discovery, average mass of discovery, and method of discovery.
+
+### Preliminary Analysis & Summary Stats.
+
+```{r types-of-discovery-methods}
+alldata %>%
+  count(discoverymethod, sort = TRUE)
+```
+
+The table above shows us the most common methods of exoplanet discovery. This will be helpful later in our analysis when we consider the constraints of modern technology on the discovery of new exoplanets.
+
+```{r discovery-distance-over-time}
+alldata %>%
+  ggplot(mapping = aes(
+                        x = disc_year,
+                        y = sy_distance,
+                        color = pl_mass)) +
+  geom_jitter() +
+  geom_smooth(color = "black") +
+  labs(
+        x = "Year of Discovery",
+        y = "Distance of Discovery (Parsecs)", 
+        title = "Distance of Exoplanet Discovery Over Time",
+        subtitle="By Mass of Exoplanet Discovered" ) 
+
+```
+
+The plot above maps the discovery distance of exoplanets over time to determine if there is a trend in the discovery distance of exoplanets. Surprisingly, it seems that the average distance of discovery has been decreasing over time since roughly 2012-2013. This will be important to consider later in our analysis when we discuss whether the distance of an exoplanet from the discovery facility makes it more difficult to discover.
+
+### Statistical Methods
+
+One statistical method that we will be using, at least in the preliminary stages of the project, will be using data taken over time to determine a trend (rate of discovery), and then using various calculations and predictive methods to estimate the same trend in the future. This will likely take the form of a line plot (plotting exoplanet discoveries over time) or a scatter plot in which we find a line of best fit. We will then extend the line past the scope of our data and aim to provide three estimates/predictions. We will provide an upper bound (overestimate), a lower bound (low estimate), and a middle estimate. We will rely on prior trends in the data, as well as any other takeaways we get from our summary statistics to estimate the future trend.
+
+We are also considering a regression-based analysis to determine the factors that have the largest impact on exoplanet discovery. Though we have not learned how to use regression-based modelling features in RStudio, we aim to try to incorporate it into our work.
 
