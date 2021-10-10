@@ -1,6 +1,6 @@
 ---
-title: Project title
-author: by Team name
+title: README
+author: by Annie, Matt, and Ethan
 output: github_document
 ---
 
@@ -29,9 +29,18 @@ Our presentation can be found [here](presentation/presentation.html).
 
 ## Data 
 
-Include a citation for your data here. 
-See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
-If you got your data off the web, make sure to note the retrieval date.
+Data Citation:
+
+California Institute of Technology, 2021, Planetary Systems, electronic dataset, NASA Exoplanet Archive, doi:10.26133/NEA12.
+
+This research has made use of the NASA Exoplanet Archive, which is operated by the California Institute of Technology, under contract with the National Aeronautics and Space Administration under the Exoplanet Exploration Program.
+
+"This table displays all solutions for planet and host stars, regardless of their relationship. This includes atypical systems such as free-floating planets and those with multiple stars. This table also contains Kepler, K2, and TESS candidate solutions for confirmed planet systems, a nearly complete identification of published stellar companions, and projected and true planet obliquities.
+This table replaced the Confirmed Planets and Extended Planet Data tables, which was retired in April 2021. Some user interface elements in this table are different from other Exoplanet Archive interactive tables."
+
+https://exoplanetarchive.ipac.caltech.edu/docs/doi.html 
+
+
 
 ## References
 
