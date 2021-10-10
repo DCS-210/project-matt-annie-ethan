@@ -22,7 +22,7 @@ Sub questions:
 
 3. Has the average distance of exoplanet discovery increased over time, and if so, can we expect to see the pace of discovery decrease in the future due to the constraints of our current technology?
 
-4. Comparing earth’s temperature/surface gravity/eccentricity with that of the exoplanets - possibly something related to habitability?
+4. How does earth’s temperature/surface gravity/eccentricity differ from that of the exoplanets, and what conclusion can we draw from the result about the degree of habitability of exoplanets?
 
 5. Is the rate at which we invent new technology for finding exoplanets increasing or decreasing?
 
@@ -53,6 +53,10 @@ glimpse(alldataunfiltered) #includes data for all exoplanets
 Y = number of exoplanets discovered each year, X = disc_year, use group by & summarise
 
 Other explanatory variables may include average distance of discovery, average mass of discovery, and method of discovery.
+
+Y = number of exoplanets discovered by country, X = disc_facility & match with the corresponding country to create a new variable named country, add another variable named gdp and find correlation
+
+Y = rate of discovery by years, X = exoplanets discovered each year/total number of exoplanets
 
 ### Preliminary Analysis & Summary Stats.
 
