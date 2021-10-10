@@ -135,13 +135,13 @@ glimpse(alldataunfiltered) #includes data for all exoplanets
 
 ### Outcome and Predictor Variables
 
-Y = number of exoplanets discovered each year, X = disc\_year, use group
-by & summarise
+Y = number of exoplanets discovered each year, X = `disc_year`, use
+group by & summarise
 
-Other explanatory variables may include average distance of discovery,
-average mass of discovery, and method of discovery.
+Other explanatory variables may include average `sy_dist`,
+average`pl_mass` and `st_mass`, and `discoverymethod`.
 
-Y = number of exoplanets discovered by country, X = disc\_facility &
+Y = number of exoplanets discovered by country, X = `disc_facility` &
 match with the corresponding country to create a new variable named
 country, add another variable named gdp and find correlation
 
