@@ -1,8 +1,8 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
-institute: "University of Edinburgh"
+title: "Exoplanet Exploration"
+subtitle: "Predicting Future Trends in Exoplanet Exploration"
+author: "Annie Li, Matt Clayton, Ethan Wu"
+institute: "Bates College"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
