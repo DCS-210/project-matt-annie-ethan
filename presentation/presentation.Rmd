@@ -33,6 +33,28 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 # Load your data here
 ```
 
+```{r discovery-facility-country}
+# Create new variable for country of discovery facility
+
+alldata %>%
+  count(disc_facility, sort = TRUE)
+
+alldata <- alldata %>%
+  mutate(disc_facility_country = case_when(
+                                            disc_facility %in% c("Kepler",
+                                                                 "K2",
+                                                                 "Transiting Exoplanet Survey Satellite (TESS)",
+                                                                 "HATNet",
+                                                                 "W. M. Keck Observatory",
+                                                                 
+                                                                 ~ "United States",
+                                          
+                                          
+                                          ))
+
+```
+
+
 ```{r}
 style_xaringan(
   title_slide_background_image = "img/confetti.jpg"
