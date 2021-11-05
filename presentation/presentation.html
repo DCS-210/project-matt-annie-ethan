@@ -4,7 +4,7 @@
     <title>Exoplanet Exploration</title>
     <meta charset="utf-8" />
     <meta name="author" content="Annie Li, Matt Clayton, Ethan Wu" />
-    <meta name="date" content="2021-11-03" />
+    <meta name="date" content="2021-11-05" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Predicting Future Trends in Exoplanet Exploration
 ### Annie Li, Matt Clayton, Ethan Wu
 ### Bates College
-### 2021-11-03
+### 2021-11-05
 
 ---
 
@@ -28,11 +28,51 @@ class: center, middle, inverse, title-slide
 
 
 
+```r
+# Create new variable for country of discovery facility
+
+alldata %&gt;%
+  count(disc_facility, sort = TRUE)
+```
+
+```
+## # A tibble: 34 × 2
+##    disc_facility                                    n
+##    &lt;chr&gt;                                        &lt;int&gt;
+##  1 Kepler                                         156
+##  2 K2                                              99
+##  3 Transiting Exoplanet Survey Satellite (TESS)    97
+##  4 SuperWASP                                       72
+##  5 HATNet                                          40
+##  6 La Silla Observatory                            31
+##  7 SuperWASP-South                                 28
+##  8 CoRoT                                           22
+##  9 HATSouth                                        22
+## 10 Multiple Observatories                          16
+## # … with 24 more rows
+```
+
+```r
+#alldata &lt;- alldata %&gt;%
+#  mutate(disc_facility_country = case_when(
+#                                            disc_facility %in% c("Kepler",
+#                                                                 "K2",
+#                                                                 "Transiting Exoplanet Survey Satellite #(TESS)",
+#                                                                 "HATNet",
+#                                                                 "W. M. Keck Observatory",
+#                                                                 
+#                                                                 ~ "United States",
+#                                          
+#                                         
+#                                          ))
+#
+```
+
 
 
 ```r
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/SPACE_2.jpg"
 )
 ```
 
@@ -118,10 +158,9 @@ glance(model)
 
 ```
 ## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
-## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC deviance df.residual  nobs
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt; &lt;int&gt;
+## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.   11354.          48    50
 ```
 
 ---

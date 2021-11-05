@@ -22,6 +22,7 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(xaringan)
 ```
 
 ```{r setup, include=FALSE}
@@ -39,25 +40,25 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 alldata %>%
   count(disc_facility, sort = TRUE)
 
-alldata <- alldata %>%
-  mutate(disc_facility_country = case_when(
-                                            disc_facility %in% c("Kepler",
-                                                                 "K2",
-                                                                 "Transiting Exoplanet Survey Satellite (TESS)",
-                                                                 "HATNet",
-                                                                 "W. M. Keck Observatory",
-                                                                 
-                                                                 ~ "United States",
-                                          
-                                          
-                                          ))
-
+#alldata <- alldata %>%
+#  mutate(disc_facility_country = case_when(
+#                                            disc_facility %in% c("Kepler",
+#                                                                 "K2",
+#                                                                 "Transiting Exoplanet Survey Satellite #(TESS)",
+#                                                                 "HATNet",
+#                                                                 "W. M. Keck Observatory",
+#                                                                 
+#                                                                 ~ "United States",
+#                                          
+#                                         
+#                                          ))
+#
 ```
 
 
 ```{r}
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/SPACE_2.jpg"
 )
 ```
 
