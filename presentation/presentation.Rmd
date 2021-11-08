@@ -31,7 +31,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
+alldata <- read_csv("/cloud/project/data/filtereddata.csv")
 ```
 
 ```{r discovery-facility-country}
@@ -145,9 +145,52 @@ iris_modified <- iris %>%
 # Code hidden with echo = FALSE
 # Uses modified iris dataset from previous chunk
 # Play around with height and width until you're happy with the look
-ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
-  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+# ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
+#  geom_point() + 
+#  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
+```
+
+```{r discovery-method-over-time, echo = FALSE}
+alldata %>%
+  ggplot(mapping = aes(x = disc_year, fill = discoverymethod)) +
+  geom_bar() +
+  labs(
+        x = "Distance of Discovery (Parsecs)",
+        y = "Number of exoplanets", 
+        title = "Number of exoplanets discovered per year",
+        subtitle="By discovery method") 
+```
+
+---
+# Plots
+```{r discovery-method-vs-planet_radius-and-planet-mass, echo = FALSE, fig.show="hold", out.width="50%"}
+alldata %>%
+  ggplot(mapping = aes(x = pl_radius,
+                       y = sy_distance,
+                       color = discoverymethod)) +
+  geom_jitter() +
+  coord_flip() +
+  labs(
+        x = "Distance of Discovery (Parsecs)",
+        y = "Planet radius [Earth radius]", 
+        title = "Planet radius and distance of discovery",
+        subtitle="By discovery method" ) +
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank())
+
+alldata %>%
+  ggplot(mapping = aes(x = pl_mass,
+                       y = sy_distance,
+                       color = discoverymethod)) +
+  geom_jitter() + 
+  coord_flip() +
+  labs(
+        x = "Distance of Discovery (Parsecs)",
+        y = "Planet mass [Earth mass]", 
+        title = "Planet mass and distance of discovery",
+        subtitle="By discovery method" ) +
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank())
 ```
 
 ---
