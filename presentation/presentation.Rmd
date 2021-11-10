@@ -132,7 +132,7 @@ alldata <- alldata %>%
 
 ```
 
-```{r telescope-type}
+```{r telescope-type, include=FALSE}
 
 alldata <- alldata %>%
   
@@ -177,7 +177,7 @@ alldata <- alldata %>%
   ))
 ```
 
-```{r}
+```{r facility-latitude, include=FALSE}
 
 alldata <- alldata %>%
   
@@ -216,6 +216,50 @@ alldata <- alldata %>%
                                  disc_facility == "Kepler" ~ 28.446671,
                                  disc_facility == "K2" ~ 28.446671,
                                  disc_facility == "Transiting Exoplanet Survey Satellite (TESS)" ~ 28.562110,
+                                                     
+                                 TRUE ~ 0
+  ))
+```
+
+```{r facility-longitude, include=FALSE}
+
+alldata <- alldata %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         facility_longitude = case_when(
+                                 disc_facility == "HATNet" ~ -110.949600,
+                                 disc_facility == "HATSouth" ~ -70.692600,
+                                 disc_facility == "W. M. Keck Observatory" ~ -155.475000,
+                                 disc_facility == "XO" ~ -156.257100,
+                                 disc_facility == "TrES" ~ -111.3952,
+                                 disc_facility == "Gemini Observatory" ~ -155.469800,
+                                 disc_facility == "Las Campanas Observatory" ~ -70.692600,
+                                 disc_facility == "MEarth Project" ~ -110.949600,
+                                 disc_facility == "Cerro Tololo Inter-American Observatory" ~ -70.806530,
+                                 disc_facility == "Lick Observatory" ~ -121.642944,
+                                 disc_facility == "La Silla Observatory" ~ -70.731330,
+                                 disc_facility == "Paranal Observatory" ~ -70.404170,
+                                 disc_facility == "SuperWASP" ~ -17.5245,
+                                 disc_facility == "WASP-South" ~ 27.924900,
+                                 disc_facility == "SuperWASP-North" ~ -17.89163,
+                                 disc_facility == "SuperWASP-South" ~ 27.924900,
+                                 disc_facility == "United Kingdom Infrared Telescope" ~ -155.470700,
+                                 disc_facility == "Roque de los Muchachos Observatory" ~ -17.5330,
+                                 disc_facility == "Calar Alto Observatory" ~ -2.546575,
+                                 disc_facility == "Haute-Provence Observatory" ~ 5.713333, 
+                                 disc_facility == "Qatar" ~ -105.530205,
+                                 disc_facility == "OGLE" ~ -70.4156,
+                                 disc_facility == "Subaru Telescope" ~ -155.089600,
+                                 disc_facility == "KELT-North" ~ -110.60182,
+                                 disc_facility == "KELT" ~ -110.60182,
+                                 disc_facility == "Fred Lawrence Whipple Observatory" ~ -110.949600,
+                                 disc_facility == "McDonald Observatory" ~ -104.024800,
+                                 disc_facility == "Acton Sky Portal Observatory" ~ -71.453447,
+                                 disc_facility == "KELT-South" ~ -110.60182,
+                                 disc_facility == "CoRoT" ~ 63.333059,
+                                 disc_facility == "Kepler" ~ -80.566109,
+                                 disc_facility == "K2" ~ -80.566109,
+                                 disc_facility == "Transiting Exoplanet Survey Satellite (TESS)" ~ -80.577180,
                                                      
                                  TRUE ~ 0
   ))
