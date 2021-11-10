@@ -23,6 +23,7 @@ library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
 library(xaringan)
+library(dplyr)
 ```
 
 ```{r setup, include=FALSE}
@@ -270,6 +271,15 @@ alldata <- alldata %>%
 style_xaringan(
   title_slide_background_image = "img/SPACE_2.jpg"
 )
+```
+
+### Plotting facilities and discoveries
+```{r construct-facility_df}
+facility_df <- alldata %>% 
+  group_by(disc_facility) %>%
+  mutate(count = n()) %>%
+  select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
+  distinct()
 ```
 
 
