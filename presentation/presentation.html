@@ -28,74 +28,53 @@ class: center, middle, inverse, title-slide
 
 
 
-```r
-# Create new variable for country of discovery facility
 
-alldata %&gt;%
-  count(disc_facility, sort = TRUE)
-```
 
-```
-## # A tibble: 34 × 2
-##    disc_facility                                    n
-##    &lt;chr&gt;                                        &lt;int&gt;
-##  1 Kepler                                         156
-##  2 K2                                              99
-##  3 Transiting Exoplanet Survey Satellite (TESS)    97
-##  4 SuperWASP                                       72
-##  5 HATNet                                          40
-##  6 La Silla Observatory                            31
-##  7 SuperWASP-South                                 28
-##  8 CoRoT                                           22
-##  9 HATSouth                                        22
-## 10 Multiple Observatories                          16
-## # … with 24 more rows
-```
+
 
 ```r
 alldata &lt;- alldata %&gt;%
   
   mutate(disc_facility = as.character(disc_facility),
-         disc_facility_country = case_when(
-                                 disc_facility %in% c("Kepler",
-                                                       "K2",
-                                                       "Transiting Exoplanet Survey Satellite (TESS)",
-                                                       "HATNet",
+         facility_type = case_when(
+                                 disc_facility %in% c( "HATNet",
                                                        "HATSouth",
                                                        "W. M. Keck Observatory",
                                                        "XO",
-                                                       "KELT-North",
-                                                       "KELT",
                                                        "TrES",
-                                                       "Acton Sky Portal Observatory",
                                                        "Gemini Observatory",
-                                                       "KELT-South",
                                                        "Las Campanas Observatory",
                                                        "MEarth Project",
                                                        "Cerro Tololo Inter-American Observatory",
-                                                       "Fred Lawrence Whipple Observatory",
                                                        "Lick Observatory",
-                                                       "McDonald Observatory")
-                                                        ~ "United States",
-                                 disc_facility %in% c("La Silla Observatory",
+                                                       "La Silla Observatory",
                                                        "Paranal Observatory",
-                                                       "CoRoT")
-                                                        ~ "Europe",
-                                 disc_facility %in% c("SuperWASP",
+                                                       "SuperWASP",
                                                        "WASP-South",
                                                        "SuperWASP-North",
-                                                       "United Kingdom Infrared Telescope")
-                                                       ~ "United Kingdom",
-                                 disc_facility %in% c("Roque de los Muchachos Observatory",
-                                                       "Calar Alto Observatory")
-                                                       ~ "Spain",
-                                 disc_facility == "Haute-Provence Observatory" ~ "France",
-                                 disc_facility == "Qatar" ~ "Qatar",
-                                 disc_facility == "OGLE" ~ "Poland",
-                                 disc_facility == "Subaru Telescope" ~ "Japan",
+                                                       "United Kingdom Infrared Telescope",
+                                                       "Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory",
+                                                       "Haute-Provence Observatory", 
+                                                       "Qatar",
+                                                       "OGLE",
+                                                       "Subaru Telescope",
+                                                       "KELT-North",
+                                                       "KELT",
+                                                       "Fred Lawrence Whipple Observatory",
+                                                       "McDonald Observatory",
+                                                       "Acton Sky Portal Observatory",
+                                                       "KELT-South")
+                                                       ~ "Observatory",
+                                 disc_facility %in% c("CoRoT",
+                                                      "Kepler",
+                                                      "K2",
+                                                      "Transiting Exoplanet Survey Satellite (TESS)")
+                                                      ~ "Space Telescope",
                                  TRUE ~ disc_facility
   ))
 ```
+
 
 
 

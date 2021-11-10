@@ -34,7 +34,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 alldata <- read_csv("/cloud/project/data/filtereddata.csv")
 ```
 
-```{r discovery-facility-country}
+```{r discovery-facility-country, include=FALSE}
 # Create new variable for country of discovery facility
 
 alldata %>%
@@ -84,6 +84,96 @@ alldata <- alldata %>%
   ))
 
 ```
+
+```{r public-or-private, include=FALSE}
+
+alldata <- alldata %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         public_or_private = case_when(
+                                 disc_facility %in% c("Kepler",
+                                                       "K2",
+                                                       "Transiting Exoplanet Survey Satellite (TESS)",
+                                                       "HATNet",
+                                                       "HATSouth",
+                                                       "W. M. Keck Observatory",
+                                                       "XO",
+                                                       "TrES",
+                                                       "Gemini Observatory",
+                                                       "Las Campanas Observatory",
+                                                       "MEarth Project",
+                                                       "Cerro Tololo Inter-American Observatory",
+                                                       "Lick Observatory",
+                                                       "La Silla Observatory",
+                                                       "Paranal Observatory",
+                                                       "CoRoT",
+                                                       "SuperWASP",
+                                                       "WASP-South",
+                                                       "SuperWASP-North",
+                                                       "United Kingdom Infrared Telescope",
+                                                       "Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory",
+                                                       "Haute-Provence Observatory", 
+                                                       "Qatar",
+                                                       "OGLE",
+                                                       "Subaru Telescope")
+                                                       ~ "Public",
+                                 disc_facility %in% c("KELT-North",
+                                                      "KELT",
+                                                      "Fred Lawrence Whipple Observatory",
+                                                      "McDonald Observatory",
+                                                      "Acton Sky Portal Observatory",
+                                                      "KELT-South")
+                                                      ~ "Private",
+                                 TRUE ~ disc_facility
+  ))
+
+```
+
+```{r telescope-type}
+
+alldata <- alldata %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         facility_type = case_when(
+                                 disc_facility %in% c( "HATNet",
+                                                       "HATSouth",
+                                                       "W. M. Keck Observatory",
+                                                       "XO",
+                                                       "TrES",
+                                                       "Gemini Observatory",
+                                                       "Las Campanas Observatory",
+                                                       "MEarth Project",
+                                                       "Cerro Tololo Inter-American Observatory",
+                                                       "Lick Observatory",
+                                                       "La Silla Observatory",
+                                                       "Paranal Observatory",
+                                                       "SuperWASP",
+                                                       "WASP-South",
+                                                       "SuperWASP-North",
+                                                       "United Kingdom Infrared Telescope",
+                                                       "Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory",
+                                                       "Haute-Provence Observatory", 
+                                                       "Qatar",
+                                                       "OGLE",
+                                                       "Subaru Telescope",
+                                                       "KELT-North",
+                                                       "KELT",
+                                                       "Fred Lawrence Whipple Observatory",
+                                                       "McDonald Observatory",
+                                                       "Acton Sky Portal Observatory",
+                                                       "KELT-South")
+                                                       ~ "Observatory",
+                                 disc_facility %in% c("CoRoT",
+                                                      "Kepler",
+                                                      "K2",
+                                                      "Transiting Exoplanet Survey Satellite (TESS)")
+                                                      ~ "Space Telescope",
+                                 TRUE ~ disc_facility
+  ))
+```
+
 
 
 ```{r}
