@@ -40,19 +40,49 @@ alldata <- read_csv("/cloud/project/data/filtereddata.csv")
 alldata %>%
   count(disc_facility, sort = TRUE)
 
-#alldata <- alldata %>%
-#  mutate(disc_facility_country = case_when(
-#                                            disc_facility %in% c("Kepler",
-#                                                                 "K2",
-#                                                                 "Transiting Exoplanet Survey Satellite #(TESS)",
-#                                                                 "HATNet",
-#                                                                 "W. M. Keck Observatory",
-#                                                                 
-#                                                                 ~ "United States",
-#                                          
-#                                         
-#                                          ))
-#
+alldata <- alldata %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         disc_facility_country = case_when(
+                                 disc_facility %in% c("Kepler",
+                                                       "K2",
+                                                       "Transiting Exoplanet Survey Satellite (TESS)",
+                                                       "HATNet",
+                                                       "HATSouth",
+                                                       "W. M. Keck Observatory",
+                                                       "XO",
+                                                       "KELT-North",
+                                                       "KELT",
+                                                       "TrES",
+                                                       "Acton Sky Portal Observatory",
+                                                       "Gemini Observatory",
+                                                       "KELT-South",
+                                                       "Las Campanas Observatory",
+                                                       "MEarth Project",
+                                                       "Cerro Tololo Inter-American Observatory",
+                                                       "Fred Lawrence Whipple Observatory",
+                                                       "Lick Observatory",
+                                                       "McDonald Observatory")
+                                                        ~ "United States",
+                                 disc_facility %in% c("La Silla Observatory",
+                                                       "Paranal Observatory",
+                                                       "CoRoT")
+                                                        ~ "Europe",
+                                 disc_facility %in% c("SuperWASP",
+                                                       "WASP-South",
+                                                       "SuperWASP-North",
+                                                       "United Kingdom Infrared Telescope")
+                                                       ~ "United Kingdom",
+                                 disc_facility %in% c("Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory")
+                                                       ~ "Spain",
+                                 disc_facility == "Haute-Provence Observatory" ~ "France",
+                                 disc_facility == "Qatar" ~ "Qatar",
+                                 disc_facility == "OGLE" ~ "Poland",
+                                 disc_facility == "Subaru Telescope" ~ "Japan",
+                                 TRUE ~ disc_facility
+  ))
+
 ```
 
 

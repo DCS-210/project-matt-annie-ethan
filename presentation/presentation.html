@@ -4,7 +4,7 @@
     <title>Exoplanet Exploration</title>
     <meta charset="utf-8" />
     <meta name="author" content="Annie Li, Matt Clayton, Ethan Wu" />
-    <meta name="date" content="2021-11-08" />
+    <meta name="date" content="2021-11-10" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -16,7 +16,7 @@ class: center, middle, inverse, title-slide
 ## Predicting Future Trends in Exoplanet Exploration
 ### Annie Li, Matt Clayton, Ethan Wu
 ### Bates College
-### 2021-11-08
+### 2021-11-10
 
 ---
 
@@ -53,19 +53,48 @@ alldata %&gt;%
 ```
 
 ```r
-#alldata &lt;- alldata %&gt;%
-#  mutate(disc_facility_country = case_when(
-#                                            disc_facility %in% c("Kepler",
-#                                                                 "K2",
-#                                                                 "Transiting Exoplanet Survey Satellite #(TESS)",
-#                                                                 "HATNet",
-#                                                                 "W. M. Keck Observatory",
-#                                                                 
-#                                                                 ~ "United States",
-#                                          
-#                                         
-#                                          ))
-#
+alldata &lt;- alldata %&gt;%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         disc_facility_country = case_when(
+                                 disc_facility %in% c("Kepler",
+                                                       "K2",
+                                                       "Transiting Exoplanet Survey Satellite (TESS)",
+                                                       "HATNet",
+                                                       "HATSouth",
+                                                       "W. M. Keck Observatory",
+                                                       "XO",
+                                                       "KELT-North",
+                                                       "KELT",
+                                                       "TrES",
+                                                       "Acton Sky Portal Observatory",
+                                                       "Gemini Observatory",
+                                                       "KELT-South",
+                                                       "Las Campanas Observatory",
+                                                       "MEarth Project",
+                                                       "Cerro Tololo Inter-American Observatory",
+                                                       "Fred Lawrence Whipple Observatory",
+                                                       "Lick Observatory",
+                                                       "McDonald Observatory")
+                                                        ~ "United States",
+                                 disc_facility %in% c("La Silla Observatory",
+                                                       "Paranal Observatory",
+                                                       "CoRoT")
+                                                        ~ "Europe",
+                                 disc_facility %in% c("SuperWASP",
+                                                       "WASP-South",
+                                                       "SuperWASP-North",
+                                                       "United Kingdom Infrared Telescope")
+                                                       ~ "United Kingdom",
+                                 disc_facility %in% c("Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory")
+                                                       ~ "Spain",
+                                 disc_facility == "Haute-Provence Observatory" ~ "France",
+                                 disc_facility == "Qatar" ~ "Qatar",
+                                 disc_facility == "OGLE" ~ "Poland",
+                                 disc_facility == "Subaru Telescope" ~ "Japan",
+                                 TRUE ~ disc_facility
+  ))
 ```
 
 
@@ -176,7 +205,7 @@ glance(model)
 
 ---
 # Plots
-&lt;img src="presentation_files/figure-html/discovery-method-and-planet_radius-1.png" width="50%" /&gt;&lt;img src="presentation_files/figure-html/discovery-method-and-planet_radius-2.png" width="50%" /&gt;
+&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-1.png" width="50%" /&gt;&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-2.png" width="50%" /&gt;
 
 ---
 
