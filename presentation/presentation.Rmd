@@ -24,6 +24,8 @@ library(knitr)
 library(xaringanthemer)
 library(xaringan)
 library(dplyr)
+library(maps)
+library(ggplot2)
 ```
 
 ```{r setup, include=FALSE}
@@ -279,8 +281,36 @@ facility_df <- alldata %>%
   group_by(disc_facility) %>%
   mutate(count = n()) %>%
   select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
-  distinct()
+  distinct() %>%
+  filter(!disc_facility == "Multiple Observatories")
 ```
+
+```{r mapping facilities}
+world_map <- map_data("world")
+
+p <- ggplot() + coord_fixed() +
+  xlab("") + ylab("")
+
+base_world_messy <- p + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), 
+                               colour="light green", fill="light green")
+
+cleanup <- 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_rect(fill = 'dodgerblue1', colour = 'white'), 
+        axis.line = element_line(colour = "white"), legend.position="none",
+        axis.ticks=element_blank(), axis.text.x=element_blank(),
+        axis.text.y=element_blank())
+
+base_world <- base_world_messy + cleanup
+
+map_data <- 
+  base_world +
+  geom_point(data=facility_df, 
+             aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type,colour=facility_type), 
+             pch=21, alpha=I(0.7))
+map_data
+```
+
 
 
 class: center, middle
