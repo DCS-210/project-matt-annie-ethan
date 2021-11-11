@@ -41,6 +41,8 @@ alldataunfiltered <- read_csv("/cloud/project/data/unfiltereddata.csv")
 ```{r discovery-facility-country, include=FALSE}
 # Create new variable for country of discovery facility
 
+### Facility Country for filtered data
+
 alldata %>%
   count(disc_facility, sort = TRUE)
 
@@ -87,6 +89,8 @@ alldata <- alldata %>%
                                  disc_facility == "Subaru Telescope" ~ "Japan",
                                  TRUE ~ disc_facility
   )) 
+
+### Facility Country for unfiltered data
 
 alldataunfiltered <- alldataunfiltered %>%
   
@@ -196,75 +200,6 @@ alldataunfiltered <- alldataunfiltered %>%
                                                           "KMTNet",
                                                           "Large Binocular Telescope Observatory",
                                                           "Winer Observatory"), "Private", "Public"))
-alldataunfiltered <- alldataunfiltered %>%
-  
-  mutate(disc_facility = as.character(disc_facility),
-         public_or_private = case_when(
-                                 disc_facility %in% c("Kepler",
-                                                       "K2",
-                                                       "Transiting Exoplanet Survey Satellite (TESS)",
-                                                       "HATNet",
-                                                       "HATSouth",
-                                                       "W. M. Keck Observatory",
-                                                       "XO",
-                                                       "TrES",
-                                                       "Gemini Observatory",
-                                                       "Las Campanas Observatory",
-                                                       "MEarth Project",
-                                                       "Cerro Tololo Inter-American Observatory",
-                                                       "Lick Observatory",
-                                                       "La Silla Observatory",
-                                                       "Paranal Observatory",
-                                                       "CoRoT",
-                                                       "SuperWASP",
-                                                       "WASP-South",
-                                                       "SuperWASP-North",
-                                                       "SuperWASP-South",
-                                                       "United Kingdom Infrared Telescope",
-                                                       "Roque de los Muchachos Observatory",
-                                                       "Calar Alto Observatory",
-                                                       "Haute-Provence Observatory", 
-                                                       "Qatar",
-                                                       "OGLE",
-                                                       "Subaru Telescope",
-                                                       "Xinglong Station",
-                                                       "Thueringer Landessternwarte Tautenburg",
-                                                       "Okayama Astrophysical Observatory",
-                                                       "Hubble Space Telescope",
-                                                       "Anglo-Australian Telescope",
-                                                       "Bohyunsan Optical Astronomical Observatory",
-                                                       "NASA Infrared Telescope Facility (IRTF)",
-                                                       "Yunnan Astronomical Observatory", 
-                                                       "Spitzer Space Telescope",
-                                                       "Kitt Peak National Observatory",
-                                                       "CHaracterising ExOPlanets Satellite (CHEOPS)",
-                                                       "Apache Point Observatory",
-                                                       "Atacama Large Millimeter Array (ALMA)",
-                                                       "MOA",
-                                                       "European Southern Observatory",
-                                                       "Arecibo Observatory",
-                                                       "Parkes Observatory",
-                                                       "Leoncito Astronomical Complex",
-                                                       "Infrared Survey Facility",
-                                                       "Mauna Kea Observatory",
-                                                       "Teide Observatory",
-                                                       "Haleakala Observatory")
-                                                       ~ "Public",
-                                 disc_facility %in% c("KELT-North",
-                                                      "KELT",
-                                                      "Fred Lawrence Whipple Observatory",
-                                                      "McDonald Observatory",
-                                                      "Acton Sky Portal Observatory",
-                                                      "KELT-South",
-                                                      "Palomar Observatory",
-                                                      "Oak Ridge Observatory",
-                                                      "KMTNet",
-                                                      "Large Binocular Telescope Observatory",
-                                                      "Winer Observatory")
-                                                      ~ "Private",
-                                 TRUE ~ disc_facility
-  ))
-
 ```
 
 ```{r telescope-type, include=FALSE}
@@ -417,6 +352,8 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```{r facility-longitude, include=FALSE}
 
+### Longitude for filtered data
+
 alldata <- alldata %>%
   
   mutate(disc_facility = as.character(disc_facility),
@@ -457,6 +394,77 @@ alldata <- alldata %>%
                                                      
                                  TRUE ~ 0
   ))
+
+### Longitude for unfiltered data
+
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         facility_longitude = case_when(
+                                 disc_facility == "HATNet" ~ -110.949600,
+                                 disc_facility == "HATSouth" ~ -70.692600,
+                                 disc_facility == "W. M. Keck Observatory" ~ -155.475000,
+                                 disc_facility == "XO" ~ -156.257100,
+                                 disc_facility == "TrES" ~ -111.3952,
+                                 disc_facility == "Gemini Observatory" ~ -155.469800,
+                                 disc_facility == "Las Campanas Observatory" ~ -70.692600,
+                                 disc_facility == "MEarth Project" ~ -110.949600,
+                                 disc_facility == "Cerro Tololo Inter-American Observatory" ~ -70.806530,
+                                 disc_facility == "Lick Observatory" ~ -121.642944,
+                                 disc_facility == "La Silla Observatory" ~ -70.731330,
+                                 disc_facility == "Paranal Observatory" ~ -70.404170,
+                                 disc_facility == "SuperWASP" ~ -17.5245,
+                                 disc_facility == "WASP-South" ~ 27.924900,
+                                 disc_facility == "SuperWASP-North" ~ -17.89163,
+                                 disc_facility == "SuperWASP-South" ~ 27.924900,
+                                 disc_facility == "United Kingdom Infrared Telescope" ~ -155.470700,
+                                 disc_facility == "Roque de los Muchachos Observatory" ~ -17.5330,
+                                 disc_facility == "Calar Alto Observatory" ~ -2.546575,
+                                 disc_facility == "Haute-Provence Observatory" ~ 5.713333, 
+                                 disc_facility == "Qatar" ~ -105.530205,
+                                 disc_facility == "OGLE" ~ -70.4156,
+                                 disc_facility == "Subaru Telescope" ~ -155.089600,
+                                 disc_facility == "KELT-North" ~ -110.60182,
+                                 disc_facility == "KELT" ~ -110.60182,
+                                 disc_facility == "Fred Lawrence Whipple Observatory" ~ -110.949600,
+                                 disc_facility == "McDonald Observatory" ~ -104.024800,
+                                 disc_facility == "Acton Sky Portal Observatory" ~ -71.453447,
+                                 disc_facility == "KELT-South" ~ -110.60182,
+                                 disc_facility == "CoRoT" ~ 63.333059,
+                                 disc_facility == "Kepler" ~ -80.566109,
+                                 disc_facility == "K2" ~ -80.566109,
+                                 disc_facility == "Transiting Exoplanet Survey Satellite (TESS)" ~ -80.577180, 
+                                 disc_facility == "Xinglong Station" ~ 117.575000,
+                                 disc_facility == "Thueringer Landessternwarte Tautenburg" ~ 11.710900,
+                                 disc_facility == "Okayama Astrophysical Observatory" ~ 133.594000,
+                                 disc_facility == "Hubble Space Telescope" ~ -80.604350,
+                                 disc_facility == "Anglo-Australian Telescope" ~ 149.067200,
+                                 disc_facility == "Bohyunsan Optical Astronomical Observatory" ~ 128.973770,
+                                 disc_facility == "NASA Infrared Telescope Facility (IRTF)" ~ -155.472600,
+                                 disc_facility == "Yunnan Astronomical Observatory" ~ 102.783300, 
+                                 disc_facility == "Spitzer Space Telescope" ~ -80.566109,
+                                 disc_facility == "Kitt Peak National Observatory" ~ -111.598000,
+                                 disc_facility == "CHaracterising ExOPlanets Satellite (CHEOPS)" ~ -52.834583,
+                                 disc_facility == "Apache Point Observatory" ~ -105.819800,
+                                 disc_facility == "Atacama Large Millimeter Array (ALMA)" ~ -67.754810,
+                                 disc_facility == "MOA" ~ 170.467133,
+                                 disc_facility == "European Southern Observatory" ~ 11.671110,
+                                 disc_facility == "Arecibo Observatory" ~ -66.752777,
+                                 disc_facility == "Parkes Observatory" ~ 148.258200,
+                                 disc_facility == "Leoncito Astronomical Complex" ~ -69.295600,
+                                 disc_facility == "Infrared Survey Facility" ~ -155.470700,
+                                 disc_facility == "Mauna Kea Observatory" ~ -155.2830,
+                                 disc_facility == "Teide Observatory" ~ -16.3035,
+                                 disc_facility == "Haleakala Observatory" ~ -156.1526,
+                                 disc_facility == "Palomar Observatory" ~ -116.865300,
+                                 disc_facility == "Oak Ridge Observatory" ~ -71.558000,
+                                 disc_facility == "KMTNet" ~ 149.03452,
+                                 disc_facility == "Large Binocular Telescope Observatory" ~ -109.889100,
+                                 disc_facility == "Winer Observatory" ~ -110.602058,
+                                 
+                                 TRUE ~ 0
+  ))
+
 ```
 
 
