@@ -655,11 +655,12 @@ iris_modified <- iris %>%
 
 ```{r discovery-method-over-time, echo = FALSE}
 alldata %>%
-  ggplot(mapping = aes(x = disc_year, fill = discoverymethod)) +
+  ggplot(mapping = aes(x = disc_year, fill = fct_relevel(discoverymethod, c( "Orbital Brightness Modulation", "Transit Timing Variations", "Imaging", "Radial Velocity", "Transit")))) +
   geom_bar() +
   labs(
-        x = "Distance of Discovery (Parsecs)",
+        x = "Discovery year",
         y = "Number of exoplanets", 
+        fill = "Discovery Method",
         title = "Number of exoplanets discovered per year",
         subtitle="By discovery method") 
 ```
