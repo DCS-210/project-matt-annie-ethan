@@ -479,9 +479,9 @@ style_xaringan(
 ### Plotting facilities and discoveries
 ```{r construct-facility_df, echo=FALSE}
 facility_df <- alldata %>% 
-  group_by(disc_facility) %>%
+  group_by(disc_facility, disc_year) %>%
   mutate(count = n()) %>%
-  select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
+  select(disc_facility, disc_year, facility_type, facility_latitude, facility_longitude, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
@@ -490,7 +490,7 @@ facility_df <- alldata %>%
 facility_df2 <- alldataunfiltered %>% 
   group_by(disc_facility) %>%
   mutate(count = n()) %>%
-  select(disc_facility, count) %>%
+  select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories") %>%
   filter(!disc_facility == "KOINet")
@@ -505,6 +505,14 @@ facility_df_lat_group <- alldata %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
+```{r construct-facility_df2_group_by_location}
+facility_df2_lat_group <- alldataunfiltered %>% 
+  group_by(facility_latitude) %>%
+  mutate(count = n()) %>%
+  select(facility_latitude, facility_longitude, disc_facility, facility_type, count) %>%
+  distinct(facility_latitude, .keep_all = TRUE) %>%
+  filter(!disc_facility == "Multiple Observatories")
+```
 
 
 ```{r mapping facilities, echo=FALSE, out.width = "500%", fig.align = "center"}
@@ -683,14 +691,31 @@ alldata %>%
   theme(legend.title = element_blank())
 
 alldata %>%
-  ggplot(mapping = aes(x = pl_mass,
-                       y = sy_distance,
-                       color = discoverymethod)) +
+  ggplot(mapping = aes(y = pl_mass,
+                       x = sy_distance,
+                       color = discoverymethod), alpha = 0.3) +
   geom_jitter() + 
   coord_flip() +
   labs(
-        x = "Distance of Discovery (Parsecs)",
-        y = "Planet mass [Earth mass]", 
+        y = "Distance of Discovery (Parsecs)",
+        x = "Planet mass [Earth mass]", 
+        title = "Planet mass and distance of discovery",
+        subtitle="By discovery method" ) +
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank())
+
+
+alldata %>%
+  ggplot(mapping = aes(y = sy_distance,
+                       x = disc_year,
+                       color = discoverymethod,
+                       size = pl_mass)) +
+           
+           
+  geom_jitter(alpha = 1) + 
+  labs(
+        y = "Distance of Discovery (Parsecs)",
+        x = "Planet mass [Earth mass]", 
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
