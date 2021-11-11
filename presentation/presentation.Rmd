@@ -35,6 +35,7 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 
 ```{r load-data, include=FALSE}
 alldata <- read_csv("/cloud/project/data/filtereddata.csv")
+alldataunfiltered <- read_csv("/cloud/project/data/unfiltereddata.csv")
 ```
 
 ```{r discovery-facility-country, include=FALSE}
@@ -236,7 +237,7 @@ alldataunfiltered <- alldataunfiltered %>%
                                                        "Yunnan Astronomical Observatory", 
                                                        "Spitzer Space Telescope",
                                                        "Kitt Peak National Observatory",
-                                                       "CHaracterising ExOPlanets Satellite (CHEOPS)"
+                                                       "CHaracterising ExOPlanets Satellite (CHEOPS)",
                                                        "Apache Point Observatory",
                                                        "Atacama Large Millimeter Array (ALMA)",
                                                        "MOA",
