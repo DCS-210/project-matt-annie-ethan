@@ -85,13 +85,117 @@ alldata <- alldata %>%
                                  disc_facility == "OGLE" ~ "Poland",
                                  disc_facility == "Subaru Telescope" ~ "Japan",
                                  TRUE ~ disc_facility
+  )) 
+
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         disc_facility_country = case_when(
+                                 disc_facility %in% c("Kepler",
+                                                       "K2",
+                                                       "Transiting Exoplanet Survey Satellite (TESS)",
+                                                       "HATNet",
+                                                       "HATSouth",
+                                                       "W. M. Keck Observatory",
+                                                       "XO",
+                                                       "KELT-North",
+                                                       "KELT",
+                                                       "TrES",
+                                                       "Acton Sky Portal Observatory",
+                                                       "Gemini Observatory",
+                                                       "KELT-South",
+                                                       "Las Campanas Observatory",
+                                                       "MEarth Project",
+                                                       "Cerro Tololo Inter-American Observatory",
+                                                       "Fred Lawrence Whipple Observatory",
+                                                       "Lick Observatory",
+                                                       "McDonald Observatory",
+                                                       "Hubble Space Telescope",
+                                                       "NASA Infrared Telescope Facility (IRTF)",
+                                                       "Spitzer Space Telescope",
+                                                       "Palomar Observatory",
+                                                       "Kitt Peak National Observatory",
+                                                       "Oak Ridge Observatory",
+                                                       "Apache Point Observatory",
+                                                       "Large Binocular Telescope Observatory",
+                                                       "Winer Observatory",
+                                                       "Arecibo Observatory",
+                                                       "Leoncito Astronomical Complex",
+                                                       "Mauna Kea Observatory",
+                                                       "Haleakala Observatory")
+                                                        ~ "United States",
+                                 disc_facility %in% c("La Silla Observatory",
+                                                       "Paranal Observatory",
+                                                       "CoRoT",
+                                                       "CHaracterising ExOPlanets Satellite (CHEOPS)",
+                                                       "Atacama Large Millimeter Array (ALMA)",
+                                                       "European Southern Observatory")
+                                                        ~ "Europe",
+                                 disc_facility %in% c("SuperWASP",
+                                                       "WASP-South",
+                                                       "SuperWASP-North",
+                                                       "SuperWASP-South",
+                                                       "United Kingdom Infrared Telescope",
+                                                       "Infrared Survey Facility")
+                                                       ~ "United Kingdom",
+                                 disc_facility %in% c("Roque de los Muchachos Observatory",
+                                                       "Calar Alto Observatory",
+                                                       "Teide Observatory")
+                                                       ~ "Spain",
+                                 disc_facility %in% c("Xinglong Station", 
+                                                      "Yunnan Astronomical Observatory")
+                                                      ~ "China",
+                                 disc_facility %in% c("Subaru Telescope",
+                                                      "Okayama Astrophysical Observatory")
+                                                      ~ "Japan",
+                                 disc_facility %in% c("Anglo-Australian Telescope",
+                                                      "Parkes Observatory")
+                                                      ~ "Australia",
+                                 disc_facility %in% c("KMTNet",
+                                                      "Bohyunsan Optical Astronomical Observatory")
+                                                      ~ "South Korea",
+                                 disc_facility == "MOA" ~ "New Zealand",
+                                 disc_facility == "Haute-Provence Observatory" ~ "France",
+                                 disc_facility == "Qatar" ~ "Qatar",
+                                 disc_facility == "OGLE" ~ "Poland",
+                                 disc_facility == "Thueringer Landessternwarte Tautenburg" ~ "Germany",
+                                 
+                                 TRUE ~ disc_facility
   ))
 
 ```
 
 ```{r public-or-private, include=FALSE}
 
+### Public or private for filtered data
+
 alldata <- alldata %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         public_or_private = ifelse( disc_facility %in% c("KELT-North",
+                                                          "KELT",
+                                                          "Fred Lawrence Whipple Observatory",
+                                                          "McDonald Observatory",
+                                                          "Acton Sky Portal Observatory",
+                                                          "KELT-South"), "Private", "Public"))
+
+### Public or private for unfiltered data
+
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         public_or_private = ifelse( disc_facility %in% c("KELT-North",
+                                                          "KELT",
+                                                          "Fred Lawrence Whipple Observatory",
+                                                          "McDonald Observatory",
+                                                          "Acton Sky Portal Observatory",
+                                                          "KELT-South",
+                                                          "Palomar Observatory",
+                                                          "Oak Ridge Observatory",
+                                                          "KMTNet",
+                                                          "Large Binocular Telescope Observatory",
+                                                          "Winer Observatory"), "Private", "Public"))
+alldataunfiltered <- alldataunfiltered %>%
   
   mutate(disc_facility = as.character(disc_facility),
          public_or_private = case_when(
@@ -121,14 +225,41 @@ alldata <- alldata %>%
                                                        "Haute-Provence Observatory", 
                                                        "Qatar",
                                                        "OGLE",
-                                                       "Subaru Telescope")
+                                                       "Subaru Telescope",
+                                                       "Xinglong Station",
+                                                       "Thueringer Landessternwarte Tautenburg",
+                                                       "Okayama Astrophysical Observatory",
+                                                       "Hubble Space Telescope",
+                                                       "Anglo-Australian Telescope",
+                                                       "Bohyunsan Optical Astronomical Observatory",
+                                                       "NASA Infrared Telescope Facility (IRTF)",
+                                                       "Yunnan Astronomical Observatory", 
+                                                       "Spitzer Space Telescope",
+                                                       "Kitt Peak National Observatory",
+                                                       "CHaracterising ExOPlanets Satellite (CHEOPS)"
+                                                       "Apache Point Observatory",
+                                                       "Atacama Large Millimeter Array (ALMA)",
+                                                       "MOA",
+                                                       "European Southern Observatory",
+                                                       "Arecibo Observatory",
+                                                       "Parkes Observatory",
+                                                       "Leoncito Astronomical Complex",
+                                                       "Infrared Survey Facility",
+                                                       "Mauna Kea Observatory",
+                                                       "Teide Observatory",
+                                                       "Haleakala Observatory")
                                                        ~ "Public",
                                  disc_facility %in% c("KELT-North",
                                                       "KELT",
                                                       "Fred Lawrence Whipple Observatory",
                                                       "McDonald Observatory",
                                                       "Acton Sky Portal Observatory",
-                                                      "KELT-South")
+                                                      "KELT-South",
+                                                      "Palomar Observatory",
+                                                      "Oak Ridge Observatory",
+                                                      "KMTNet",
+                                                      "Large Binocular Telescope Observatory",
+                                                      "Winer Observatory")
                                                       ~ "Private",
                                  TRUE ~ disc_facility
   ))
@@ -137,50 +268,37 @@ alldata <- alldata %>%
 
 ```{r telescope-type, include=FALSE}
 
+### Facility Type for filtered data
+
 alldata <- alldata %>%
   
   mutate(disc_facility = as.character(disc_facility),
-         facility_type = case_when(
-                                 disc_facility %in% c( "HATNet",
-                                                       "HATSouth",
-                                                       "W. M. Keck Observatory",
-                                                       "XO",
-                                                       "TrES",
-                                                       "Gemini Observatory",
-                                                       "Las Campanas Observatory",
-                                                       "MEarth Project",
-                                                       "Cerro Tololo Inter-American Observatory",
-                                                       "Lick Observatory",
-                                                       "La Silla Observatory",
-                                                       "Paranal Observatory",
-                                                       "SuperWASP",
-                                                       "WASP-South",
-                                                       "SuperWASP-South",
-                                                       "SuperWASP-North",
-                                                       "United Kingdom Infrared Telescope",
-                                                       "Roque de los Muchachos Observatory",
-                                                       "Calar Alto Observatory",
-                                                       "Haute-Provence Observatory", 
-                                                       "Qatar",
-                                                       "OGLE",
-                                                       "Subaru Telescope",
-                                                       "KELT-North",
-                                                       "KELT",
-                                                       "Fred Lawrence Whipple Observatory",
-                                                       "McDonald Observatory",
-                                                       "Acton Sky Portal Observatory",
-                                                       "KELT-South")
-                                                       ~ "Observatory",
-                                 disc_facility %in% c("CoRoT",
+         facility_type = ifelse( disc_facility %in% c("CoRoT",
                                                       "Kepler",
                                                       "K2",
-                                                      "Transiting Exoplanet Survey Satellite (TESS)")
-                                                      ~ "Space Telescope",
-                                 TRUE ~ disc_facility
-  ))
+                                                      "Transiting Exoplanet Survey Satellite (TESS)"),
+                                                         "Space Telescope",
+                                                         "Observatory"))
+  
+### Facility Type for unfiltered data
+
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         facility_type = ifelse( disc_facility %in% c("CoRoT",
+                                                      "Kepler",
+                                                      "K2",
+                                                      "Transiting Exoplanet Survey Satellite (TESS)",
+                                                      "Hubble Space Telescope",
+                                                      "Spitzer Space Telescope",
+                                                      "CHaracterising ExOPlanets Satellite (CHEOPS)"),
+                                                         "Space Telescope",
+                                                         "Observatory"))
 ```
 
 ```{r facility-latitude, include=FALSE}
+
+### Latitude for filtered data
 
 alldata <- alldata %>%
   
@@ -219,9 +337,81 @@ alldata <- alldata %>%
                                  disc_facility == "Kepler" ~ 28.446671,
                                  disc_facility == "K2" ~ 28.446671,
                                  disc_facility == "Transiting Exoplanet Survey Satellite (TESS)" ~ 28.562110,
+                                 
                                                      
                                  TRUE ~ 0
   ))
+
+### Latitude for unfiltered data
+
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         facility_latitude = case_when(
+                                 disc_facility == "HATNet" ~ 31.674920,
+                                 disc_facility == "HATSouth" ~ -29.014600,
+                                 disc_facility == "W. M. Keck Observatory" ~ 19.826360,
+                                 disc_facility == "XO" ~ 20.708300,
+                                 disc_facility == "TrES" ~ 35.1210,
+                                 disc_facility == "Gemini Observatory" ~ 19.823960,
+                                 disc_facility == "Las Campanas Observatory" ~ -29.014600,
+                                 disc_facility == "MEarth Project" ~ 31.674920,
+                                 disc_facility == "Cerro Tololo Inter-American Observatory" ~ -30.169660,
+                                 disc_facility == "Lick Observatory" ~ 37.341373,
+                                 disc_facility == "La Silla Observatory" ~ -29.261170,
+                                 disc_facility == "Paranal Observatory" ~ -24.627220,
+                                 disc_facility == "SuperWASP" ~ 28.4537,
+                                 disc_facility == "WASP-South" ~ -26.030260,
+                                 disc_facility == "SuperWASP-North" ~ 28.75651,
+                                 disc_facility == "SuperWASP-South" ~ -26.030260,
+                                 disc_facility == "United Kingdom Infrared Telescope" ~ 19.822500,
+                                 disc_facility == "Roque de los Muchachos Observatory" ~ 28.4522,
+                                 disc_facility == "Calar Alto Observatory" ~ 37.220790,
+                                 disc_facility == "Haute-Provence Observatory" ~ 43.930830, 
+                                 disc_facility == "Qatar" ~ 32.902359,
+                                 disc_facility == "OGLE" ~ -29.0036,
+                                 disc_facility == "Subaru Telescope" ~ 19.701610,
+                                 disc_facility == "KELT-North" ~ 31.71272,
+                                 disc_facility == "KELT" ~ 31.71272,
+                                 disc_facility == "Fred Lawrence Whipple Observatory" ~ 31.674920,
+                                 disc_facility == "McDonald Observatory" ~ 30.679770,
+                                 disc_facility == "Acton Sky Portal Observatory" ~ 42.477587,
+                                 disc_facility == "KELT-South" ~ 31.71272,
+                                 disc_facility == "CoRoT" ~ 45.592759,
+                                 disc_facility == "Kepler" ~ 28.446671,
+                                 disc_facility == "K2" ~ 28.446671,
+                                 disc_facility == "Transiting Exoplanet Survey Satellite (TESS)" ~ 28.562110,
+                                 disc_facility == "Xinglong Station" ~ 40.394170,
+                                 disc_facility == "Thueringer Landessternwarte Tautenburg" ~ 50.982190,
+                                 disc_facility == "Okayama Astrophysical Observatory" ~ 34.576100,
+                                 disc_facility == "Hubble Space Telescope" ~ 28.608400,
+                                 disc_facility == "Anglo-Australian Telescope" ~ -31.275400,
+                                 disc_facility == "Bohyunsan Optical Astronomical Observatory" ~ 36.160774,
+                                 disc_facility == "NASA Infrared Telescope Facility (IRTF)" ~ 19.826210,
+                                 disc_facility == "Yunnan Astronomical Observatory" ~ 25.033330, 
+                                 disc_facility == "Spitzer Space Telescope" ~ 28.446671,
+                                 disc_facility == "Kitt Peak National Observatory" ~ 31.960050,
+                                 disc_facility == "CHaracterising ExOPlanets Satellite (CHEOPS)" ~ 5.301861,
+                                 disc_facility == "Apache Point Observatory" ~ 32.780340,
+                                 disc_facility == "Atacama Large Millimeter Array (ALMA)" ~ -23.027780,
+                                 disc_facility == "MOA" ~ -43.970600,
+                                 disc_facility == "European Southern Observatory" ~ 48.260000,
+                                 disc_facility == "Arecibo Observatory" ~ 18.344168,
+                                 disc_facility == "Parkes Observatory" ~ -33.011640,
+                                 disc_facility == "Leoncito Astronomical Complex" ~ -31.798600,
+                                 disc_facility == "Infrared Survey Facility" ~ 19.822500,
+                                 disc_facility == "Mauna Kea Observatory" ~ 19.4920,
+                                 disc_facility == "Teide Observatory" ~ 28.1800,
+                                 disc_facility == "Haleakala Observatory" ~ 20.4230,
+                                 disc_facility == "Palomar Observatory" ~ 33.357030,
+                                 disc_facility == "Oak Ridge Observatory" ~ 42.505000,
+                                 disc_facility == "KMTNet" ~ -31.16163,
+                                 disc_facility == "Large Binocular Telescope Observatory" ~ 32.701310,
+                                 disc_facility == "Winer Observatory" ~ 31.665947,
+                                 
+                                 TRUE ~ 0
+  ))
+
 ```
 
 ```{r facility-longitude, include=FALSE}
@@ -287,7 +477,31 @@ facility_df <- alldata %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
+```{r construct-facility_df2, echo=FALSE}
+facility_df2 <- alldataunfiltered %>% 
+  group_by(disc_facility) %>%
+  mutate(count = n()) %>%
+  select(disc_facility, count) %>%
+  distinct() %>%
+  filter(!disc_facility == "Multiple Observatories") %>%
+  filter(!disc_facility == "KOINet")
+```
+
+```{r construct-facility_df_group_by_location, echo=FALSE}
+facility_df_lat_group <- alldata %>% 
+  group_by(facility_latitude) %>%
+  mutate(count = n()) %>%
+  select(facility_latitude, facility_longitude, disc_facility, facility_type, count) %>%
+  distinct(facility_latitude, .keep_all = TRUE) %>%
+  filter(!disc_facility == "Multiple Observatories")
+```
+
+
+
 ```{r mapping facilities, echo=FALSE, out.width = "500%", fig.align = "center"}
+
+### Group by facility
+
 world_map <- map_data("world")
 
 p <- ggplot() + coord_fixed() +
@@ -311,7 +525,35 @@ map_data <-
              aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
              pch=21, alpha=I(0.5))
 map_data
+
+### Group By Coordinates
+
+world_map <- map_data("world")
+
+p <- ggplot() + coord_fixed() +
+  xlab("") + ylab("")
+
+base_world_messy <- p + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), 
+                               colour="darkseagreen", fill="light green")
+
+cleanup <- 
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
+        panel.background = element_rect(fill = 'white', colour = 'white'), 
+        axis.line = element_line(colour = "white"), legend.position="none",
+        axis.ticks=element_blank(), axis.text.x=element_blank(),
+        axis.text.y=element_blank())
+
+base_world <- base_world_messy + cleanup
+
+map_data <- 
+  base_world +
+  geom_point(data=facility_df_lat_group, 
+             aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
+             pch=21, alpha=I(0.5))
+map_data
 ```
+
+
 
 ---
 
