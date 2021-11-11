@@ -26,6 +26,8 @@ library(xaringan)
 library(dplyr)
 library(maps)
 library(ggplot2)
+library(gganimate)
+library(gifski)
 ```
 
 ```{r setup, include=FALSE}
@@ -703,10 +705,13 @@ alldata %>%
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank())
+```
+--- 
 
+--- 
 
-alldata %>%
-  ggplot(mapping = aes(y = sy_distance,
+```{r animate-scatter, echo = FALSE, fig.show="hold", out.width="50%"}
+ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
                        x = disc_year,
                        color = discoverymethod,
                        size = pl_mass)) +
@@ -719,7 +724,9 @@ alldata %>%
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) 
+
+ethan + transition_reveal(disc_year)
 ```
 
 ---

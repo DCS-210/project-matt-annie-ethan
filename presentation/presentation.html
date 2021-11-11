@@ -55,6 +55,15 @@ style_xaringan(
 
 
 
+```r
+facility_df2_lat_group &lt;- alldataunfiltered %&gt;% 
+  group_by(facility_latitude) %&gt;%
+  mutate(count = n()) %&gt;%
+  select(facility_latitude, facility_longitude, disc_facility, facility_type, count) %&gt;%
+  distinct(facility_latitude, .keep_all = TRUE) %&gt;%
+  filter(!disc_facility == "Multiple Observatories")
+```
+
 
 &lt;img src="presentation_files/figure-html/mapping facilities-1.png" width="500%" style="display: block; margin: auto;" /&gt;&lt;img src="presentation_files/figure-html/mapping facilities-2.png" width="500%" style="display: block; margin: auto;" /&gt;
 
@@ -162,6 +171,19 @@ glance(model)
 ---
 # Plots
 &lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-1.png" width="50%" /&gt;&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-2.png" width="50%" /&gt;
+--- 
+
+--- 
+
+
+```
+## Warning: No renderer available. Please install the gifski, av, or magick package
+## to create animated output
+```
+
+```
+## NULL
+```
 
 ---
 
