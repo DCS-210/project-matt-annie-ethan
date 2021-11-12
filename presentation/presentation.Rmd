@@ -720,13 +720,13 @@ ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
   geom_jitter(alpha = 1) + 
   labs(
         y = "Distance of Discovery (Parsecs)",
-        x = "Planet mass [Earth mass]", 
+        x = "Year", 
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank()) 
 
-ethan + transition_reveal(disc_year)
+ethan
 ```
 
 ---
