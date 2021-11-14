@@ -719,6 +719,7 @@ alldata %>%
 --- 
 
 ```{r animate-scatter, echo = FALSE, fig.show="hold", out.width="50%"}
+
 ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
                        x = disc_year,
                        color = discoverymethod,
@@ -739,13 +740,16 @@ ethan
 
 ---
 
-```{r discovery-facilit-leaflet}
+```{r discovery-facility-leaflet}
 
 labels <- sprintf(
   "<strong>%s</strong><br/>%g Discoveries",
   facility_df2$disc_facility, facility_df2$count
-) %>% lapply(htmltools::HTML)
+) %>% lapply(htmltools::HTML) 
 
+```
+
+```{r discovery-facility-leaflet} 
 
 leaflet(facility_df2) %>% 
       addProviderTiles(providers$Stamen.Terrain) %>%
