@@ -14,8 +14,11 @@ ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
   theme(legend.title = element_blank()) 
 
 ethan_anim <- ethan +
-              transition_time(disc_year) +
-              shadow_mark()
+              transition_time(as.integer(disc_year)) +
+              shadow_mark() +
+              labs(title = "Discovery Year: {frame_time}") +
+              enter_fade() +
+              exit_reset() +
                       
 
 

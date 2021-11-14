@@ -28,6 +28,11 @@ library(maps)
 library(ggplot2)
 library(gganimate)
 library(gifski)
+library(leaflet) 
+library(sf) 
+library(RColorBrewer) 
+library(htmltools) 
+library(leafsync)
 ```
 
 ```{r setup, include=FALSE}
@@ -495,7 +500,8 @@ facility_df2 <- alldataunfiltered %>%
   select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories") %>%
-  filter(!disc_facility == "KOINet")
+  filter(!disc_facility == "KOINet") %>%
+  filter(!disc_facility == "Multiple Facilities")
 ```
 
 ```{r construct-facility_df_group_by_location, echo=FALSE}
@@ -540,9 +546,11 @@ base_world <- base_world_messy + cleanup
 
 map_data <- 
   base_world +
-  geom_point(data=facility_df, 
+  geom_point(data=facility_df2, 
              aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
-             pch=21, alpha=I(0.5))
+             pch=21, alpha=I(0.5)) +
+  scale_size_continuous(range = c(3, 30))
+
 map_data
 
 ### Group By Coordinates
@@ -568,7 +576,7 @@ map_data <-
   base_world +
   geom_point(data=facility_df_lat_group, 
              aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
-             pch=21, alpha=I(0.5))
+             pch=21, alpha=I(0.5)) 
 map_data
 ```
 
@@ -730,6 +738,24 @@ ethan
 ```
 
 ---
+
+```{r discovery-facilit-leaflet}
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Discoveries",
+  facility_df2$disc_facility, facility_df2$count
+) %>% lapply(htmltools::HTML)
+
+
+leaflet(facility_df2) %>% 
+      addProviderTiles(providers$Stamen.Terrain) %>%
+      addProviderTiles(providers$Stamen.TerrainLabels) %>%
+      addCircleMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)
+      
+```
+
+
+
 
 ## Plot and text
 
