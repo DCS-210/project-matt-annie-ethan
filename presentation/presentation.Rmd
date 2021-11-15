@@ -747,6 +747,18 @@ glance(gdp_disc)
 ---
 
 # Plots
+```{r}
+alldata %>%
+  group_by(disc_year) %>%
+  summarise_at(vars(sy_distance), list(name = mean)) %>%
+  ggplot(mapping = aes(x = disc_year, y = name)) +
+  labs(
+    x = "Discovery Year",
+    y = "Mean Distance of Discovery (Parsecs)",
+    title = "Year to Mean Distance of Discovery (Parsecs)"
+  ) +
+  geom_point()
+```
 
 ```{r recode-species, echo = FALSE}
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
