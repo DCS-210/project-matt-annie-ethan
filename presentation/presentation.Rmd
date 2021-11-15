@@ -474,8 +474,33 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```
 
+```{r facility-country-gdp}
 
-```{r}
+alldataunfiltered <- alldataunfiltered %>%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         GDP_2020 = case_when(
+                                 disc_facility_country == "United States" ~ 63543.58,
+                                 disc_facility_country == "Europe" ~ 34114.9,
+                                 disc_facility_country == "United Kingdom" ~ 40284.64,
+                                 disc_facility_country == "Spain" ~ 27063.19,
+                                 disc_facility_country == "China" ~ 10500.40,
+                                 disc_facility_country == "Japan" ~ 39538.88,
+                                 disc_facility_country == "Australia" ~ 51812.15,
+                                 disc_facility_country == "South Korea" ~ 31489.12,
+                                 disc_facility_country == "New Zealand" ~ 41477.94,
+                                 disc_facility_country == "France" ~ 39030.36,
+                                 disc_facility_country == "Qatar" ~ 50805.46,
+                                 disc_facility_country == "Poland" ~ 15656.18,
+                                 disc_facility_country == "Germany" ~ 46208.43,
+                                 
+                                 TRUE ~ 0
+  ))
+
+```
+
+
+```{r title-slide-background, include=FALSE}
 style_xaringan(
   title_slide_background_image = "img/SPACE_2.jpg"
 )
@@ -488,7 +513,7 @@ style_xaringan(
 facility_df <- alldata %>% 
   group_by(disc_facility, disc_year) %>%
   mutate(count = n()) %>%
-  select(disc_facility, disc_year, facility_type, facility_latitude, facility_longitude, count) %>%
+  select(disc_facility, disc_facility_country, disc_year, facility_type, facility_latitude, facility_longitude, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
@@ -497,7 +522,7 @@ facility_df <- alldata %>%
 facility_df2 <- alldataunfiltered %>% 
   group_by(disc_facility) %>%
   mutate(count = n()) %>%
-  select(disc_facility, facility_type, facility_latitude, facility_longitude, count) %>%
+  select(disc_facility, disc_facility_country, facility_type, facility_latitude, facility_longitude, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories") %>%
   filter(!disc_facility == "KOINet") %>%
@@ -513,13 +538,34 @@ facility_df_lat_group <- alldata %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
-```{r construct-facility_df2_group_by_location}
+```{r construct-facility_df2_group_by_location, echo=FALSE}
 facility_df2_lat_group <- alldataunfiltered %>% 
   group_by(facility_latitude) %>%
   mutate(count = n()) %>%
   select(facility_latitude, facility_longitude, disc_facility, facility_type, count) %>%
   distinct(facility_latitude, .keep_all = TRUE) %>%
   filter(!disc_facility == "Multiple Observatories")
+```
+
+```{r gdp_country_disc_count, echo=FALSE}
+gdp_country_disc_count <- alldataunfiltered %>% 
+  group_by(disc_facility_country) %>%
+  mutate(count = n()) %>%
+  select(disc_facility_country, count, GDP_2020) %>%
+  distinct(disc_facility_country, .keep_all = TRUE) %>%
+  filter(!disc_facility_country == "Multiple Observatories") %>%
+  filter(!disc_facility_country == "KOINet")
+```
+
+```{r gdp_country_disc_count_no_USA, echo=FALSE}
+gdp_country_disc_count_no_USA <- alldataunfiltered %>% 
+  group_by(disc_facility_country) %>%
+  mutate(count = n()) %>%
+  select(disc_facility_country, count, GDP_2020) %>%
+  distinct(disc_facility_country, .keep_all = TRUE) %>%
+  filter(!disc_facility_country == "Multiple Observatories") %>%
+  filter(!disc_facility_country == "United States") %>%
+  filter(!disc_facility_country == "KOINet")
 ```
 
 
@@ -549,7 +595,7 @@ map_data <-
   geom_point(data=facility_df2, 
              aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
              pch=21, alpha=I(0.5)) +
-  scale_size_continuous(range = c(3, 30))
+  scale_size_continuous(range = c(3, 15))
 
 map_data
 
@@ -586,21 +632,23 @@ map_data
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## Trends in exoplanet discovery over the course of 20 years
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# Intoduction
 
 ---
 
-# Hello World
+# What is an Exoplanet?
 
-- Click the `Knit` button to compile your presentation
+- "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
 
-- Make sure to commit and push all resulting files to your GitHub repo
+- Exoplanet discovery allows us to search for habitable planets outside of our solar system!
+
+- As of today, we have discoverd roughly 4500 exoplanets
 
 ---
 
@@ -644,11 +692,56 @@ or text in two columns $^*$
 
 # Code
 
-```{r boring-regression}
-# a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
+```{r gdp-vs-count, echo=FALSE, fig.align = "center"}
+
+# GDP per capita vs count (USA)
+gdp_country_disc_count %>%
+  ggplot(mapping = aes(
+                        x = GDP_2020,
+                        y = count,
+                        color = disc_facility_country)) +
+  geom_jitter() +
+  geom_smooth(color = "black") +
+  labs(
+        x = "2020 GDP Per Capita of Country (USD)",
+        y = "Total Discovery Count", 
+        title = " Country GDP Per Capita vs Discovery Count") +
+  guides(color = guide_legend("Country"))
+
+# GDP per capita vs count (No USA)
+gdp_country_disc_count_no_USA %>%
+  ggplot(mapping = aes(
+                        x = GDP_2020,
+                        y = count,
+                        color = disc_facility_country)) +
+  geom_jitter() +
+  geom_smooth(color = "black") +
+  labs(
+        x = "2020 GDP Per Capita of Country (USD)",
+        y = "Total Discovery Count", 
+        title = " Country GDP Per Capita vs Discovery Count") +
+  guides(color = guide_legend("Country"))
+```
+
+```{r gdp-vs-count-reg}
+
+# USA Included
+gdp_disc <- linear_reg() %>% 
+  set_engine("lm") %>%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count)
+
+tidy(gdp_disc)
+glance(gdp_disc)
+
+
+# No USA
+gdp_disc <- linear_reg() %>% 
+  set_engine("lm") %>%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count_no_USA)
+
+tidy(gdp_disc)
+glance(gdp_disc)
+```
 ```
 
 ---
@@ -740,7 +833,7 @@ ethan
 
 ---
 
-```{r discovery-facility-leaflet}
+```{r discovery-facility-leaflet-labels}
 
 labels <- sprintf(
   "<strong>%s</strong><br/>%g Discoveries",

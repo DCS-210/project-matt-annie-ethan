@@ -40,6 +40,7 @@ The data that we are using is a compilation of data from many different exoplane
 ```{r load-data, message = FALSE}
 alldata <- read_csv("/cloud/project/data/filtereddata.csv")
 alldataunfiltered <- read_csv("/cloud/project/data/unfiltereddata.csv")
+gdp <- read_csv("/cloud/project/data/GDP.csv")
 
 glimpse(alldata)
 glimpse(alldataunfiltered) #includes data for all exoplanets

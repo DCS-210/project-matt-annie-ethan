@@ -4,8 +4,19 @@
     <title>Exoplanet Exploration</title>
     <meta charset="utf-8" />
     <meta name="author" content="Annie Li, Matt Clayton, Ethan Wu" />
-    <meta name="date" content="2021-11-11" />
+    <meta name="date" content="2021-11-15" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+    <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+    <script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -16,7 +27,7 @@ class: center, middle, inverse, title-slide
 ## Predicting Future Trends in Exoplanet Exploration
 ### Annie Li, Matt Clayton, Ethan Wu
 ### Bates College
-### 2021-11-11
+### 2021-11-15
 
 ---
 
@@ -38,12 +49,31 @@ class: center, middle, inverse, title-slide
 
 
 
-
 ```r
-style_xaringan(
-  title_slide_background_image = "img/SPACE_2.jpg"
-)
+alldataunfiltered &lt;- alldataunfiltered %&gt;%
+  
+  mutate(disc_facility = as.character(disc_facility),
+         GDP_2020 = case_when(
+                                 disc_facility_country == "United States" ~ 63543.58,
+                                 disc_facility_country == "Europe" ~ 34114.9,
+                                 disc_facility_country == "United Kingdom" ~ 40284.64,
+                                 disc_facility_country == "Spain" ~ 27063.19,
+                                 disc_facility_country == "China" ~ 10500.40,
+                                 disc_facility_country == "Japan" ~ 39538.88,
+                                 disc_facility_country == "Australia" ~ 51812.15,
+                                 disc_facility_country == "South Korea" ~ 31489.12,
+                                 disc_facility_country == "New Zealand" ~ 41477.94,
+                                 disc_facility_country == "France" ~ 39030.36,
+                                 disc_facility_country == "Qatar" ~ 50805.46,
+                                 disc_facility_country == "Poland" ~ 15656.18,
+                                 disc_facility_country == "Germany" ~ 46208.43,
+                                 
+                                 TRUE ~ 0
+  ))
 ```
+
+
+
 
 ---
 
@@ -55,13 +85,28 @@ style_xaringan(
 
 
 
+
+
 ```r
-facility_df2_lat_group &lt;- alldataunfiltered %&gt;% 
-  group_by(facility_latitude) %&gt;%
+gdp_country_disc_count &lt;- alldataunfiltered %&gt;% 
+  group_by(disc_facility_country) %&gt;%
   mutate(count = n()) %&gt;%
-  select(facility_latitude, facility_longitude, disc_facility, facility_type, count) %&gt;%
-  distinct(facility_latitude, .keep_all = TRUE) %&gt;%
-  filter(!disc_facility == "Multiple Observatories")
+  select(disc_facility_country, count, GDP_2020) %&gt;%
+  distinct(disc_facility_country, .keep_all = TRUE) %&gt;%
+  filter(!disc_facility_country == "Multiple Observatories") %&gt;%
+  filter(!disc_facility_country == "KOINet")
+```
+
+
+```r
+gdp_country_disc_count_no_USA &lt;- alldataunfiltered %&gt;% 
+  group_by(disc_facility_country) %&gt;%
+  mutate(count = n()) %&gt;%
+  select(disc_facility_country, count, GDP_2020) %&gt;%
+  distinct(disc_facility_country, .keep_all = TRUE) %&gt;%
+  filter(!disc_facility_country == "Multiple Observatories") %&gt;%
+  filter(!disc_facility_country == "United States") %&gt;%
+  filter(!disc_facility_country == "KOINet")
 ```
 
 
@@ -73,21 +118,23 @@ facility_df2_lat_group &lt;- alldataunfiltered %&gt;%
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## Trends in exoplanet discovery over the course of 20 years
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# Intoduction
 
 ---
 
-# Hello World
+# What is an Exoplanet?
 
-- Click the `Knit` button to compile your presentation
+- "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
 
-- Make sure to commit and push all resulting files to your GitHub repo
+- Exoplanet discovery allows us to search for habitable planets outside of our solar system!
+
+- As of today, we have discoverd roughly 4500 exoplanets
 
 ---
 
@@ -132,30 +179,76 @@ or text in two columns `\(^*\)`
 # Code
 
 
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+&lt;img src="presentation_files/figure-html/gdp-vs-count-1.png" width="80%" /&gt;
+
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+&lt;img src="presentation_files/figure-html/gdp-vs-count-2.png" width="80%" /&gt;
+
+
 ```r
-# a boring regression
-model &lt;- lm(dist ~ speed, data = cars)
-tidy(model)
+# USA Included
+gdp_disc &lt;- linear_reg() %&gt;% 
+  set_engine("lm") %&gt;%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count)
+
+tidy(gdp_disc)
 ```
 
 ```
 ## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
-## 2 speed           3.93     0.416      9.46 1.49e-12
+##   term         estimate std.error statistic p.value
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) -595.      529.         -1.13  0.282 
+## 2 GDP_2020       0.0258    0.0136      1.89  0.0826
 ```
 
 ```r
-glance(model)
+glance(gdp_disc)
 ```
 
 ```
 ## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
+##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.230         0.166  846.      3.59  0.0826     1  -113.  232.  234.
 ## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
+```
+
+```r
+# No USA
+gdp_disc &lt;- linear_reg() %&gt;% 
+  set_engine("lm") %&gt;%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count_no_USA)
+
+tidy(gdp_disc)
+```
+
+```
+## # A tibble: 2 × 5
+##   term         estimate std.error statistic p.value
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) 49.2       60.4         0.816   0.432
+## 2 GDP_2020     0.000448   0.00167     0.269   0.793
+```
+
+```r
+glance(gdp_disc)
+```
+
+```
+## # A tibble: 1 × 12
+##   r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1   0.00653       -0.0838  91.0    0.0723   0.793     1  -76.0  158.  160.
+## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
+```
 ```
 
 ---
@@ -175,17 +268,31 @@ glance(model)
 
 --- 
 
-
-```
-## Warning: No renderer available. Please install the gifski, av, or magick package
-## to create animated output
-```
-
-```
-## NULL
-```
+&lt;img src="presentation_files/figure-html/animate-scatter-1.png" width="50%" /&gt;
 
 ---
+
+
+```r
+labels &lt;- sprintf(
+  "&lt;strong&gt;%s&lt;/strong&gt;&lt;br/&gt;%g Discoveries",
+  facility_df2$disc_facility, facility_df2$count
+) %&gt;% lapply(htmltools::HTML) 
+```
+
+
+```r
+leaflet(facility_df2) %&gt;% 
+      addProviderTiles(providers$Stamen.Terrain) %&gt;%
+      addProviderTiles(providers$Stamen.TerrainLabels) %&gt;%
+      addCircleMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)
+```
+
+<div id="htmlwidget-eaa87376114d446bfd6b" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-eaa87376114d446bfd6b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addCircleMarkers","args":[[40.39417,50.98219,34.5761,19.82636,19.82396,37.341373,-24.62722,-30.16966,28.6084,28.446671,43.93083,30.67977,-31.2754,36.160774,28.56211,28.4522,28.446671,-29.26117,19.82621,45.592759,19.70161,25.03333,28.446671,37.22079,31.67492,32.902359,42.477587,33.35703,31.67492,-29.0146,31.96005,-29.0146,5.301861,42.505,31.67492,32.78034,-23.02778,31.71272,31.71272,31.71272,-31.16163,32.70131,-43.9706,31.665947,-29.0036,48.26,18.344168,-33.01164,-31.7986,19.8225,35.121,19.492,28.18,28.4537,-26.03026,28.75651,-26.03026,19.8225,20.423,20.7083],[117.575,11.7109,133.594,-155.475,-155.4698,-121.642944,-70.40417,-70.80653,-80.60435,-80.566109,5.713333,-104.0248,149.0672,128.97377,-80.57718,-17.533,-80.566109,-70.73133,-155.4726,63.333059,-155.0896,102.7833,-80.566109,-2.546575,-110.9496,-105.530205,-71.453447,-116.8653,-110.9496,-70.6926,-111.598,-70.6926,-52.834583,-71.558,-110.9496,-105.8198,-67.75481,-110.60182,-110.60182,-110.60182,149.03452,-109.8891,170.467133,-110.602058,-70.4156,11.67111,-66.752777,148.2582,-69.2956,-155.4707,-111.3952,-155.283,-16.3035,-17.5245,27.9249,-17.89163,27.9249,-155.4707,-156.1526,-156.2571],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,["<strong>Xinglong Station<\/strong><br/>2 Discoveries","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries","<strong>Gemini Observatory<\/strong><br/>9 Discoveries","<strong>Lick Observatory<\/strong><br/>33 Discoveries","<strong>Paranal Observatory<\/strong><br/>36 Discoveries","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries","<strong>Kepler<\/strong><br/>2402 Discoveries","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries","<strong>McDonald Observatory<\/strong><br/>29 Discoveries","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries","<strong>K2<\/strong><br/>467 Discoveries","<strong>La Silla Observatory<\/strong><br/>247 Discoveries","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries","<strong>CoRoT<\/strong><br/>33 Discoveries","<strong>Subaru Telescope<\/strong><br/>8 Discoveries","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries","<strong>MEarth Project<\/strong><br/>2 Discoveries","<strong>Qatar<\/strong><br/>11 Discoveries","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries","<strong>Palomar Observatory<\/strong><br/>2 Discoveries","<strong>HATNet<\/strong><br/>67 Discoveries","<strong>HATSouth<\/strong><br/>69 Discoveries","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries","<strong>KELT<\/strong><br/>10 Discoveries","<strong>KELT-South<\/strong><br/>4 Discoveries","<strong>KELT-North<\/strong><br/>7 Discoveries","<strong>KMTNet<\/strong><br/>24 Discoveries","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries","<strong>MOA<\/strong><br/>25 Discoveries","<strong>Winer Observatory<\/strong><br/>1 Discoveries","<strong>OGLE<\/strong><br/>72 Discoveries","<strong>European Southern Observatory<\/strong><br/>2 Discoveries","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries","<strong>Parkes Observatory<\/strong><br/>2 Discoveries","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries","<strong>TrES<\/strong><br/>5 Discoveries","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries","<strong>Teide Observatory<\/strong><br/>1 Discoveries","<strong>SuperWASP<\/strong><br/>113 Discoveries","<strong>SuperWASP-South<\/strong><br/>32 Discoveries","<strong>SuperWASP-North<\/strong><br/>5 Discoveries","<strong>WASP-South<\/strong><br/>10 Discoveries","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries","<strong>XO<\/strong><br/>7 Discoveries"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.9706,50.98219],"lng":[-156.2571,170.467133]}},"evals":[],"jsHooks":[]}</script>
+
+
+
 
 ## Plot and text
 
@@ -194,7 +301,7 @@ glance(model)
 - goes here
 ]
 .pull-right[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-1-1.png" width="100%" /&gt;
 ]
 
 ---
@@ -281,7 +388,7 @@ background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e69
 You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
 
 ```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
 ```
 
 `$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
