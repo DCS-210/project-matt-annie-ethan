@@ -22,5 +22,5 @@ ethan_anim <- ethan +
                       
 
 
-anim_save("Ethan.gif", ethan_anim, width = 1000, height = 500)
+anim_save("Ethan.gif", ethan_anim, width = 830, height = 500)
 

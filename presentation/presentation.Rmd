@@ -660,13 +660,10 @@ class: inverse, middle, center
 
 # xaringan
 
-- The presentation is created using the `xaringan` package
+```{r animation, echo = FALSE, out.width = "1000%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
+include_graphics("/cloud/project/Ethan.gif")
+```
 
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
 
 ---
 
