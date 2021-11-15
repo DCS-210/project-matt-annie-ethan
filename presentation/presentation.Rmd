@@ -827,28 +827,26 @@ alldata_discoverymethod %>%
 # Plots
 ```{r discovery-method-vs-planet_radius-and-planet-mass, echo = FALSE, fig.show="hold", out.width="50%"}
 alldata %>%
-  ggplot(mapping = aes(x = pl_radius,
-                       y = sy_distance,
+  ggplot(mapping = aes(x = disc_year,
+                       y = pl_radius,
                        color = discoverymethod)) +
   geom_jitter() +
-  coord_flip() +
   labs(
-        x = "Distance of Discovery (Parsecs)",
-        y = "Planet radius [Earth radius]", 
+        y = "Planet radius [Earth radius]",
+        x = "Discovery year", 
         title = "Planet radius and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank())
 
 alldata %>%
-  ggplot(mapping = aes(y = pl_mass,
-                       x = sy_distance,
+  ggplot(mapping = aes(x = disc_year,
+                       y = pl_mass,
                        color = discoverymethod), alpha = 0.3) +
   geom_jitter() + 
-  coord_flip() +
   labs(
-        y = "Distance of Discovery (Parsecs)",
-        x = "Planet mass [Earth mass]", 
+        x = "Discovery year",
+        y = "Planet mass [Earth mass]", 
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
@@ -866,8 +864,7 @@ alldata_dist <- alldataunfiltered %>%
 
 ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
                        x = disc_year,
-                       color = discoverymethod,
-                       size = pl_mass)) +
+                       color = discoverymethod)) +
   geom_jitter(alpha = 1) + 
   labs(
         y = "Distance of Discovery (Parsecs)",
@@ -878,7 +875,7 @@ ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
   theme(legend.title = element_blank()) +
   theme(legend.key.size = unit(0.2, 'cm')) +
   theme(legend.spacing = unit(0.1, 'cm')) + 
-  theme(legend.text=element_text(size=3))
+  theme(legend.text=element_text(size=5))
 
 ethan
 ```
