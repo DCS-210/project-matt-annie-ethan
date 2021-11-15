@@ -25,6 +25,7 @@ your project.
 ## Presentation
 
 Our presentation can be found [here](presentation/presentation.html).
+Our animation can be found [here](Ethan.gif)
 
 ## Data
 
