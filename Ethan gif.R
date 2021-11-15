@@ -1,4 +1,4 @@
-ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
+ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
                                               x = disc_year,
                                               color = discoverymethod,
                                               size = pl_mass)) +
@@ -22,4 +22,5 @@ ethan_anim <- ethan +
                       
 
 
-anim_save("Ethan.gif", ethan_anim)
+anim_save("Ethan.gif", ethan_anim, width = 1000, height = 500)
+

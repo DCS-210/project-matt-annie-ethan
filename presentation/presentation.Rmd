@@ -747,8 +747,9 @@ glance(gdp_disc)
 ---
 
 # Plots
-```{r}
-alldata %>%
+```{r disc-distance-over-time-plot}
+
+alldataunfiltered %>%
   group_by(disc_year) %>%
   summarise_at(vars(sy_distance), list(name = mean)) %>%
   ggplot(mapping = aes(x = disc_year, y = name)) +
@@ -757,8 +758,18 @@ alldata %>%
     y = "Mean Distance of Discovery (Parsecs)",
     title = "Year to Mean Distance of Discovery (Parsecs)"
   ) +
-  geom_point()
+  geom_point() +
+  geom_smooth (color = "black")
+  
+  
 ```
+
+```{r disc-distance-over-time-reg}
+
+
+```
+
+
 
 ```{r recode-species, echo = FALSE}
 # In this chunk I'm doing a bunch of analysis that I don't want to present 
@@ -823,9 +834,12 @@ alldata %>%
 
 --- 
 
-```{r animate-scatter, echo = FALSE, fig.show="hold", out.width="50%"}
+```{r animate-scatter, echo = FALSE, fig.show="hold", out.width="200%"}
 
-ethan <- ggplot(data = alldata, mapping = aes(y = sy_distance,
+alldata_dist <- alldataunfiltered %>%
+  filter(!sy_distance == 0)
+
+ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
                        x = disc_year,
                        color = discoverymethod,
                        size = pl_mass)) +
