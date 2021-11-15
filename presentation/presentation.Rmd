@@ -660,10 +660,11 @@ class: inverse, middle, center
 
 # xaringan
 
-```{r animation, echo = FALSE, out.width = "1000%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
-include_graphics("/cloud/project/Ethan.gif")
+```{r animation, echo = FALSE}
+knitr::include_graphics("https://github.com/DCS-210/project-matt-annie-ethan/blob/main/Ethan.gif")
 ```
 
+<img src = "/cloud/project/Ethan.gif" width = "40" height = "40"/>
 
 ---
 
@@ -739,7 +740,7 @@ gdp_disc <- linear_reg() %>%
 tidy(gdp_disc)
 glance(gdp_disc)
 ```
-```
+
 
 ---
 
@@ -784,17 +785,43 @@ iris_modified <- iris %>%
 #  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
 ```
 
-```{r discovery-method-over-time, echo = FALSE}
-alldata %>%
-  ggplot(mapping = aes(x = disc_year, fill = fct_relevel(discoverymethod, c( "Orbital Brightness Modulation", "Transit Timing Variations", "Imaging", "Radial Velocity", "Transit")))) +
-  geom_bar() +
+---
+
+## Discovery methods
+.pull-left[
+- Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
+- Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
+- Imaging: Directly detect exoplanets using large telescope
+- Transit Timing Variations: Observe the variations in the timing of a transit
+- Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
+]
+```{r discovery-method-over-time, warning = FALSE, echo = FALSE, out.width = "50%"}
+alldata_discoverymethod <- alldataunfiltered %>%
+  filter(!discoverymethod == "Disk Kinematics") %>%
+  filter(!discoverymethod == "Pulsar Timing") %>%
+  filter(!discoverymethod == "Eclipse Timing Variations") %>%
+  filter(!discoverymethod == "Pulsation Timing") %>%
+  filter(!discoverymethod == "Pulsation Timing Variations") %>%
+  filter(!discoverymethod == "Astrometry") %>%
+  filter(!discoverymethod == "Microlensing")
+
+alldata_discoverymethod %>%
+  ggplot(mapping = aes(x = disc_year, fill = fct_relevel(discoverymethod, c("Orbital Brightness Modulation", "Transit Timing Variations", "Imaging", "Radial Velocity", "Transit")))) +
+  geom_bar() + 
+  xlim(1997,2021) +
   labs(
         x = "Discovery year",
         y = "Number of exoplanets", 
         fill = "Discovery Method",
         title = "Number of exoplanets discovered per year",
-        subtitle="By discovery method") 
+        subtitle = "By discovery method") +
+  theme(legend.position = "bottom") +
+  theme(legend.key.size = unit(0.4, 'cm')) +
+  theme(legend.title = element_blank()) +
+  guides(color = guide_legend(nrow = 2, byrow = TRUE))
+
 ```
+
 
 ---
 # Plots
@@ -827,11 +854,12 @@ alldata %>%
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank())
 ```
---- 
 
---- 
 
-```{r animate-scatter, echo = FALSE, fig.show="hold", out.width="200%"}
+---
+## Change in distance of discovery over time by discovery method
+
+```{r animate-scatter, warning = FALSE, echo = FALSE, fig.show="hold"}
 
 alldata_dist <- alldataunfiltered %>%
   filter(!sy_distance == 0)
