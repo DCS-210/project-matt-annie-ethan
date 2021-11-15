@@ -857,9 +857,9 @@ alldata %>%
 
 
 ---
-## Change in distance of discovery over time by discovery method
+### Change in distance of discovery over time by discovery method
 
-```{r animate-scatter, warning = FALSE, echo = FALSE, fig.show="hold"}
+```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center'}
 
 alldata_dist <- alldataunfiltered %>%
   filter(!sy_distance == 0)
@@ -868,8 +868,6 @@ ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
                        x = disc_year,
                        color = discoverymethod,
                        size = pl_mass)) +
-           
-           
   geom_jitter(alpha = 1) + 
   labs(
         y = "Distance of Discovery (Parsecs)",
@@ -877,7 +875,10 @@ ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
-  theme(legend.title = element_blank()) 
+  theme(legend.title = element_blank()) +
+  theme(legend.key.size = unit(0.2, 'cm')) +
+  theme(legend.spacing = unit(0.1, 'cm')) + 
+  theme(legend.text=element_text(size=3))
 
 ethan
 ```
