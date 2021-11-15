@@ -763,6 +763,18 @@ alldataunfiltered %>%
 ```
 
 ```{r disc-distance-over-time-reg}
+disc_distance <- alldataunfiltered %>% 
+  group_by(disc_year) %>%
+  mutate(count = n()) %>%
+  mutate(mean_distance = mean(sy_distance)) %>%
+  select(disc_year, count, mean_distance) %>%
+  distinct(disc_year, .keep_all = TRUE)
+
+distance_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ mean_distance, data = disc_distance)
+
+distance_reg
 
 
 ```
