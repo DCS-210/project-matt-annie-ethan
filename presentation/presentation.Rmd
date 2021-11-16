@@ -641,7 +641,9 @@ gdp_country_disc_count <- alldataunfiltered %>%
   select(disc_facility_country, count, GDP_2020) %>%
   distinct(disc_facility_country, .keep_all = TRUE) %>%
   filter(!disc_facility_country == "Multiple Observatories") %>%
-  filter(!disc_facility_country == "KOINet")
+  filter(!disc_facility_country == "Multiple Facilities") %>%
+  filter(!disc_facility_country == "KOINet") %>%
+  filter(!disc_facility_country == "Europe") 
 ```
 
 ```{r gdp_country_disc_count_no_USA, echo=FALSE}
@@ -651,8 +653,10 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
   select(disc_facility_country, count, GDP_2020) %>%
   distinct(disc_facility_country, .keep_all = TRUE) %>%
   filter(!disc_facility_country == "Multiple Observatories") %>%
+  filter(!disc_facility_country == "Multiple Facilities") %>%
   filter(!disc_facility_country == "United States") %>%
-  filter(!disc_facility_country == "KOINet")
+  filter(!disc_facility_country == "KOINet") %>%
+  filter(!disc_facility_country == "Europe") 
 ```
 
 ```{r mapping facilities, echo=FALSE, out.width = "100%", fig.align = "top"}
@@ -741,7 +745,7 @@ leaflet(facility_df2) %>%
 
 ---
 
-# Exoplanet Discovery Over Time
+### Exoplanet Discovery Over Time
 ```{r disc-distance-over-time-plot, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align='center'}
 
 alldataunfiltered %>%
@@ -761,7 +765,7 @@ alldataunfiltered %>%
 
 ---
 
-## Linear Regression of Count on Mean Distance 
+### Linear Regression of Count on Mean Distance 
 ```{r count-on-distance-reg-df, include=FALSE}
 disc_distance <- alldataunfiltered %>% 
   group_by(disc_year) %>%
@@ -786,7 +790,7 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance$
 
 ---
 
-## Linear Regression of Count on Discovery Year
+### Linear Regression of Count on Discovery Year
 ``` {r count-on-time-reg}
 time_reg <- linear_reg() %>%
   set_engine("lm") %>%
@@ -801,7 +805,7 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Year$
 
 ---
 
-## Linear Regression of Count on Distance and Year
+### Linear Regression of Count on Distance and Year
 
 ``` {r count-on-time-distance-reg}
 distance_time_reg <- linear_reg() %>%
@@ -817,7 +821,7 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
 
 --- 
 
-## Linear Regression of Year on Distance 
+### Linear Regression of Year on Distance 
 
 ``` {r distance-on-time-reg}
 distance_on_time_reg <- linear_reg() %>%
@@ -899,12 +903,17 @@ glance(gdp_disc)
 
 ---
 
-## Discovery methods
+### Discovery methods
 - Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
+
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
+
 - Imaging: Directly detect exoplanets using large telescope
+
 - Transit Timing Variations: Observe the variations in the timing of a transit
+
 - Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
+
 - Microlensing: Measure light curve of a distant star that is not physically related to the planet/star.
 
 ---
