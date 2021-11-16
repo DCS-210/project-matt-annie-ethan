@@ -505,6 +505,22 @@ style_xaringan(
   title_slide_background_image = "img/SPACE_2.jpg"
 )
 ```
+---
+
+class: inverse, center, middle
+
+# Intoduction
+
+---
+
+# What is an Exoplanet?
+
+- "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
+
+- Exoplanet discovery allows us to search for habitable planets outside of our solar system!
+
+- As of today, we have discoverd roughly 4500 exoplanets
+
 
 ---
 
@@ -628,66 +644,80 @@ map_data <-
 map_data
 ```
 
+---
 
+### Interactive leaflet map: location and number of discoveries
+```{r discovery-facility-leaflet-labels, echo = FALSE}
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s",
+  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country
+) %>% lapply(htmltools::HTML) 
+
+```
+
+```{r discovery-facility-leaflet, echo = FALSE} 
+
+facility_df2$lat <- jitter(facility_df2$facility_latitude, factor = 0.5)
+facility_df2$lon <- jitter(facility_df2$facility_longitude, factor = 0.5)
+
+leaflet(facility_df2) %>%
+  setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
+      addProviderTiles(providers$Stamen.Terrain) %>%
+      addProviderTiles(providers$Stamen.TerrainLabels) %>%
+      addMarkers(~lon, ~lat, popup = ~labels)
+      
+```
 
 ---
 
-class: center, middle
-
-## Trends in exoplanet discovery over the course of 20 years
-
----
-
-class: inverse, center, middle
-
-# Intoduction
-
----
-
-# What is an Exoplanet?
-
-- "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
-
-- Exoplanet discovery allows us to search for habitable planets outside of our solar system!
-
-- As of today, we have discoverd roughly 4500 exoplanets
-
----
-
-class: inverse, middle, center
-
-# Using xaringan
-
----
 # Exoplanet Discovery Over Time
+```{r disc-distance-over-time-plot, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align='center'}
 
-  <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
-
-
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
-
-.pull-left[
-or text in two columns $^*$
-]
-.pull-right[
-- like
-- this
-]
-
-.footnote[
-[*] And add footnotes
-]
+alldataunfiltered %>%
+  group_by(disc_year) %>%
+  summarise_at(vars(sy_distance), list(name = mean)) %>%
+  ggplot(mapping = aes(x = disc_year, y = name)) +
+  labs(
+    x = "Discovery Year",
+    y = "Mean Distance of Discovery (Parsecs)",
+    title = "Year to Mean Distance of Discovery (Parsecs)"
+  ) +
+  geom_point() +
+  geom_smooth (color = "black")
+  
+  
+```
 
 ---
 
-# Code
+### Linear regression of count vs mean distance and count vs discovery year
+```{r disc-distance-over-time-reg}
+disc_distance <- alldataunfiltered %>% 
+  group_by(disc_year) %>%
+  mutate(count = n()) %>%
+  mutate(mean_distance = mean(sy_distance)) %>%
+  select(disc_year, count, mean_distance) %>%
+  distinct(disc_year, .keep_all = TRUE)
+
+distance_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ mean_distance, data = disc_distance)
+
+time_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ disc_year, data = disc_distance)
+
+time_reg
+
+distance_reg
+
+
+```
+
+---
+
+### Influence of country's GDP on the number of exoplanets discovered
 
 ```{r gdp-vs-count, echo=FALSE, fig.align = "center"}
 
@@ -743,87 +773,28 @@ glance(gdp_disc)
 
 ---
 
-# Plots
-```{r disc-distance-over-time-plot}
-
-alldataunfiltered %>%
-  group_by(disc_year) %>%
-  summarise_at(vars(sy_distance), list(name = mean)) %>%
-  ggplot(mapping = aes(x = disc_year, y = name)) +
-  labs(
-    x = "Discovery Year",
-    y = "Mean Distance of Discovery (Parsecs)",
-    title = "Year to Mean Distance of Discovery (Parsecs)"
-  ) +
-  geom_point() +
-  geom_smooth (color = "black")
-  
-  
-```
-
-```{r disc-distance-over-time-reg}
-disc_distance <- alldataunfiltered %>% 
-  group_by(disc_year) %>%
-  mutate(count = n()) %>%
-  mutate(mean_distance = mean(sy_distance)) %>%
-  select(disc_year, count, mean_distance) %>%
-  distinct(disc_year, .keep_all = TRUE)
-
-distance_reg <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(count ~ mean_distance, data = disc_distance)
-
-time_reg <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(count ~ disc_year, data = disc_distance)
-
-time_reg
-
-distance_reg
-
-
-```
-
-
-
-```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
-iris_modified <- iris %>%
-  mutate(Species = fct_other(Species, keep = "setosa"))
-```
-
-```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
-# ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-#  geom_point() + 
-#  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
-```
-
----
-
 ## Discovery methods
-.pull-left[
 - Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
 - Imaging: Directly detect exoplanets using large telescope
 - Transit Timing Variations: Observe the variations in the timing of a transit
 - Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
-]
-```{r discovery-method-over-time, warning = FALSE, echo = FALSE, out.width = "50%"}
+- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star.
+
+---
+
+### Popularity of discovery methods over time
+```{r discovery-method-over-time, warning = FALSE, echo = FALSE, fig.align = 'center'}
 alldata_discoverymethod <- alldataunfiltered %>%
   filter(!discoverymethod == "Disk Kinematics") %>%
   filter(!discoverymethod == "Pulsar Timing") %>%
   filter(!discoverymethod == "Eclipse Timing Variations") %>%
   filter(!discoverymethod == "Pulsation Timing") %>%
   filter(!discoverymethod == "Pulsation Timing Variations") %>%
-  filter(!discoverymethod == "Astrometry") %>%
-  filter(!discoverymethod == "Microlensing")
+  filter(!discoverymethod == "Astrometry")
 
 alldata_discoverymethod %>%
-  ggplot(mapping = aes(x = disc_year, fill = fct_relevel(discoverymethod, c("Orbital Brightness Modulation", "Transit Timing Variations", "Imaging", "Radial Velocity", "Transit")))) +
+  ggplot(mapping = aes(x = disc_year, fill = fct_relevel(discoverymethod, c("Orbital Brightness Modulation", "Transit Timing Variations", "Microlensing", "Imaging", "Radial Velocity", "Transit")))) +
   geom_bar() + 
   xlim(1997,2021) +
   labs(
@@ -839,10 +810,41 @@ alldata_discoverymethod %>%
 
 ```
 
+---
+### Change in distance of discovery over time by discovery method
+<p align="center">
+  <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
+</p>
 
 ---
-# Plots
-```{r discovery-method-vs-planet_radius-and-planet-mass, echo = FALSE, fig.show="hold", out.width="50%"}
+### Change in distance of discovery over time by discovery method
+```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center'}
+
+alldata_dist <- alldataunfiltered %>%
+  filter(!sy_distance == 0)
+
+ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
+                       x = disc_year,
+                       color = discoverymethod)) +
+  geom_jitter(alpha = 1) + 
+  labs(
+        y = "Distance of Discovery (Parsecs)",
+        x = "Year", 
+        title = "Distance of discovery over time",
+        subtitle="By discovery method" ) +
+  theme(legend.position = "bottom") +
+  theme(legend.title = element_blank()) +
+  theme(legend.key.size = unit(0.2, 'cm')) +
+  theme(legend.spacing = unit(0.1, 'cm')) + 
+  theme(legend.text=element_text(size=5))
+
+ethan
+```
+
+
+---
+## Exoplanets' radius
+```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show="hold", fig.align = 'center'}
 alldata %>%
   ggplot(mapping = aes(x = disc_year,
                        y = pl_radius,
@@ -855,7 +857,11 @@ alldata %>%
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank())
+```
 
+---
+## Exoplanets' mass
+```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show="hold", fig.align = 'center'}
 alldata %>%
   ggplot(mapping = aes(x = disc_year,
                        y = pl_mass,
@@ -870,75 +876,6 @@ alldata %>%
   theme(legend.title = element_blank())
 ```
 
-
----
-### Change in distance of discovery over time by discovery method
-
-```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center'}
-
-alldata_dist <- alldataunfiltered %>%
-  filter(!sy_distance == 0)
-
-ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
-                       x = disc_year,
-                       color = discoverymethod)) +
-  geom_jitter(alpha = 1) + 
-  labs(
-        y = "Distance of Discovery (Parsecs)",
-        x = "Year", 
-        title = "Planet mass and distance of discovery",
-        subtitle="By discovery method" ) +
-  theme(legend.position = "bottom") +
-  theme(legend.title = element_blank()) +
-  theme(legend.key.size = unit(0.2, 'cm')) +
-  theme(legend.spacing = unit(0.1, 'cm')) + 
-  theme(legend.text=element_text(size=5))
-
-ethan
-```
-
----
-
-```{r discovery-facility-leaflet-labels, echo = FALSE}
-
-labels <- sprintf(
-  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s",
-  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country
-) %>% lapply(htmltools::HTML) 
-
-```
-
-```{r discovery-facility-leaflet, echo = FALSE} 
-
-facility_df2$lat <- jitter(facility_df2$facility_latitude, factor = 0.5)
-facility_df2$lon <- jitter(facility_df2$facility_longitude, factor = 0.5)
-
-leaflet(facility_df2) %>%
-  setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
-      addProviderTiles(providers$Stamen.Terrain) %>%
-      addProviderTiles(providers$Stamen.TerrainLabels) %>%
-      addMarkers(~lon, ~lat, popup = ~labels)
-      
-```
-
-
-
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-# see how I changed out.width and fig.width from defaults
-# to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
-```
-]
 
 ---
 

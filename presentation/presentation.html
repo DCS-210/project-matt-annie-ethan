@@ -49,57 +49,8 @@ class: center, middle, inverse, title-slide
 
 
 
-```r
-alldataunfiltered &lt;- alldataunfiltered %&gt;%
-  
-  mutate(disc_facility = as.character(disc_facility),
-         GDP_2020 = case_when(
-                                 disc_facility_country == "United States" ~ 63543.58,
-                                 disc_facility_country == "Europe" ~ 34114.9,
-                                 disc_facility_country == "United Kingdom" ~ 40284.64,
-                                 disc_facility_country == "Spain" ~ 27063.19,
-                                 disc_facility_country == "China" ~ 10500.40,
-                                 disc_facility_country == "Japan" ~ 39538.88,
-                                 disc_facility_country == "Australia" ~ 51812.15,
-                                 disc_facility_country == "South Korea" ~ 31489.12,
-                                 disc_facility_country == "New Zealand" ~ 41477.94,
-                                 disc_facility_country == "France" ~ 39030.36,
-                                 disc_facility_country == "Qatar" ~ 50805.46,
-                                 disc_facility_country == "Poland" ~ 15656.18,
-                                 disc_facility_country == "Germany" ~ 46208.43,
-                                 
-                                 TRUE ~ 0
-  ))
-```
 
 
-
-
----
-
-### Plotting facilities and discoveries
-
-
-
-
-
-
-
-
-
-
-
-
-
-&lt;img src="presentation_files/figure-html/mapping facilities-1.png" width="500%" style="display: block; margin: auto;" /&gt;&lt;img src="presentation_files/figure-html/mapping facilities-2.png" width="500%" style="display: block; margin: auto;" /&gt;
-
-
-
----
-
-class: center, middle
-
-## Trends in exoplanet discovery over the course of 20 years
 
 ---
 
@@ -117,47 +68,96 @@ class: inverse, center, middle
 
 - As of today, we have discoverd roughly 4500 exoplanets
 
----
-
-class: inverse, middle, center
-
-# Using xaringan
 
 ---
+
+### Plotting Facilities and Discoveries Discover Count
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;img src="presentation_files/figure-html/mapping facilities-1.png" width="500%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+### Interactive leaflet map: location and number of discoveries
+
+
+<div id="htmlwidget-04aef461e945d4ceaff2" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-04aef461e945d4ceaff2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-13.7,13.3],2,[]],"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[40.3945311147851,50.9831576949205,34.5766852893773,19.8273389226819,19.8232102527116,37.3406448005944,-24.6279489219112,-30.1694913161004,28.6084519640041,28.4472479212069,43.9318253010227,30.68006464872,-31.2751609113255,36.160317713741,28.5619737887193,28.452969229434,28.4473432134766,-29.2615503322944,19.8253482342949,45.5927718338044,19.7013085820429,25.0343073156936,28.4459783478164,37.2198124074949,31.6749978903454,32.9022935294735,42.4783251226029,33.3565080699955,31.6742220006488,-29.0143483776114,31.9608519551057,-29.0138107842392,5.30164715522757,42.5056431732387,31.6741366061159,32.7812073321288,-23.0283094644595,31.7136389731749,31.7135332969323,31.7128762493579,-31.1614221046652,32.7021599994078,-43.970262773998,31.6651858168918,-29.0035292084165,48.2601273679133,18.3436299435742,-33.0124428748957,-31.7993896948303,19.8221518917875,35.120379627767,19.492924849987,28.1799312023972,28.4540902496742,-26.0308504274089,28.7571606211455,-26.0296103035856,19.8221293534543,20.4237910037725,20.7086984488794],[117.567981900875,11.7091936543599,133.585474133795,-155.470423271852,-155.468384604445,-121.635402759882,-70.403478464434,-70.8037896423235,-80.5964716084855,-80.5616137726352,5.71303287407792,-104.021134829032,149.057591539987,128.981465925762,-80.5766587984062,-17.5337352642575,-80.5624561115893,-70.732942182213,-155.482051374598,63.3242756564353,-155.097139555659,102.784269412089,-80.5733634681048,-2.53858249048963,-110.939606749476,-105.534878020174,-71.4499384569631,-116.868919049801,-110.958631542609,-70.6934786146995,-111.595468616553,-70.7006965122534,-52.8323420752905,-71.5597370047793,-110.943452279861,-105.810058647315,-67.7522506206142,-110.59212442962,-110.601456114892,-110.598937284038,149.025310422587,-109.879601911631,170.462710105894,-110.603238200558,-70.4110591866815,11.6639550833075,-66.7624025478077,148.267830717719,-69.2880092886969,-155.465582046487,-111.394039149657,-155.280983035673,-16.300669217295,-17.5283223086717,27.9166430603132,-17.8958825417171,27.9334474419175,-155.473575151695,-156.144106923721,-156.265095135202],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<strong>Xinglong Station<\/strong><br/>2 Discoveries<br/>Ownership: China","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries<br/>Ownership: Germany","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries<br/>Ownership: Japan","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries<br/>Ownership: United States","<strong>Gemini Observatory<\/strong><br/>9 Discoveries<br/>Ownership: United States","<strong>Lick Observatory<\/strong><br/>33 Discoveries<br/>Ownership: United States","<strong>Paranal Observatory<\/strong><br/>36 Discoveries<br/>Ownership: Europe","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries<br/>Ownership: United States","<strong>Kepler<\/strong><br/>2402 Discoveries<br/>Ownership: United States","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries<br/>Ownership: France","<strong>McDonald Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries<br/>Ownership: Australia","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries<br/>Ownership: South Korea","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries<br/>Ownership: United States","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries<br/>Ownership: Spain","<strong>K2<\/strong><br/>467 Discoveries<br/>Ownership: United States","<strong>La Silla Observatory<\/strong><br/>247 Discoveries<br/>Ownership: Europe","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>CoRoT<\/strong><br/>33 Discoveries<br/>Ownership: Europe","<strong>Subaru Telescope<\/strong><br/>8 Discoveries<br/>Ownership: Japan","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries<br/>Ownership: China","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries<br/>Ownership: United States","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries<br/>Ownership: Spain","<strong>MEarth Project<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Qatar<\/strong><br/>11 Discoveries<br/>Ownership: Qatar","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Palomar Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>HATNet<\/strong><br/>67 Discoveries<br/>Ownership: United States","<strong>HATSouth<\/strong><br/>69 Discoveries<br/>Ownership: United States","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries<br/>Ownership: Europe","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries<br/>Ownership: United States","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries<br/>Ownership: Europe","<strong>KELT<\/strong><br/>10 Discoveries<br/>Ownership: United States","<strong>KELT-South<\/strong><br/>4 Discoveries<br/>Ownership: United States","<strong>KELT-North<\/strong><br/>7 Discoveries<br/>Ownership: United States","<strong>KMTNet<\/strong><br/>24 Discoveries<br/>Ownership: South Korea","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>MOA<\/strong><br/>25 Discoveries<br/>Ownership: New Zealand","<strong>Winer Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>OGLE<\/strong><br/>72 Discoveries<br/>Ownership: Poland","<strong>European Southern Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Europe","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries<br/>Ownership: United States","<strong>Parkes Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Australia","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries<br/>Ownership: United Kingdom","<strong>TrES<\/strong><br/>5 Discoveries<br/>Ownership: United States","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Teide Observatory<\/strong><br/>1 Discoveries<br/>Ownership: Spain","<strong>SuperWASP<\/strong><br/>113 Discoveries<br/>Ownership: United Kingdom","<strong>SuperWASP-South<\/strong><br/>32 Discoveries<br/>Ownership: United Kingdom","<strong>SuperWASP-North<\/strong><br/>5 Discoveries<br/>Ownership: United Kingdom","<strong>WASP-South<\/strong><br/>10 Discoveries<br/>Ownership: United Kingdom","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries<br/>Ownership: United Kingdom","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>XO<\/strong><br/>7 Discoveries<br/>Ownership: United States"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.970262773998,50.9831576949205],"lng":[-156.265095135202,170.462710105894]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
 # Exoplanet Discovery Over Time
-
-.pull-left[
-- Some text
-- goes here
-]
-
-  &lt;iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"&gt;&lt;/iframe&gt;
-
-
+&lt;img src="presentation_files/figure-html/disc-distance-over-time-plot-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 
-# Layouts
+### Linear regression of count vs mean distance and count vs discovery year
 
-You can use plain text
+```r
+disc_distance &lt;- alldataunfiltered %&gt;% 
+  group_by(disc_year) %&gt;%
+  mutate(count = n()) %&gt;%
+  mutate(mean_distance = mean(sy_distance)) %&gt;%
+  select(disc_year, count, mean_distance) %&gt;%
+  distinct(disc_year, .keep_all = TRUE)
 
-- or bullet points
+distance_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ mean_distance, data = disc_distance)
 
-.pull-left[
-or text in two columns `\(^*\)`
-]
-.pull-right[
-- like
-- this
-]
+time_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ disc_year, data = disc_distance)
 
-.footnote[
-[*] And add footnotes
-]
+time_reg
+```
+
+```
+## parsnip model object
+## 
+## Fit time:  2ms 
+## 
+## Call:
+## stats::lm(formula = count ~ disc_year, data = data)
+## 
+## Coefficients:
+## (Intercept)    disc_year  
+##   -32164.41        16.11
+```
+
+```r
+distance_reg
+```
+
+```
+## parsnip model object
+## 
+## Fit time:  3ms 
+## 
+## Call:
+## stats::lm(formula = count ~ mean_distance, data = data)
+## 
+## Coefficients:
+##   (Intercept)  mean_distance  
+##      -81.0415         0.6718
+```
 
 ---
 
-# Code
+### Influence of country's GDP on the number of exoplanets discovered
 
 
 ```
@@ -234,134 +234,38 @@ glance(gdp_disc)
 
 ---
 
-# Plots
-
-```r
-alldataunfiltered %&gt;%
-  group_by(disc_year) %&gt;%
-  summarise_at(vars(sy_distance), list(name = mean)) %&gt;%
-  ggplot(mapping = aes(x = disc_year, y = name)) +
-  labs(
-    x = "Discovery Year",
-    y = "Mean Distance of Discovery (Parsecs)",
-    title = "Year to Mean Distance of Discovery (Parsecs)"
-  ) +
-  geom_point() +
-  geom_smooth (color = "black")
-```
-
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
-
-```
-## Warning: Removed 5 rows containing non-finite values (stat_smooth).
-```
-
-```
-## Warning: Removed 5 rows containing missing values (geom_point).
-```
-
-&lt;img src="presentation_files/figure-html/disc-distance-over-time-plot-1.png" width="80%" /&gt;
-
-
-```r
-disc_distance &lt;- alldataunfiltered %&gt;% 
-  group_by(disc_year) %&gt;%
-  mutate(count = n()) %&gt;%
-  mutate(mean_distance = mean(sy_distance)) %&gt;%
-  select(disc_year, count, mean_distance) %&gt;%
-  distinct(disc_year, .keep_all = TRUE)
-
-distance_reg &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(count ~ mean_distance, data = disc_distance)
-
-time_reg &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(count ~ disc_year, data = disc_distance)
-
-time_reg
-```
-
-```
-## parsnip model object
-## 
-## Fit time:  1ms 
-## 
-## Call:
-## stats::lm(formula = count ~ disc_year, data = data)
-## 
-## Coefficients:
-## (Intercept)    disc_year  
-##   -32164.41        16.11
-```
-
-```r
-distance_reg
-```
-
-```
-## parsnip model object
-## 
-## Fit time:  1ms 
-## 
-## Call:
-## stats::lm(formula = count ~ mean_distance, data = data)
-## 
-## Coefficients:
-##   (Intercept)  mean_distance  
-##      -81.0415         0.6718
-```
-
-
-
-
-
-
-
----
-
 ## Discovery methods
-.pull-left[
 - Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
 - Imaging: Directly detect exoplanets using large telescope
 - Transit Timing Variations: Observe the variations in the timing of a transit
 - Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
-]
-&lt;img src="presentation_files/figure-html/discovery-method-over-time-1.png" width="50%" /&gt;
-
+- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star.
 
 ---
-# Plots
-&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-1.png" width="50%" /&gt;&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-and-planet-mass-2.png" width="50%" /&gt;
 
+### Popularity of discovery methods over time
+&lt;img src="presentation_files/figure-html/discovery-method-over-time-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
 ### Change in distance of discovery over time by discovery method
-
-&lt;img src="presentation_files/figure-html/animate-scatter-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;p align="center"&gt;
+  &lt;iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"&gt;&lt;/iframe&gt;
+&lt;/p&gt;
 
 ---
+### Change in distance of discovery over time by discovery method
+&lt;img src="presentation_files/figure-html/animate-scatter-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
+---
+## Exoplanets' radius
+&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-<div id="htmlwidget-0a62293c679ed0392025" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0a62293c679ed0392025">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-13.7,13.3],2,[]],"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[40.394710436212,50.9821494151066,34.5759036833997,19.8265707174946,19.8248108344898,37.3420954066565,-24.6270175619691,-30.1698437325636,28.6087238209523,28.4466656044595,43.9317011914304,30.6798793860199,-31.2763985187673,36.1612210433956,28.5612721891204,28.4524069303142,28.4472718091494,-29.2603118635743,19.8259564985522,45.5928176246192,19.7006334305505,25.0333769429903,28.4474717997111,37.2206430883482,31.6751871413664,32.9024556404825,42.4765930365186,33.3576774354849,31.6750609366773,-29.0146742417835,31.9607145034961,-29.0140420774602,5.30178429651071,42.5041334659234,31.6744573970405,32.7801787174844,-23.0276776126113,31.7135000147915,31.7133742533413,31.7120508013915,-31.1617053005738,32.70178251279,-43.9696437366096,31.6649752138777,-29.0039981121765,48.2602455599527,18.3439866652926,-33.0114220535512,-31.7994934114943,19.8221769160391,35.1209780550362,19.4914073115168,28.1804694255129,28.4544305887677,-26.029302253843,28.7561115847288,-26.0298305901529,19.8217410393227,20.4221649078294,20.7092135157946],[117.579941805121,11.7066272547204,133.584295710242,-155.481004678416,-155.464151190105,-121.637261197865,-70.3953988763607,-70.8085206534487,-80.6135755369108,-80.5674280412382,5.71624611157867,-104.031134320852,149.059302571866,128.963809718975,-80.5801869287447,-17.5296429551085,-80.5681294209117,-70.7249132537524,-155.475625201568,63.3386473002374,-155.088111415953,102.78529524119,-80.5626150792305,-2.55410876634791,-110.941467240397,-105.538676943387,-71.4473368575585,-116.873503285397,-110.952649663492,-70.6977556357089,-111.602677872779,-70.6873950801812,-52.8354470765538,-71.5641091309646,-110.947077828702,-105.817508679033,-67.7628314524595,-110.609546490865,-110.602168357898,-110.605012725568,149.025873320484,-109.894536866391,170.465699315724,-110.593113517844,-70.4110712679004,11.6780878857008,-66.7618655251202,148.264499620178,-69.30428754528,-155.473353533923,-111.385559903914,-155.273746929124,-16.2965140238348,-17.5150570359388,27.9152012880497,-17.8881669206481,27.9236783677317,-155.46240133872,-156.148616952759,-156.255979753533],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<strong>Xinglong Station<\/strong><br/>2 Discoveries<br/>Ownership: China","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries<br/>Ownership: Germany","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries<br/>Ownership: Japan","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries<br/>Ownership: United States","<strong>Gemini Observatory<\/strong><br/>9 Discoveries<br/>Ownership: United States","<strong>Lick Observatory<\/strong><br/>33 Discoveries<br/>Ownership: United States","<strong>Paranal Observatory<\/strong><br/>36 Discoveries<br/>Ownership: Europe","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries<br/>Ownership: United States","<strong>Kepler<\/strong><br/>2402 Discoveries<br/>Ownership: United States","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries<br/>Ownership: France","<strong>McDonald Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries<br/>Ownership: Australia","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries<br/>Ownership: South Korea","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries<br/>Ownership: United States","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries<br/>Ownership: Spain","<strong>K2<\/strong><br/>467 Discoveries<br/>Ownership: United States","<strong>La Silla Observatory<\/strong><br/>247 Discoveries<br/>Ownership: Europe","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>CoRoT<\/strong><br/>33 Discoveries<br/>Ownership: Europe","<strong>Subaru Telescope<\/strong><br/>8 Discoveries<br/>Ownership: Japan","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries<br/>Ownership: China","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries<br/>Ownership: United States","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries<br/>Ownership: Spain","<strong>MEarth Project<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Qatar<\/strong><br/>11 Discoveries<br/>Ownership: Qatar","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>Palomar Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>HATNet<\/strong><br/>67 Discoveries<br/>Ownership: United States","<strong>HATSouth<\/strong><br/>69 Discoveries<br/>Ownership: United States","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries<br/>Ownership: Europe","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries<br/>Ownership: United States","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries<br/>Ownership: Europe","<strong>KELT<\/strong><br/>10 Discoveries<br/>Ownership: United States","<strong>KELT-South<\/strong><br/>4 Discoveries<br/>Ownership: United States","<strong>KELT-North<\/strong><br/>7 Discoveries<br/>Ownership: United States","<strong>KMTNet<\/strong><br/>24 Discoveries<br/>Ownership: South Korea","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>MOA<\/strong><br/>25 Discoveries<br/>Ownership: New Zealand","<strong>Winer Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>OGLE<\/strong><br/>72 Discoveries<br/>Ownership: Poland","<strong>European Southern Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Europe","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries<br/>Ownership: United States","<strong>Parkes Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Australia","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries<br/>Ownership: United Kingdom","<strong>TrES<\/strong><br/>5 Discoveries<br/>Ownership: United States","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States","<strong>Teide Observatory<\/strong><br/>1 Discoveries<br/>Ownership: Spain","<strong>SuperWASP<\/strong><br/>113 Discoveries<br/>Ownership: United Kingdom","<strong>SuperWASP-South<\/strong><br/>32 Discoveries<br/>Ownership: United Kingdom","<strong>SuperWASP-North<\/strong><br/>5 Discoveries<br/>Ownership: United Kingdom","<strong>WASP-South<\/strong><br/>10 Discoveries<br/>Ownership: United Kingdom","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries<br/>Ownership: United Kingdom","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States","<strong>XO<\/strong><br/>7 Discoveries<br/>Ownership: United States"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.9696437366096,50.9821494151066],"lng":[-156.255979753533,170.465699315724]}},"evals":[],"jsHooks":[]}</script>
+---
+## Exoplanets' mass
+&lt;img src="presentation_files/figure-html/discovery-method-vs-planet-mass-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-
-
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-1-1.png" width="100%" /&gt;
-]
 
 ---
 
