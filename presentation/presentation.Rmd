@@ -566,7 +566,7 @@ table <- alldataunfiltered %>%
 
 ---
 
-### Wolrd Bank GDP Per-Capita Dataset
+### World Bank GDP Per-Capita Dataset
 
 .pull-left[
 
@@ -609,7 +609,7 @@ facility_df <- alldata %>%
 facility_df2 <- alldataunfiltered %>% 
   group_by(disc_facility) %>%
   mutate(count = n()) %>%
-  select(disc_facility, disc_facility_country, facility_type, facility_latitude, facility_longitude, count) %>%
+  select(disc_facility, disc_facility_country, facility_type, facility_latitude, facility_longitude,public_or_private, count) %>%
   distinct() %>%
   filter(!disc_facility == "Multiple Observatories") %>%
   filter(!disc_facility == "KOINet") %>%
@@ -724,8 +724,8 @@ map_data
 ```{r discovery-facility-leaflet-labels, echo = FALSE, out.width = "100%"}
 
 labels <- sprintf(
-  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s",
-  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country
+  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s<br/>Ownership Type: %s",
+  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country,facility_df2$public_or_private 
 ) %>% lapply(htmltools::HTML) 
 
 ```
@@ -819,7 +819,7 @@ distance_time_reg
 $\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
 
 
---- 
+---
 
 ### Linear Regression of Year on Distance 
 
@@ -900,6 +900,17 @@ gdp_disc <- linear_reg() %>%
 glance(gdp_disc)
 ```
 
+---
+
+### GDP Per-Capita Discussion
+
+- The United States has the highest GDP per-capita of any of the countries that have discovered exoplants and has the most discoveries by a significant amount
+
+- However, excluding the United States, GDP per-capita does not seem to have a significant impact on the number of exoplanets that a country is able to discover
+
+- All the countries in the sample are wealthly/developed countries
+
+- The United States has the best funded space program by a lot!
 
 ---
 
@@ -914,7 +925,7 @@ glance(gdp_disc)
 
 - Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
 
-- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star.
+- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star
 
 ---
 
@@ -976,6 +987,16 @@ ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
 ethan
 ```
 
+---
+
+### Discovery Methods Discussion
+
+- Prior to 2006, radial velocity is the prominent method of discovery, with a few observations coming from pulsar timing
+
+- Around 2003, microlensing began to be used, allowing us to discover slightly more exoplanets per year, and we were able to discover exoplanets much further from earth
+
+- Around 2006, when transit began to be used, the number of observations per year started to increase rapidly and we were able to discover planets that were a bit further from earth
+
 
 ---
 ## Exoplanets' radius
@@ -1018,16 +1039,21 @@ alldata_discoverymethod %>%
   theme(legend.spacing = unit(0.1, 'cm'))
 ```
 
-
 ---
 
-# Tables
+# Radius and Mass Discussion
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+- Around the time that the transit method started being used, we began able to discover exoplanets with smaller radii (likely small solid planets)
 
-```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
-```
+- Technology that allows us to discover exoplanets with smaller radii has increased the amount of discoveries per year
+
+- The mass of the exoplanets we have discovered over time has stayed relatively consistent (with a few outliers around 2016)
+
+- Both graphs omit one observation*
+
+.footnote[
+[*] Both graphs omit a single exoplanet with an enormous radius and mass: HD 100546 b (Mass = 239000, Radius = 77.342)
+]
 
 ---
 
