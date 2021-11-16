@@ -657,15 +657,10 @@ class: inverse, middle, center
 # Using xaringan
 
 ---
-
-# xaringan
-
-```{r animation, echo = FALSE}
-knitr::include_graphics("https://github.com/DCS-210/project-matt-annie-ethan/blob/main/Ethan.gif")
-```
-
-<img src = "/cloud/project/Ethan.gif" width = "40" height = "40"/>
-
+# Exoplanet Discovery Over Time
+<p align="center">
+  <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan.gif" width="1016" height="516" frameBorder="0"></iframe>
+</p>
 ---
 
 # Layouts
@@ -773,6 +768,12 @@ disc_distance <- alldataunfiltered %>%
 distance_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ mean_distance, data = disc_distance)
+
+time_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ disc_year, data = disc_distance)
+
+time_reg
 
 distance_reg
 
@@ -894,7 +895,7 @@ ethan
 
 ---
 
-```{r discovery-facility-leaflet-labels}
+```{r discovery-facility-leaflet-labels, echo = FALSE}
 
 labels <- sprintf(
   "<strong>%s</strong><br/>%g Discoveries",
@@ -903,9 +904,10 @@ labels <- sprintf(
 
 ```
 
-```{r discovery-facility-leaflet} 
+```{r discovery-facility-leaflet, echo = FALSE} 
 
-leaflet(facility_df2) %>% 
+leaflet(facility_df2) %>%
+  setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
       addProviderTiles(providers$Stamen.Terrain) %>%
       addProviderTiles(providers$Stamen.TerrainLabels) %>%
       addCircleMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)

@@ -69,7 +69,7 @@ alldata %>%
 The table above shows us the most common methods of exoplanet discovery. This will be helpful later in our analysis when we consider the constraints of modern technology on the discovery of new exoplanets.
 
 ```{r discovery-distance-over-time}
-alldata %>%
+alldataunfiltered %>%
   ggplot(mapping = aes(
                         x = disc_year,
                         y = sy_distance,
