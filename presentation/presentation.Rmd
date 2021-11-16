@@ -505,7 +505,6 @@ style_xaringan(
   title_slide_background_image = "img/SPACE_2.jpg"
 )
 ```
----
 
 class: inverse, center, middle
 
@@ -521,10 +520,26 @@ class: inverse, center, middle
 
 - As of today, we have discoverd roughly 4500 exoplanets
 
+---
+
+class: inverse, center, middle
+
+# Data
 
 ---
 
-### Plotting Facilities and Discoveries Discover Count
+## NASA Exoplanet Archives Planet Systems Dataset
+
+- Compilation of system, stellar, and planetary parameters for all known confirmed exoplanets
+
+- Data comes from from many different exoplanet transit survey programs from all around the world (and over the world!)
+
+- Notable programs include the Kepler space mission, the K2 space mission, and the CoRoT space mission 
+
+
+---
+
+## Plotting Facilities and Discoveries Discover Count
 
 ```{r construct-facility_df, echo=FALSE}
 facility_df <- alldata %>% 
