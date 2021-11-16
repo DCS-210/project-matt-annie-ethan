@@ -474,7 +474,7 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```
 
-```{r facility-country-gdp}
+```{r facility-country-gdp, include=FALSE}
 
 alldataunfiltered <- alldataunfiltered %>%
   
@@ -508,7 +508,8 @@ style_xaringan(
 
 ---
 
-### Plotting facilities and discoveries
+### Plotting Facilities and Discoveries Discover Count
+
 ```{r construct-facility_df, echo=FALSE}
 facility_df <- alldata %>% 
   group_by(disc_facility, disc_year) %>%
@@ -568,7 +569,6 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
   filter(!disc_facility_country == "KOINet")
 ```
 
-
 ```{r mapping facilities, echo=FALSE, out.width = "500%", fig.align = "center"}
 
 ### Group by facility
@@ -598,7 +598,9 @@ map_data <-
   scale_size_continuous(range = c(3, 15))
 
 map_data
+```
 
+``` {r mapping-facilities-by-location, include=FALSE}
 ### Group By Coordinates
 
 world_map <- map_data("world")
@@ -658,9 +660,11 @@ class: inverse, middle, center
 
 ---
 # Exoplanet Discovery Over Time
-<p align="center">
+
   <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
-</p>
+
+
+
 ---
 
 # Layouts
@@ -898,19 +902,22 @@ ethan
 ```{r discovery-facility-leaflet-labels, echo = FALSE}
 
 labels <- sprintf(
-  "<strong>%s</strong><br/>%g Discoveries",
-  facility_df2$disc_facility, facility_df2$count
+  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s",
+  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country
 ) %>% lapply(htmltools::HTML) 
 
 ```
 
 ```{r discovery-facility-leaflet, echo = FALSE} 
 
+facility_df2$lat <- jitter(facility_df2$facility_latitude, factor = 0.5)
+facility_df2$lon <- jitter(facility_df2$facility_longitude, factor = 0.5)
+
 leaflet(facility_df2) %>%
   setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
       addProviderTiles(providers$Stamen.Terrain) %>%
       addProviderTiles(providers$Stamen.TerrainLabels) %>%
-      addMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)
+      addMarkers(~lon, ~lat, popup = ~labels)
       
 ```
 
