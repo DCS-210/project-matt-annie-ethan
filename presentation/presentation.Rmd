@@ -508,7 +508,7 @@ style_xaringan(
 
 class: inverse, center, middle
 
-# Intoduction
+# Introduction
 
 ---
 
@@ -518,7 +518,15 @@ class: inverse, center, middle
 
 - Exoplanet discovery allows us to search for habitable planets outside of our solar system!
 
-- As of today, we have discoverd roughly 4500 exoplanets
+- As of today, we have discovered over 4500 exoplanets!
+
+<br>
+<br>
+
+--
+<p align="center">
+<img src="https://www.pngkey.com/png/detail/969-9692789_planet-cute-saturn-jupiter-uranus-neptune-smile-cute.png" width="200" height="200" alt="#planet #cute #saturn #jupiter #uranus #neptune #smile - Cute Saturn Clipart@pngkey.com">
+</p>
 
 ---
 
@@ -530,16 +538,56 @@ class: inverse, center, middle
 
 ## NASA Exoplanet Archives Planet Systems Dataset
 
+.pull-left[
 - Compilation of system, stellar, and planetary parameters for all known confirmed exoplanets
 
 - Data comes from from many different exoplanet transit survey programs from all around the world (and over the world!)
 
 - Notable programs include the Kepler space mission, the K2 space mission, and the CoRoT space mission 
 
+- Last Updated: April 2021
+]
+
+.pull-right[
+
+
+```{r top-discovery-facilites-tibble, echo=FALSE, include=FALSE}
+table <- alldataunfiltered %>%
+  count(disc_facility, sort = TRUE) %>%
+  top_n(5)
+```
+
+```{r top-discovery-facilites-table, echo=FALSE}
+  kable(head(table), col.names = c("Discovery Facility", "Discoveries"), caption = "Top 5 Discovery Facilities", format = "html")
+
+```
+
+]
 
 ---
 
+## Wolrd Bank GDP Per-Capita Dataset
+
+.pull-left[
+
+<iframe src="https://data.worldbank.org/share/widget?end=2020&indicators=NY.GDP.PCAP.CD&start=2020&type=shaded&view=map" width='550' height='366' frameBorder='0' scrolling="no" ></iframe>
+
+]
+
+.pull-right[
+
+- Annual measure of GDP per-capita for every country in the world and some larger regions (eg. European Union)
+
+- GDP per capita measured in USD
+
+- Data from 1960-2020
+
+- We focus on GDP per-capita from 2020
+
+]
+---
 ## Plotting Facilities and Discoveries Discover Count
+
 
 ```{r construct-facility_df, echo=FALSE}
 facility_df <- alldata %>% 
@@ -600,7 +648,7 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
   filter(!disc_facility_country == "KOINet")
 ```
 
-```{r mapping facilities, echo=FALSE, out.width = "500%", fig.align = "center"}
+```{r mapping facilities, echo=FALSE, out.width = "100%", fig.align = "top"}
 
 ### Group by facility
 
@@ -661,8 +709,8 @@ map_data
 
 ---
 
-### Interactive leaflet map: location and number of discoveries
-```{r discovery-facility-leaflet-labels, echo = FALSE}
+## Interactive Leaflet Map: Location and Number of Discoveries
+```{r discovery-facility-leaflet-labels, echo = FALSE, out.width = "100%"}
 
 labels <- sprintf(
   "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s",
@@ -706,29 +754,74 @@ alldataunfiltered %>%
 
 ---
 
-### Linear regression of count vs mean distance and count vs discovery year
-```{r disc-distance-over-time-reg}
+## Linear Regression of Count on Mean Distance 
+```{r count-on-distance-reg-df, include=FALSE}
 disc_distance <- alldataunfiltered %>% 
   group_by(disc_year) %>%
   mutate(count = n()) %>%
   mutate(mean_distance = mean(sy_distance)) %>%
   select(disc_year, count, mean_distance) %>%
   distinct(disc_year, .keep_all = TRUE)
+```
 
+```{r count-on-distance-reg}
 distance_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ mean_distance, data = disc_distance)
 
+distance_reg
+```
+
+<br>
+
+
+$\widehat{Count}=\beta_{0}+\beta_{1}Distance$
+
+---
+
+## Linear Regression of Count on Discovery Year
+``` {r count-on-time-reg}
 time_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ disc_year, data = disc_distance)
 
 time_reg
-
-distance_reg
-
-
 ```
+<br>
+
+$\widehat{Count}=\beta_{0}+\beta_{1}Year$
+
+
+---
+
+## Linear Regression of Count on Distance and Year
+
+``` {r count-on-time-distance-reg}
+distance_time_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ mean_distance + disc_year, data = disc_distance)
+
+distance_time_reg
+```
+<br>
+
+$\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
+
+
+--- 
+
+## Linear Regression of Year on Distance 
+
+``` {r distance-on-time-reg}
+distance_on_time_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(mean_distance ~ disc_year, data = disc_distance)
+
+distance_on_time_reg
+```
+<br>
+
+$\widehat{Distance}=\beta_{0}+\beta_{1}Year$
 
 ---
 
