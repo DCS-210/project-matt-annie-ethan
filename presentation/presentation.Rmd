@@ -659,7 +659,7 @@ class: inverse, middle, center
 ---
 # Exoplanet Discovery Over Time
 <p align="center">
-  <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan.gif" width="1016" height="516" frameBorder="0"></iframe>
+  <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
 </p>
 ---
 
