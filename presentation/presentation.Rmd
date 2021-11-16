@@ -910,7 +910,7 @@ leaflet(facility_df2) %>%
   setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
       addProviderTiles(providers$Stamen.Terrain) %>%
       addProviderTiles(providers$Stamen.TerrainLabels) %>%
-      addCircleMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)
+      addMarkers(~facility_longitude, ~facility_latitude, popup = ~labels)
       
 ```
 
