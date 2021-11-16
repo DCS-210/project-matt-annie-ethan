@@ -717,9 +717,9 @@ distance_reg
 
 ---
 
-### Influence of country's GDP on the number of exoplanets discovered
+### GDP and the number of exoplanets discovered
 
-```{r gdp-vs-count, echo=FALSE, fig.align = "center"}
+```{r gdp-vs-count, echo=FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 
 # GDP per capita vs count (USA)
 gdp_country_disc_count %>%
@@ -734,7 +734,12 @@ gdp_country_disc_count %>%
         y = "Total Discovery Count", 
         title = " Country GDP Per Capita vs Discovery Count") +
   guides(color = guide_legend("Country"))
+```
 
+---
+
+### GDP and the number of exoplanets discovered (exluding USA)
+```{r gdp-vs-count-without-USA, echo=FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 # GDP per capita vs count (No USA)
 gdp_country_disc_count_no_USA %>%
   ggplot(mapping = aes(
@@ -750,6 +755,9 @@ gdp_country_disc_count_no_USA %>%
   guides(color = guide_legend("Country"))
 ```
 
+---
+
+### Linear regression on the relationship between GDP and number of discoveres exoplanets
 ```{r gdp-vs-count-reg}
 
 # USA Included
