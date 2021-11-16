@@ -15,6 +15,12 @@ output:
       countIncrementalSlides: false
 ---
 
+### Research Question
+
+### General research question: What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?
+
+---
+
 ```{r load-packages, include = FALSE}
 # Add any additional packages you need to this chunk
 library(tidyverse)
@@ -765,7 +771,8 @@ alldataunfiltered %>%
 
 ---
 
-### Linear Regression of Count on Mean Distance 
+### Linear Regression of Year on Distance 
+
 ```{r count-on-distance-reg-df, include=FALSE}
 disc_distance <- alldataunfiltered %>% 
   group_by(disc_year) %>%
@@ -775,18 +782,17 @@ disc_distance <- alldataunfiltered %>%
   distinct(disc_year, .keep_all = TRUE)
 ```
 
-```{r count-on-distance-reg}
-distance_reg <- linear_reg() %>%
+``` {r distance-on-time-reg}
+distance_on_time_reg <- linear_reg() %>%
   set_engine("lm") %>%
-  fit(count ~ mean_distance, data = disc_distance)
+  fit(mean_distance ~ disc_year, data = disc_distance)
 
-distance_reg
+tidy(distance_on_time_reg)
+glance(distance_on_time_reg)$r.squared
 ```
-
 <br>
 
-
-$\widehat{Count}=\beta_{0}+\beta_{1}Distance$
+$\widehat{Distance}=\beta_{0}+\beta_{1}Year$
 
 ---
 
@@ -796,7 +802,8 @@ time_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ disc_year, data = disc_distance)
 
-time_reg
+tidy(time_reg)
+glance(time_reg)$r.squared
 ```
 <br>
 
@@ -812,7 +819,8 @@ distance_time_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ mean_distance + disc_year, data = disc_distance)
 
-distance_time_reg
+tidy(distance_time_reg)
+glance(distance_time_reg)$r.squared
 ```
 <br>
 
@@ -821,18 +829,23 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
 
 ---
 
-### Linear Regression of Year on Distance 
+### Linear Regression of Count on Mean Distance 
 
-``` {r distance-on-time-reg}
-distance_on_time_reg <- linear_reg() %>%
+```{r count-on-distance-reg}
+distance_reg <- linear_reg() %>%
   set_engine("lm") %>%
-  fit(mean_distance ~ disc_year, data = disc_distance)
+  fit(count ~ mean_distance, data = disc_distance)
 
-distance_on_time_reg
+tidy(distance_reg)
+glance(distance_reg)$r.squared
 ```
+
 <br>
 
-$\widehat{Distance}=\beta_{0}+\beta_{1}Year$
+
+$\widehat{Count}=\beta_{0}+\beta_{1}Distance$
+
+
 
 ---
 
@@ -864,7 +877,7 @@ gdp_disc <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ GDP_2020, data = gdp_country_disc_count)
 
-glance(gdp_disc)
+glance(gdp_disc)$r.squared
 
 ```
 
@@ -897,7 +910,7 @@ gdp_disc <- linear_reg() %>%
   set_engine("lm") %>%
   fit(count ~ GDP_2020, data = gdp_country_disc_count_no_USA)
 
-glance(gdp_disc)
+glance(gdp_disc)$r.squared
 ```
 
 ---
@@ -999,7 +1012,7 @@ ethan
 
 
 ---
-## Exoplanets' radius
+### Exoplanets' radius
 ```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
 alldata_discoverymethod <- alldata_discoverymethod %>%
   filter(!pl_name == "HD 100546 b")
@@ -1021,7 +1034,7 @@ alldata_discoverymethod %>%
 ```
 
 ---
-## Exoplanets' mass
+### Exoplanets' mass
 ```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
 alldata_discoverymethod %>%
   ggplot(mapping = aes(x = disc_year,
@@ -1041,7 +1054,7 @@ alldata_discoverymethod %>%
 
 ---
 
-# Radius and Mass Discussion
+### Radius and Mass Discussion
 
 - Around the time that the transit method started being used, we began able to discover exoplanets with smaller radii (likely small solid planets)
 
@@ -1057,47 +1070,32 @@ alldata_discoverymethod %>%
 
 ---
 
-# Images
+### Conclusion
 
-```{r castle, echo = FALSE, out.width = "60%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
-include_graphics("https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80")
-```
+- Advancements and innovation in the technology used to discover exoplanets appears to be the main driving force in the number of planets discovered each year as well as the parameters of the range of exploration
 
-Or you can also include a full page image. See next slide.
+- The distance of exoplanet discovery has been shown to increase over time, due to advances in technology
 
----
+- The radii of exoplanets being discovered today has a larger range than it did in the early days of exoplanet exploration (we are now able to discover planets with smaller radii than before)
 
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80)
+- The mass of exoplanets being discovered today is consistent with the mass of exoplanets discovered in the early days of exoplanet exploration
 
----
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
+- The GDP per-capita of countries with established space programs does not appear to have a significant impact on the amount of exoplanets discovered by different countries, though only developed countries have established space programs
 
 ---
 
-# Feeling adventurous?
+### Methods Critique 
 
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
+- At the beginning of the project we sought out to predict the number of exoplanet discoveries in the next 5-20 years. We ultimately determined that innovations in discovery technology are the largest driver in new exoplanet discovery, so in order to predict the future we should research what steps are currently being made in the space industry to develop new technology.
 
-- You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+- We feel that our data is very reliable in the sense that the information reported by NASA is accurate and correct. The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis.   
 
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
+- The regression based analyses that we conducted did not have very high r-squared values and therefore it is likely that they were either too simple or did not show a significant correlation. That said, our visual-based analyses appeared to be statistically accurate and representaive of other similar literature/publications. 
 
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+---
+class: inverse, center, middle
+
+# Questions?
+
+---
+
