@@ -953,7 +953,7 @@ alldata_discoverymethod %>%
 
 ---
 ### Change in distance of discovery over time by discovery method
-```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center'}
+```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center', warning = FALSE}
 
 alldata_dist <- alldataunfiltered %>%
   filter(!sy_distance == 0)
@@ -979,8 +979,11 @@ ethan
 
 ---
 ## Exoplanets' radius
-```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show="hold", fig.align = 'center'}
-alldata %>%
+```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
+alldata_discoverymethod <- alldata_discoverymethod %>%
+  filter(!pl_name == "HD 100546 b")
+
+alldata_discoverymethod %>%
   ggplot(mapping = aes(x = disc_year,
                        y = pl_radius,
                        color = discoverymethod)) +
@@ -991,13 +994,15 @@ alldata %>%
         title = "Planet radius and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) +
+  theme(legend.key.size = unit(0.2, 'cm')) +
+  theme(legend.spacing = unit(0.1, 'cm'))
 ```
 
 ---
 ## Exoplanets' mass
-```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show="hold", fig.align = 'center'}
-alldata %>%
+```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
+alldata_discoverymethod %>%
   ggplot(mapping = aes(x = disc_year,
                        y = pl_mass,
                        color = discoverymethod), alpha = 0.3) +
@@ -1008,7 +1013,9 @@ alldata %>%
         title = "Planet mass and distance of discovery",
         subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
-  theme(legend.title = element_blank())
+  theme(legend.title = element_blank()) +
+  theme(legend.key.size = unit(0.2, 'cm')) +
+  theme(legend.spacing = unit(0.1, 'cm'))
 ```
 
 
