@@ -536,7 +536,7 @@ class: inverse, center, middle
 
 ---
 
-## NASA Exoplanet Archives Planet Systems Dataset
+### NASA Exoplanet Archives Planet Systems Dataset
 
 .pull-left[
 - Compilation of system, stellar, and planetary parameters for all known confirmed exoplanets
@@ -566,7 +566,7 @@ table <- alldataunfiltered %>%
 
 ---
 
-## Wolrd Bank GDP Per-Capita Dataset
+### Wolrd Bank GDP Per-Capita Dataset
 
 .pull-left[
 
@@ -586,7 +586,14 @@ table <- alldataunfiltered %>%
 
 ]
 ---
-## Plotting Facilities and Discoveries Discover Count
+### Useful Terminology
+
+-**Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers). In other words, very far!
+
+
+
+---
+### Plotting Facilities and Discoveries Discover Count
 
 
 ```{r construct-facility_df, echo=FALSE}
@@ -709,7 +716,7 @@ map_data
 
 ---
 
-## Interactive Leaflet Map: Location and Number of Discoveries
+### Interactive Leaflet Map: Location and Number of Discoveries
 ```{r discovery-facility-leaflet-labels, echo = FALSE, out.width = "100%"}
 
 labels <- sprintf(
