@@ -1,13 +1,13 @@
 ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
                                               x = disc_year,
-                                              color = discoverymethod,
-                                              size = pl_mass)) +
+                                              color = discoverymethod
+                                              )) +
   
   
   geom_jitter(alpha = 1) + 
   labs(
     y = "Distance of Discovery (Parsecs)",
-    x = "Planet mass [Earth mass]", 
+    x = "Year", 
     title = "Planet mass and distance of discovery",
     subtitle="By discovery method" ) +
   theme(legend.position = "bottom") +
