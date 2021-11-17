@@ -947,17 +947,22 @@ glance(gdp_disc)$r.squared
 ---
 
 ### Discovery Methods
-- Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
-
+<FONT COLOR=#728FCE>
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
 
+<FONT COLOR=magenta>
+- Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
+
+<FONT COLOR=green>
+- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star
+
+<FONT COLOR=black> 
 - Imaging: Directly detect exoplanets using large telescope
 
 - Transit Timing Variations: Observe the variations in the timing of a transit
 
 - Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
 
-- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star
 
 <p align="center">
 <img class="J9AiF" src="https://64.media.tumblr.com/fedb2fdb5c89b7d1b4cfdbfb5ac558c6/tumblr_od10f9utK81v8t5gwo1_r1_500.png" alt="#tattoo commission from indigo night">
