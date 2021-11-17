@@ -4,7 +4,7 @@
     <title>Exoplanet Exploration</title>
     <meta charset="utf-8" />
     <meta name="author" content="Annie Li, Matt Clayton, Ethan Wu" />
-    <meta name="date" content="2021-11-16" />
+    <meta name="date" content="2021-11-17" />
     <script src="libs/header-attrs-2.11/header-attrs.js"></script>
     <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
     <script src="libs/jquery-1.12.4/jquery.min.js"></script>
@@ -24,17 +24,23 @@
 class: center, middle, inverse, title-slide
 
 # Exoplanet Exploration
-## Predicting Future Trends in Exoplanet Exploration
+## Examining driving factors in Exoplanet Exploration
 ### Annie Li, Matt Clayton, Ethan Wu
 ### Bates College
-### 2021-11-16
+### 2021-11-17
 
 ---
 
 
-### Research Question
+&lt;H1 style="font-size:180%;"&gt;&lt;FONT COLOR=blue&gt;
+General research question: &lt;br&gt;&lt;br&gt;
+What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?&lt;/H1&gt;&lt;br&gt;&lt;br&gt;
 
-### General research question: What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?
+&lt;body style="font-size:100%;"&gt;
+Sub research questions:&lt;br&gt;&lt;br&gt;
+How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility and distance from earth)?&lt;br&gt;&lt;br&gt;
+How does the number of discoveries vary across countries and how does the result relate to the country’s gdp? &lt;/body&gt;
+
 
 ---
 
@@ -104,8 +110,6 @@ class: inverse, center, middle
 .pull-right[
 
 
-
-
 &lt;table&gt;
 &lt;caption&gt;Top 5 Discovery Facilities&lt;/caption&gt;
  &lt;thead&gt;
@@ -161,6 +165,7 @@ class: inverse, center, middle
 - We focus on GDP per-capita from 2020
 
 ]
+
 ---
 ### Useful Terminology
 
@@ -193,8 +198,8 @@ class: inverse, center, middle
 ### Interactive Leaflet Map: Location and Number of Discoveries
 
 
-<div id="htmlwidget-6a3fd2a606d4addbd751" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6a3fd2a606d4addbd751">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-13.7,13.3],2,[]],"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[40.3949361422868,50.9827994144098,34.5753622845792,19.8272210845269,19.8235458188127,37.3419918027905,-24.6267313125439,-30.1698210005167,28.607655619457,28.4467159490524,43.9311572943106,30.6798958921227,-31.275662949504,36.160333940272,28.5619284427279,28.4517004254975,28.4461547949118,-29.2602298858828,19.825246759309,45.5923282935782,19.7008787403238,25.0326876385472,28.4465757938329,37.221135055914,31.6742271090104,32.9028378988661,42.477134216469,33.3568611215718,31.6754120398486,-29.0138670530817,31.9594477161222,-29.0144243914223,5.3017907459526,42.5058731741179,31.675846682563,32.7813107563771,-23.0287501485224,31.7124043464873,31.7123548535558,31.7124320538377,-31.1625594045521,32.7018115270631,-43.9700589911359,31.6666560572165,-29.0034855414446,48.2600579146333,18.343392710586,-33.0113319055437,-31.7978320369296,19.823345637721,35.1200450026016,19.4919029702335,28.1799474312072,28.4527965855289,-26.0293689017377,28.7562578367612,-26.0298872409041,19.8233955902923,20.4220573594091,20.7082679753315],[117.574649259006,11.7046489370396,133.599221499107,-155.483777569332,-155.466202250575,-121.644164839359,-70.3944094858189,-70.8018470443466,-80.6056995477475,-80.5656100909857,5.70730832969713,-104.022684085588,149.068390168858,128.974866183071,-80.5709504204954,-17.5345510345576,-80.5743367105516,-70.740274608951,-155.476591068467,63.3247978587631,-155.098024473009,102.783591770748,-80.5578283843192,-2.54736844471451,-110.957081969548,-105.536904652872,-71.4519253968749,-116.855442289936,-110.946586150141,-70.6992474734107,-111.607937598226,-70.6946988490479,-52.8309077841317,-71.5596667240625,-110.946004738612,-105.810424310998,-67.7646003597914,-110.60554739715,-110.599055820764,-110.609214776661,149.029634555391,-109.897312092356,170.4758660866,-110.606680871224,-70.4184681240603,11.6785840749691,-66.7467057861297,148.260069027256,-69.2908400368825,-155.464911911662,-111.396928761233,-155.285014206029,-16.3091398999505,-17.5263056103075,27.9198734109826,-17.8949150190857,27.9236660591677,-155.468450042942,-156.161084493904,-156.252697595088],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<strong>Xinglong Station<\/strong><br/>2 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries<br/>Ownership: Germany<br/>Ownership Type: Public","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Gemini Observatory<\/strong><br/>9 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Lick Observatory<\/strong><br/>33 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Paranal Observatory<\/strong><br/>36 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kepler<\/strong><br/>2402 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries<br/>Ownership: France<br/>Ownership Type: Public","<strong>McDonald Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Public","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>K2<\/strong><br/>467 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>La Silla Observatory<\/strong><br/>247 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CoRoT<\/strong><br/>33 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Subaru Telescope<\/strong><br/>8 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>MEarth Project<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Qatar<\/strong><br/>11 Discoveries<br/>Ownership: Qatar<br/>Ownership Type: Public","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Palomar Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>HATNet<\/strong><br/>67 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>HATSouth<\/strong><br/>69 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>KELT<\/strong><br/>10 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-South<\/strong><br/>4 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-North<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KMTNet<\/strong><br/>24 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Private","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>MOA<\/strong><br/>25 Discoveries<br/>Ownership: New Zealand<br/>Ownership Type: Public","<strong>Winer Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>OGLE<\/strong><br/>72 Discoveries<br/>Ownership: Poland<br/>Ownership Type: Public","<strong>European Southern Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Parkes Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>TrES<\/strong><br/>5 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Teide Observatory<\/strong><br/>1 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>SuperWASP<\/strong><br/>113 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-South<\/strong><br/>32 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-North<\/strong><br/>5 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>WASP-South<\/strong><br/>10 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>XO<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.9700589911359,50.9827994144098],"lng":[-156.252697595088,170.4758660866]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-8d554c0d38c2acf81622" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8d554c0d38c2acf81622">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-13.7,13.3],2,[]],"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[40.3935153411358,50.9828716245378,34.5762964157815,19.827030339277,19.8243959381655,37.3405225958883,-24.6271679474598,-30.1689991658417,28.6082865510784,28.4461277624233,43.9314061489072,30.6797139402795,-31.2761736038882,36.1606746314445,28.562428791829,28.4528710143113,28.4459797295643,-29.2618180352352,19.8252199941529,45.5934938267925,19.7021852050816,25.0338235210436,28.4457206615721,37.219922971359,31.6753479176672,32.9013927634734,42.4772816373517,33.3578106620565,31.6744505606131,-29.0152764277522,31.9591335593222,-29.0136632928871,5.30159559991068,42.5050983455824,31.6742490574956,32.7810998047024,-23.0272346484207,31.7133875442001,31.7122284749232,31.7122198929743,-31.1623452707409,32.7020831984402,-43.97026542958,31.6658493480616,-29.0042958741415,48.2595989460587,18.3441056416029,-33.0111154761541,-31.799329404775,19.821593604154,35.121548282458,19.49221972103,28.1809890648569,28.45274041244,-26.0301330547219,28.7566574203756,-26.030250579688,19.8229596765409,20.4220222641407,20.7076647716627],[117.583615824538,11.7140186698563,133.584409890101,-155.484430062561,-155.475196299777,-121.638985033682,-70.414117091639,-70.8062712939323,-80.6022804419225,-80.5668541245282,5.72136873808167,-104.023746812409,149.069738303826,128.976397262492,-80.5850896492659,-17.5260912245018,-80.5727860559363,-70.72873207884,-155.470164949086,63.3389284259683,-155.081602862017,102.786856969254,-80.5572674076146,-2.53709076273982,-110.952829345158,-105.522719459896,-71.4465746218686,-116.861855184242,-110.956709322483,-70.6916077549592,-111.592359321562,-70.6864878689241,-52.8380244372267,-71.5603251388595,-110.945858178353,-105.821408275254,-67.7597705241045,-110.593669773698,-110.60356189399,-110.598721298044,149.026537744458,-109.88168690279,170.466264379053,-110.605056789493,-70.4177782151982,11.6810168468437,-66.7502980214313,148.26649581324,-69.3023218566686,-155.470216758043,-111.388571332707,-155.291724131742,-16.3118516526781,-17.5210892458428,27.9320789369732,-17.8931817290449,27.9256149876002,-155.474654622699,-156.15653664489,-156.247902824665],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<strong>Xinglong Station<\/strong><br/>2 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries<br/>Ownership: Germany<br/>Ownership Type: Public","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Gemini Observatory<\/strong><br/>9 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Lick Observatory<\/strong><br/>33 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Paranal Observatory<\/strong><br/>36 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kepler<\/strong><br/>2402 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries<br/>Ownership: France<br/>Ownership Type: Public","<strong>McDonald Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Public","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>K2<\/strong><br/>467 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>La Silla Observatory<\/strong><br/>247 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CoRoT<\/strong><br/>33 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Subaru Telescope<\/strong><br/>8 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>MEarth Project<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Qatar<\/strong><br/>11 Discoveries<br/>Ownership: Qatar<br/>Ownership Type: Public","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Palomar Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>HATNet<\/strong><br/>67 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>HATSouth<\/strong><br/>69 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>KELT<\/strong><br/>10 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-South<\/strong><br/>4 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-North<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KMTNet<\/strong><br/>24 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Private","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>MOA<\/strong><br/>25 Discoveries<br/>Ownership: New Zealand<br/>Ownership Type: Public","<strong>Winer Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>OGLE<\/strong><br/>72 Discoveries<br/>Ownership: Poland<br/>Ownership Type: Public","<strong>European Southern Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Parkes Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>TrES<\/strong><br/>5 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Teide Observatory<\/strong><br/>1 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>SuperWASP<\/strong><br/>113 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-South<\/strong><br/>32 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-North<\/strong><br/>5 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>WASP-South<\/strong><br/>10 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>XO<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.97026542958,50.9828716245378],"lng":[-156.247902824665,170.466264379053]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -203,7 +208,7 @@ class: inverse, center, middle
 
 ---
 
-### Linear Regression of Year on Distance 
+### Linear Regression of Discovery Year on Mean Distance 
 
 
 
@@ -237,7 +242,7 @@ glance(distance_on_time_reg)$r.squared
 
 ---
 
-### Linear Regression of Count on Discovery Year
+### Linear Regression of Discovery Year on Count
 
 ```r
 time_reg &lt;- linear_reg() %&gt;%
@@ -266,44 +271,9 @@ glance(time_reg)$r.squared
 
 `\(\widehat{Count}=\beta_{0}+\beta_{1}Year\)`
 
-
 ---
 
-### Linear Regression of Count on Distance and Year
-
-
-```r
-distance_time_reg &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(count ~ mean_distance + disc_year, data = disc_distance)
-
-tidy(distance_time_reg)
-```
-
-```
-## # A tibble: 3 × 5
-##   term            estimate std.error statistic p.value
-##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 (Intercept)   -24291.    17454.        -1.39  0.178 
-## 2 mean_distance      0.452     0.262      1.72  0.0986
-## 3 disc_year         12.1       8.73       1.39  0.179
-```
-
-```r
-glance(distance_time_reg)$r.squared
-```
-
-```
-## [1] 0.3581314
-```
-&lt;br&gt;
-
-`\(\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year\)`
-
-
----
-
-### Linear Regression of Count on Mean Distance 
+### Linear Regression of Mean Distance on Count
 
 
 ```r
@@ -336,6 +306,45 @@ glance(distance_reg)$r.squared
 `\(\widehat{Count}=\beta_{0}+\beta_{1}Distance\)`
 
 
+---
+
+### Linear Regression of Mean Distance and Discovery Year on Count
+
+
+```r
+distance_time_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ mean_distance + disc_year, data = disc_distance)
+
+tidy(distance_time_reg)
+```
+
+```
+## # A tibble: 3 × 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   -24291.    17454.        -1.39  0.178 
+## 2 mean_distance      0.452     0.262      1.72  0.0986
+## 3 disc_year         12.1       8.73       1.39  0.179
+```
+
+```r
+glance(distance_time_reg)$r.squared
+```
+
+```
+## [1] 0.3581314
+```
+&lt;br&gt;
+
+`\(\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year\)`
+
+---
+
+### Observed future trends
+- We may discover exoplanets that are further away from us
+
+- We may see an increase in the number of exoplanets discovered
 
 ---
 
@@ -396,7 +405,7 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Discovery methods
+### Discovery Methods
 - Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
 
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
@@ -411,17 +420,17 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Popularity of discovery methods over time
+### Popularity of Discovery Methods over time
 &lt;img src="presentation_files/figure-html/discovery-method-over-time-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
-### Change in distance of discovery over time by discovery method
+### Change in Distance of discovery over time by Discovery Method
 &lt;p align="center"&gt;
   &lt;iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"&gt;&lt;/iframe&gt;
 &lt;/p&gt;
 
 ---
-### Change in distance of discovery over time by discovery method
+### Change in Distance of discovery over time by Discovery Method
 &lt;img src="presentation_files/figure-html/animate-scatter-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -436,11 +445,11 @@ glance(gdp_disc)$r.squared
 
 
 ---
-### Exoplanets' radius
+### Exoplanets' Radius
 &lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
-### Exoplanets' mass
+### Exoplanets' Mass
 &lt;img src="presentation_files/figure-html/discovery-method-vs-planet-mass-1.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 ---
@@ -475,13 +484,20 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Methods Critique 
+### Methods Critique and Areas of Improvement
 
-- At the beginning of the project we sought out to predict the number of exoplanet discoveries in the next 5-20 years. We ultimately determined that innovations in discovery technology are the largest driver in new exoplanet discovery, so in order to predict the future we should research what steps are currently being made in the space industry to develop new technology.
+Change of research direction and recommendation for future research: 
+- Initial thought: to predict the number of exoplanet discoveries in the next 5-20 years
+- Result: innovations in discovery technology are the largest driver in new exoplanet discovery
+- Future research: what steps are currently being made in the space industry to develop new technology
 
-- We feel that our data is very reliable in the sense that the information reported by NASA is accurate and correct. The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis.   
+Reliability of the data
+- Accurate and correct information reported by NASA
+- The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis  
 
-- The regression based analyses that we conducted did not have very high r-squared values and therefore it is likely that they were either too simple or did not show a significant correlation. That said, our visual-based analyses appeared to be statistically accurate and representaive of other similar literature/publications. 
+Appropriateness of the statistical analysis
+- Regression based analyses did not have very high r-squared values, so it is likely that they were either too simple or did not show a significant correlation
+- Visual-based analyses appeared to be statistically accurate and representative of other similar literature/publications
 
 ---
 class: inverse, center, middle

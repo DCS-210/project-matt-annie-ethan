@@ -1,6 +1,6 @@
 ---
 title: "Exoplanet Exploration"
-subtitle: "Predicting Future Trends in Exoplanet Exploration"
+subtitle: "Examining driving factors in Exoplanet Exploration"
 author: "Annie Li, Matt Clayton, Ethan Wu"
 institute: "Bates College"
 date: "`r Sys.Date()`"
@@ -15,9 +15,15 @@ output:
       countIncrementalSlides: false
 ---
 
-### Research Question
+<H1 style="font-size:180%;"><FONT COLOR=blue>
+General research question: <br><br>
+What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?</H1><br><br>
 
-### General research question: What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?
+<body style="font-size:100%;">
+Sub research questions:<br><br>
+How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility and distance from earth)?<br><br>
+How does the number of discoveries vary across countries and how does the result relate to the country’s gdp? </body>
+
 
 ---
 
@@ -41,17 +47,17 @@ library(htmltools)
 library(leafsync)
 ```
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 # For better figure resolution
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r load-data, include=FALSE}
+```{r load-data, include = FALSE}
 alldata <- read_csv("/cloud/project/data/filtereddata.csv")
 alldataunfiltered <- read_csv("/cloud/project/data/unfiltereddata.csv")
 ```
 
-```{r discovery-facility-country, include=FALSE}
+```{r discovery-facility-country, include = FALSE}
 # Create new variable for country of discovery facility
 
 ### Facility Country for filtered data
@@ -183,7 +189,7 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```
 
-```{r public-or-private, include=FALSE}
+```{r public-or-private, include = FALSE}
 
 ### Public or private for filtered data
 
@@ -215,7 +221,7 @@ alldataunfiltered <- alldataunfiltered %>%
                                                           "Winer Observatory"), "Private", "Public"))
 ```
 
-```{r telescope-type, include=FALSE}
+```{r telescope-type, include = FALSE}
 
 ### Facility Type for filtered data
 
@@ -245,7 +251,7 @@ alldataunfiltered <- alldataunfiltered %>%
                                                          "Observatory"))
 ```
 
-```{r facility-latitude, include=FALSE}
+```{r facility-latitude, include = FALSE}
 
 ### Latitude for filtered data
 
@@ -363,7 +369,7 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```
 
-```{r facility-longitude, include=FALSE}
+```{r facility-longitude, include = FALSE}
 
 ### Longitude for filtered data
 
@@ -480,7 +486,7 @@ alldataunfiltered <- alldataunfiltered %>%
 
 ```
 
-```{r facility-country-gdp, include=FALSE}
+```{r facility-country-gdp, include = FALSE}
 
 alldataunfiltered <- alldataunfiltered %>%
   
@@ -506,7 +512,7 @@ alldataunfiltered <- alldataunfiltered %>%
 ```
 
 
-```{r title-slide-background, include=FALSE}
+```{r title-slide-background, include = FALSE}
 style_xaringan(
   title_slide_background_image = "img/SPACE_2.jpg"
 )
@@ -555,15 +561,13 @@ class: inverse, center, middle
 ]
 
 .pull-right[
-
-
-```{r top-discovery-facilites-tibble, echo=FALSE, include=FALSE}
+```{r top-discovery-facilites-tibble, echo = FALSE, include = FALSE}
 table <- alldataunfiltered %>%
   count(disc_facility, sort = TRUE) %>%
   top_n(5)
 ```
 
-```{r top-discovery-facilites-table, echo=FALSE}
+```{r top-discovery-facilites-table, echo = FALSE}
   kable(head(table), col.names = c("Discovery Facility", "Discoveries"), caption = "Top 5 Discovery Facilities", format = "html")
 
 ```
@@ -591,6 +595,7 @@ table <- alldataunfiltered %>%
 - We focus on GDP per-capita from 2020
 
 ]
+
 ---
 ### Useful Terminology
 
@@ -602,7 +607,7 @@ table <- alldataunfiltered %>%
 ### Plotting Facilities and Discoveries Discover Count
 
 
-```{r construct-facility_df, echo=FALSE}
+```{r construct-facility_df, echo = FALSE}
 facility_df <- alldata %>% 
   group_by(disc_facility, disc_year) %>%
   mutate(count = n()) %>%
@@ -611,7 +616,7 @@ facility_df <- alldata %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
-```{r construct-facility_df2, echo=FALSE}
+```{r construct-facility_df2, echo = FALSE}
 facility_df2 <- alldataunfiltered %>% 
   group_by(disc_facility) %>%
   mutate(count = n()) %>%
@@ -622,7 +627,7 @@ facility_df2 <- alldataunfiltered %>%
   filter(!disc_facility == "Multiple Facilities")
 ```
 
-```{r construct-facility_df_group_by_location, echo=FALSE}
+```{r construct-facility_df_group_by_location, echo = FALSE}
 facility_df_lat_group <- alldata %>% 
   group_by(facility_latitude) %>%
   mutate(count = n()) %>%
@@ -631,7 +636,7 @@ facility_df_lat_group <- alldata %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
-```{r construct-facility_df2_group_by_location, echo=FALSE}
+```{r construct-facility_df2_group_by_location, echo = FALSE}
 facility_df2_lat_group <- alldataunfiltered %>% 
   group_by(facility_latitude) %>%
   mutate(count = n()) %>%
@@ -640,7 +645,7 @@ facility_df2_lat_group <- alldataunfiltered %>%
   filter(!disc_facility == "Multiple Observatories")
 ```
 
-```{r gdp_country_disc_count, echo=FALSE}
+```{r gdp_country_disc_count, echo = FALSE}
 gdp_country_disc_count <- alldataunfiltered %>% 
   group_by(disc_facility_country) %>%
   mutate(count = n()) %>%
@@ -652,7 +657,7 @@ gdp_country_disc_count <- alldataunfiltered %>%
   filter(!disc_facility_country == "Europe") 
 ```
 
-```{r gdp_country_disc_count_no_USA, echo=FALSE}
+```{r gdp_country_disc_count_no_USA, echo = FALSE}
 gdp_country_disc_count_no_USA <- alldataunfiltered %>% 
   group_by(disc_facility_country) %>%
   mutate(count = n()) %>%
@@ -665,7 +670,7 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
   filter(!disc_facility_country == "Europe") 
 ```
 
-```{r mapping facilities, echo=FALSE, out.width = "100%", fig.align = "top"}
+```{r mapping facilities, echo = FALSE, out.width = "100%", fig.align = "top"}
 
 ### Group by facility
 
@@ -674,29 +679,29 @@ world_map <- map_data("world")
 p <- ggplot() + coord_fixed() +
   xlab("") + ylab("")
 
-base_world_messy <- p + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), 
-                               colour="darkseagreen", fill="light green")
+base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
+                               colour ="darkseagreen", fill ="light green")
 
 cleanup <- 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_rect(fill = 'white', colour = 'white'), 
-        axis.line = element_line(colour = "white"), legend.position="none",
-        axis.ticks=element_blank(), axis.text.x=element_blank(),
-        axis.text.y=element_blank())
+        axis.line = element_line(colour = "white"), legend.position ="none",
+        axis.ticks = element_blank(), axis.text.x=element_blank(),
+        axis.text.y = element_blank())
 
 base_world <- base_world_messy + cleanup
 
 map_data <- 
   base_world +
-  geom_point(data=facility_df2, 
-             aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
-             pch=21, alpha=I(0.5)) +
+  geom_point(data = facility_df2, 
+             aes(x = facility_longitude, y = facility_latitude,size = count,fill = facility_type), colour = "black",
+             pch = 21, alpha = I(0.5)) +
   scale_size_continuous(range = c(3, 15))
 
 map_data
 ```
 
-``` {r mapping-facilities-by-location, include=FALSE}
+``` {r mapping-facilities-by-location, include = FALSE}
 ### Group By Coordinates
 
 world_map <- map_data("world")
@@ -704,23 +709,23 @@ world_map <- map_data("world")
 p <- ggplot() + coord_fixed() +
   xlab("") + ylab("")
 
-base_world_messy <- p + geom_polygon(data=world_map, aes(x=long, y=lat, group=group), 
+base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                                colour="darkseagreen", fill="light green")
 
 cleanup <- 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_rect(fill = 'white', colour = 'white'), 
-        axis.line = element_line(colour = "white"), legend.position="none",
-        axis.ticks=element_blank(), axis.text.x=element_blank(),
-        axis.text.y=element_blank())
+        axis.line = element_line(colour = "white"), legend.position ="none",
+        axis.ticks = element_blank(), axis.text.x = element_blank(),
+        axis.text.y = element_blank())
 
 base_world <- base_world_messy + cleanup
 
 map_data <- 
   base_world +
-  geom_point(data=facility_df_lat_group, 
-             aes(x=facility_longitude, y=facility_latitude,size = count,fill=facility_type), colour = "black",
-             pch=21, alpha=I(0.5)) 
+  geom_point(data = facility_df_lat_group, 
+             aes(x = facility_longitude, y = facility_latitude,size = count,fill = facility_type), colour = "black",
+             pch = 21, alpha = I(0.5)) 
 map_data
 ```
 
@@ -732,7 +737,8 @@ map_data
 labels <- sprintf(
   "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s<br/>Ownership Type: %s",
   facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country,facility_df2$public_or_private 
-) %>% lapply(htmltools::HTML) 
+) %>% 
+  lapply(htmltools::HTML) 
 
 ```
 
@@ -771,9 +777,9 @@ alldataunfiltered %>%
 
 ---
 
-### Linear Regression of Year on Distance 
+### Linear Regression of Discovery Year on Mean Distance 
 
-```{r count-on-distance-reg-df, include=FALSE}
+```{r count-on-distance-reg-df, include = FALSE}
 disc_distance <- alldataunfiltered %>% 
   group_by(disc_year) %>%
   mutate(count = n()) %>%
@@ -796,7 +802,7 @@ $\widehat{Distance}=\beta_{0}+\beta_{1}Year$
 
 ---
 
-### Linear Regression of Count on Discovery Year
+### Linear Regression of Discovery Year on Count
 ``` {r count-on-time-reg}
 time_reg <- linear_reg() %>%
   set_engine("lm") %>%
@@ -809,27 +815,9 @@ glance(time_reg)$r.squared
 
 $\widehat{Count}=\beta_{0}+\beta_{1}Year$
 
-
 ---
 
-### Linear Regression of Count on Distance and Year
-
-``` {r count-on-time-distance-reg}
-distance_time_reg <- linear_reg() %>%
-  set_engine("lm") %>%
-  fit(count ~ mean_distance + disc_year, data = disc_distance)
-
-tidy(distance_time_reg)
-glance(distance_time_reg)$r.squared
-```
-<br>
-
-$\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
-
-
----
-
-### Linear Regression of Count on Mean Distance 
+### Linear Regression of Mean Distance on Count
 
 ```{r count-on-distance-reg}
 distance_reg <- linear_reg() %>%
@@ -846,12 +834,34 @@ glance(distance_reg)$r.squared
 $\widehat{Count}=\beta_{0}+\beta_{1}Distance$
 
 
+---
+
+### Linear Regression of Mean Distance and Discovery Year on Count
+
+``` {r count-on-time-distance-reg}
+distance_time_reg <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(count ~ mean_distance + disc_year, data = disc_distance)
+
+tidy(distance_time_reg)
+glance(distance_time_reg)$r.squared
+```
+<br>
+
+$\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
+
+---
+
+### Observed future trends
+- We may discover exoplanets that are further away from us
+
+- We may see an increase in the number of exoplanets discovered
 
 ---
 
 ### GDP and the number of exoplanets discovered
 
-```{r gdp-vs-count, echo=FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
+```{r gdp-vs-count, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 
 # GDP per capita vs count (USA)
 gdp_country_disc_count %>%
@@ -884,7 +894,7 @@ glance(gdp_disc)$r.squared
 ---
 
 ### GDP and the number of exoplanets discovered (exluding USA)
-```{r gdp-vs-count-without-USA, echo=FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
+```{r gdp-vs-count-without-USA, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 # GDP per capita vs count (No USA)
 gdp_country_disc_count_no_USA %>%
   ggplot(mapping = aes(
@@ -927,7 +937,7 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Discovery methods
+### Discovery Methods
 - Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
 
 - Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
@@ -942,7 +952,7 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Popularity of discovery methods over time
+### Popularity of Discovery Methods over time
 ```{r discovery-method-over-time, warning = FALSE, echo = FALSE, fig.align = 'center'}
 alldata_discoverymethod <- alldataunfiltered %>%
   filter(!discoverymethod == "Disk Kinematics") %>%
@@ -964,38 +974,37 @@ alldata_discoverymethod %>%
         subtitle = "By discovery method") +
   theme(legend.position = "bottom") +
   theme(legend.key.size = unit(0.4, 'cm')) +
-  theme(legend.title = element_blank()) +
-  guides(color = guide_legend(nrow = 2, byrow = TRUE))
+  theme(legend.title = element_blank())
 
 ```
 
 ---
-### Change in distance of discovery over time by discovery method
+### Change in Distance of discovery over time by Discovery Method
 <p align="center">
   <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
 </p>
 
 ---
-### Change in distance of discovery over time by discovery method
+### Change in Distance of discovery over time by Discovery Method
 ```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center', warning = FALSE}
 
 alldata_dist <- alldataunfiltered %>%
   filter(!sy_distance == 0)
 
 ethan <- ggplot(data = alldata_dist, mapping = aes(y = sy_distance,
-                       x = disc_year,
-                       color = discoverymethod)) +
+                                                   x = disc_year,
+                                                   color = discoverymethod)) +
   geom_jitter(alpha = 1) + 
   labs(
         y = "Distance of Discovery (Parsecs)",
         x = "Year", 
         title = "Distance of discovery over time",
-        subtitle="By discovery method" ) +
+        subtitle ="By discovery method" ) +
   theme(legend.position = "bottom") +
   theme(legend.title = element_blank()) +
   theme(legend.key.size = unit(0.2, 'cm')) +
   theme(legend.spacing = unit(0.1, 'cm')) + 
-  theme(legend.text=element_text(size=5))
+  theme(legend.text = element_text(size=5))
 
 ethan
 ```
@@ -1012,8 +1021,8 @@ ethan
 
 
 ---
-### Exoplanets' radius
-```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
+### Exoplanets' Radius
+```{r discovery-method-vs-planet_radius, echo = FALSE, fig.show = "hold", fig.align = 'center', warning = FALSE}
 alldata_discoverymethod <- alldata_discoverymethod %>%
   filter(!pl_name == "HD 100546 b")
 
@@ -1034,8 +1043,8 @@ alldata_discoverymethod %>%
 ```
 
 ---
-### Exoplanets' mass
-```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show="hold", fig.align = 'center', warning = FALSE}
+### Exoplanets' Mass
+```{r discovery-method-vs-planet-mass, echo = FALSE, fig.show = "hold", fig.align = 'center', warning = FALSE}
 alldata_discoverymethod %>%
   ggplot(mapping = aes(x = disc_year,
                        y = pl_mass,
@@ -1084,13 +1093,20 @@ alldata_discoverymethod %>%
 
 ---
 
-### Methods Critique 
+### Methods Critique and Areas of Improvement
 
-- At the beginning of the project we sought out to predict the number of exoplanet discoveries in the next 5-20 years. We ultimately determined that innovations in discovery technology are the largest driver in new exoplanet discovery, so in order to predict the future we should research what steps are currently being made in the space industry to develop new technology.
+Change of research direction and recommendation for future research: 
+- Initial thought: to predict the number of exoplanet discoveries in the next 5-20 years
+- Result: innovations in discovery technology are the largest driver in new exoplanet discovery
+- Future research: what steps are currently being made in the space industry to develop new technology
 
-- We feel that our data is very reliable in the sense that the information reported by NASA is accurate and correct. The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis.   
+Reliability of the data
+- Accurate and correct information reported by NASA
+- The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis  
 
-- The regression based analyses that we conducted did not have very high r-squared values and therefore it is likely that they were either too simple or did not show a significant correlation. That said, our visual-based analyses appeared to be statistically accurate and representaive of other similar literature/publications. 
+Appropriateness of the statistical analysis
+- Regression based analyses did not have very high r-squared values, so it is likely that they were either too simple or did not show a significant correlation
+- Visual-based analyses appeared to be statistically accurate and representative of other similar literature/publications
 
 ---
 class: inverse, center, middle
