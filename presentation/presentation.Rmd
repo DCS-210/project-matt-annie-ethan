@@ -1,6 +1,6 @@
 ---
 title: "Exoplanet Exploration"
-subtitle: "Examining driving factors in Exoplanet Exploration"
+subtitle: "Examining Driving Factors in Exoplanet Exploration"
 author: "Annie Li, Matt Clayton, Ethan Wu"
 institute: "Bates College"
 date: "`r Sys.Date()`"
@@ -524,7 +524,7 @@ class: inverse, center, middle
 
 ---
 
-# What is an Exoplanet?
+### What is an Exoplanet?
 
 - "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
 
@@ -599,10 +599,19 @@ table <- alldataunfiltered %>%
 ---
 ### Useful Terminology
 
--**Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers) or the “mean radius of the earth's orbit subtends an angle of one second of arc.” In other words, very far! 
+- **Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers) or the “mean radius of the earth's orbit subtends an angle of one second of arc.” In other words, very far! 
 
+- **GDP Per-Capita**: A country's economic output divided by its total population (indicator of how developed a country is)
 
+- **Earth Radius & Earth Mass**: The radius and mass of an exoplanet is measured relative to Earth's mass and radius (eg. if a planet is twice the mass of Earth, mass = 2)
 
+- **Observatory**: Facility on Earth with telescopes and other technology used in the discovery of exoplanets
+
+- **Space Telescope**: Spacecraft launched into space that floats throughout space discovering exoplanets (eg. Kepler and Hubble)
+
+<p align="center">
+<img class="CSS_LIGHTBOX_SCALED_IMAGE_IMG" src="https://3.bp.blogspot.com/-cK5pFMAwvyc/UQ23Fc-g1cI/AAAAAAAAGjQ/cOLdC6cllUE/s1600/Copy+of+telescopemamme.jpg" style="width: 201px; height: 200px;">
+</p>
 ---
 ### Plotting Facility Locations and Exoplanet Discovery Count
 
@@ -852,14 +861,14 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
 
 ---
 
-### Observed future trends
+### Observed Future Trends
 - We may discover exoplanets that are further away from us
 
 - We may see an increase in the number of exoplanets discovered
 
 ---
 
-### GDP and the number of exoplanets discovered
+### GDP and the Number of Exoplanets Discovered
 
 ```{r gdp-vs-count, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 
@@ -950,9 +959,12 @@ glance(gdp_disc)$r.squared
 
 - Microlensing: Measure light curve of a distant star that is not physically related to the planet/star
 
+<p align="center">
+<img class="J9AiF" src="https://64.media.tumblr.com/fedb2fdb5c89b7d1b4cfdbfb5ac558c6/tumblr_od10f9utK81v8t5gwo1_r1_500.png" alt="#tattoo commission from indigo night">
+</p>
 ---
 
-### Effectiveness of discovery methods over time
+### Effectiveness of Discovery Methods Over Time
 ```{r discovery-method-over-time, warning = FALSE, echo = FALSE, fig.align = 'center'}
 alldata_discoverymethod <- alldataunfiltered %>%
   filter(!discoverymethod == "Disk Kinematics") %>%
@@ -979,13 +991,13 @@ alldata_discoverymethod %>%
 ```
 
 ---
-### Change in Distance of discovery over time by Discovery Method
+### Change in Distance of Discovery Over Time by Discovery Method
 <p align="center">
   <iframe src="https://dcs-210.github.io/project-matt-annie-ethan/Ethan5.gif" width="1016" height="516" frameBorder="0"></iframe>
 </p>
 
 ---
-### Change in Distance of discovery over time by Discovery Method
+### Change in Distance of Discovery Over Time by Discovery Method
 ```{r animate-scatter, warning = FALSE, echo = FALSE, fig.align = 'center', warning = FALSE}
 
 alldata_dist <- alldataunfiltered %>%
@@ -1019,6 +1031,9 @@ ethan
 
 - Around 2006, when transit began to be used, the number of observations per year started to increase rapidly and we were able to discover planets that were a bit further from earth
 
+<p align="center">
+<img src="https://th.bing.com/th/id/OIP.qH7G8WkiADoh-P_nv188RAHaFj?pid=ImgDet&amp;rs=1" alt="See the source image" class=" nofocus" tabindex="0" aria-label="See the source image">
+</p>
 
 ---
 ### Exoplanets' Radius
