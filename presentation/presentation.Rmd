@@ -599,12 +599,12 @@ table <- alldataunfiltered %>%
 ---
 ### Useful Terminology
 
--**Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers). In other words, very far!
+-**Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers) or the “mean radius of the earth's orbit subtends an angle of one second of arc.” In other words, very far! 
 
 
 
 ---
-### Plotting Facilities and Discoveries Discover Count
+### Plotting Facility Locations and Exoplanet Discovery Count
 
 
 ```{r construct-facility_df, echo = FALSE}
@@ -952,7 +952,7 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### Popularity of Discovery Methods over time
+### Effectiveness of discovery methods over time
 ```{r discovery-method-over-time, warning = FALSE, echo = FALSE, fig.align = 'center'}
 alldata_discoverymethod <- alldataunfiltered %>%
   filter(!discoverymethod == "Disk Kinematics") %>%
