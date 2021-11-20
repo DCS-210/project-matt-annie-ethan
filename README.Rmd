@@ -1,5 +1,5 @@
 ---
-title: README
+title: Examining Driving Factors in Exoplanet Exploration
 author: by Annie, Matt, and Ethan
 output: github_document
 ---

@@ -1,4 +1,4 @@
-README
+Examining Driving Factors in Exoplanet Exploration
 ================
 by Annie, Matt, and Ethan
 
