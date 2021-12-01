@@ -15,14 +15,17 @@ output:
       countIncrementalSlides: false
 ---
 
-<H1 style="font-size:180%;"><FONT COLOR=blue>
-General research question: <br><br>
-What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?</H1><br><br>
+### Research Questions
 
-<body style="font-size:100%;">
-Sub research questions:<br><br>
-How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility and distance from earth)?<br><br>
-How does the number of discoveries vary across countries and how does the result relate to the country’s gdp? </body>
+General Research Question:
+
+#### What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?
+
+Sub-questions:
+
+- How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility and distance from earth)?
+
+- How does the number of discoveries vary across countries and how does the result relate to the country’s gdp?
 
 
 ---
