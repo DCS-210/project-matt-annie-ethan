@@ -689,7 +689,8 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
 world_map <- map_data("world")
 
 p <- ggplot() + coord_fixed() +
-  xlab("") + ylab("")
+  xlab("") + ylab("") + labs(title = "Discovery Facilities Mainly Located in Developed Nations",  
+                             subtitle = "(Land Obervatories in Red, Space Telescope Launch Sites in Blue)")
 
 base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                                colour ="darkseagreen", fill ="light green")
@@ -706,10 +707,15 @@ base_world <- base_world_messy + cleanup
 map_data <- 
   base_world +
   geom_point(data = facility_df2, 
-             aes(x = facility_longitude, y = facility_latitude,size = count,fill = facility_type), colour = "black",
+             aes(x = facility_longitude, 
+                 y = facility_latitude,
+                 size = count,
+                 fill = facility_type), 
+             colour = "black",
              pch = 21, alpha = I(0.5)) +
-  scale_size_continuous(range = c(3, 15))
-
+             scale_size_continuous(range = c(3, 15))
+             
+                                   
 map_data
 ```
 
@@ -719,7 +725,7 @@ map_data
 world_map <- map_data("world")
 
 p <- ggplot() + coord_fixed() +
-  xlab("") + ylab("")
+  xlab("") + ylab("") 
 
 base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                                colour="darkseagreen", fill="light green")
