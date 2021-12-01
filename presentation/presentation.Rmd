@@ -615,9 +615,6 @@ table <- alldataunfiltered %>%
 <p align="center">
 <img class="CSS_LIGHTBOX_SCALED_IMAGE_IMG" src="https://3.bp.blogspot.com/-cK5pFMAwvyc/UQ23Fc-g1cI/AAAAAAAAGjQ/cOLdC6cllUE/s1600/Copy+of+telescopemamme.jpg" style="width: 201px; height: 200px;">
 </p>
----
-### Plotting Facility Locations and Exoplanet Discovery Count
-
 
 ```{r construct-facility_df, echo = FALSE}
 facility_df <- alldata %>% 
@@ -682,15 +679,18 @@ gdp_country_disc_count_no_USA <- alldataunfiltered %>%
   filter(!disc_facility_country == "Europe") 
 ```
 
-```{r mapping facilities, echo = FALSE, out.width = "100%", fig.align = "top"}
+---
+
+### Plotting Facility Locations and Exoplanet Discovery Count
+
+```{r mapping-facilities, echo = FALSE, out.width = "400%", fig.align = "center"}
 
 ### Group by facility
 
 world_map <- map_data("world")
 
 p <- ggplot() + coord_fixed() +
-  xlab("") + ylab("") + labs(title = "Discovery Facilities Mainly Located in Developed Nations",  
-                             subtitle = "(Land Obervatories in Red, Space Telescope Launch Sites in Blue)")
+  xlab("") + ylab("") + labs(subtitle = "Discovery Facilities Mainly Located in Developed Nations") 
 
 base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                                colour ="darkseagreen", fill ="light green")
@@ -698,7 +698,7 @@ base_world_messy <- p + geom_polygon(data = world_map, aes(x = long, y = lat, gr
 cleanup <- 
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
         panel.background = element_rect(fill = 'white', colour = 'white'), 
-        axis.line = element_line(colour = "white"), legend.position ="none",
+        axis.line = element_line(colour = "white"), 
         axis.ticks = element_blank(), axis.text.x=element_blank(),
         axis.text.y = element_blank())
 
@@ -713,7 +713,9 @@ map_data <-
                  fill = facility_type), 
              colour = "black",
              pch = 21, alpha = I(0.5)) +
-             scale_size_continuous(range = c(3, 15))
+             scale_size_continuous(range = c(3, 15)) + 
+             guides(size = "none") +   
+             guides(fill = guide_legend("Facility Type"))
              
                                    
 map_data
