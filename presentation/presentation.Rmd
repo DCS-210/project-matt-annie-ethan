@@ -751,32 +751,6 @@ map_data
 
 ---
 
-### Interactive Leaflet Map: Location and Number of Discoveries
-```{r discovery-facility-leaflet-labels, echo = FALSE, out.width = "100%"}
-
-labels <- sprintf(
-  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s<br/>Ownership Type: %s",
-  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country,facility_df2$public_or_private 
-) %>% 
-  lapply(htmltools::HTML) 
-
-```
-
-```{r discovery-facility-leaflet, echo = FALSE} 
-
-facility_df2$lat <- jitter(facility_df2$facility_latitude, factor = 0.5)
-facility_df2$lon <- jitter(facility_df2$facility_longitude, factor = 0.5)
-
-leaflet(facility_df2) %>%
-  setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
-      addProviderTiles(providers$Stamen.Terrain) %>%
-      addProviderTiles(providers$Stamen.TerrainLabels) %>%
-      addMarkers(~lon, ~lat, popup = ~labels)
-      
-```
-
----
-
 ### Exoplanet Discovery Over Time
 ```{r disc-distance-over-time-plot, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align='center'}
 
@@ -1145,4 +1119,28 @@ class: inverse, center, middle
 # Questions?
 
 ---
+
+### Exploring the Data: Interactive Leaflet Map (Discovery Locations)
+```{r discovery-facility-leaflet-labels, echo = FALSE, out.width = "100%"}
+
+labels <- sprintf(
+  "<strong>%s</strong><br/>%g Discoveries<br/>Ownership: %s<br/>Ownership Type: %s",
+  facility_df2$disc_facility, facility_df2$count, facility_df2$disc_facility_country,facility_df2$public_or_private 
+) %>% 
+  lapply(htmltools::HTML) 
+
+```
+
+```{r discovery-facility-leaflet, echo = FALSE} 
+
+facility_df2$lat <- jitter(facility_df2$facility_latitude, factor = 0.5)
+facility_df2$lon <- jitter(facility_df2$facility_longitude, factor = 0.5)
+
+leaflet(facility_df2) %>%
+  setView(lat = -13.7, lng = 13.3, zoom = 2) %>%
+      addProviderTiles(providers$Stamen.Terrain) %>%
+      addProviderTiles(providers$Stamen.TerrainLabels) %>%
+      addMarkers(~lon, ~lat, popup = ~labels)
+      
+```
 
