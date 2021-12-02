@@ -766,11 +766,30 @@ alldataunfiltered %>%
   geom_point() +
   geom_smooth (color = "black")
   
-  
 ```
 
 ---
+### Exoplanet Discovery Over Time (Linear Fit)
 
+
+```{r disc-distance-over-time-plot-linear, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align='center'}
+
+alldataunfiltered %>%
+  group_by(disc_year) %>%
+  summarise_at(vars(sy_distance), list(name = mean)) %>%
+  ggplot(mapping = aes(x = disc_year, y = name)) +
+  labs(
+    x = "Discovery Year",
+    y = "Mean Distance of Discovery (Parsecs)",
+    title = "Year to Mean Distance of Discovery (Parsecs)"
+  ) +
+  geom_point() +
+  geom_smooth (color = "black", 
+               method = "lm",
+               se = FALSE)
+  
+```
+---
 ### Linear Regression of Discovery Year on Mean Distance 
 
 ```{r count-on-distance-reg-df, include = FALSE}
@@ -846,6 +865,15 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year$
 
 ---
 
+### Regression Results
+
+- The best model is one that includes both mean distance and discovery year, since a combined model has less omitted variable bias and a higher R-squared value
+
+- The results suggest that as the mean distance in a given year increases by 1 parsec, we can expect an increase in discoveries of approximately 0.452
+
+- The results also suggest that we can expect roughly 12 new discoveries each year on account of time alone (this likely represents technological advancements over time)
+
+---
 ### Observed Future Trends
 - We may discover exoplanets that are further away from us
 
@@ -872,7 +900,30 @@ gdp_country_disc_count %>%
   guides(color = guide_legend("Country"))
 ```
 ---
-### Linear regression on the relationship between GDP and number of discoveres exoplanets 
+
+### GDP and the Number of Exoplanets Discovered (Linear Fit)
+
+```{r gdp-vs-count-linear, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
+
+# GDP per capita vs count (USA)
+gdp_country_disc_count %>%
+  ggplot(mapping = aes(
+                        x = GDP_2020,
+                        y = count,
+                        color = disc_facility_country)) +
+  geom_jitter() +
+  geom_smooth(color = "black",
+              method = "lm",
+              se = FALSE) +
+  labs(
+        x = "2020 GDP Per Capita of Country (USD)",
+        y = "Total Discovery Count", 
+        title = " Country GDP Per Capita vs Discovery Count") +
+  guides(color = guide_legend("Country"))
+```
+
+---
+### Linear Regression on the Relationship Between GDP and Number of Discoveres Exoplanets 
 
 ```{r gdp-vs-count-reg}
 
@@ -887,7 +938,7 @@ glance(gdp_disc)$r.squared
 
 ---
 
-### GDP and the number of exoplanets discovered (exluding USA)
+### GDP & the Number of Exoplanets Discovered (Exluding USA)
 ```{r gdp-vs-count-without-USA, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 # GDP per capita vs count (No USA)
 gdp_country_disc_count_no_USA %>%
@@ -906,7 +957,28 @@ gdp_country_disc_count_no_USA %>%
 
 ---
 
-### Linear regression on the relationship between GDP and number of discoveres exoplanets (excluding USA)
+### GDP & the Number of Exoplanets Discovered (Exluding USA) (Linear Fit)
+```{r gdp-vs-count-without-USA-linear, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
+# GDP per capita vs count (No USA)
+gdp_country_disc_count_no_USA %>%
+  ggplot(mapping = aes(
+                        x = GDP_2020,
+                        y = count,
+                        color = disc_facility_country)) +
+  geom_jitter() +
+  geom_smooth(color = "black",
+              method = "lm",
+              se = FALSE) +
+  labs(
+        x = "2020 GDP Per Capita of Country (USD)",
+        y = "Total Discovery Count", 
+        title = " Country GDP Per Capita vs Discovery Count") +
+  guides(color = guide_legend("Country"))
+```
+
+---
+
+### Linear Regression on the Relationship Between GDP and Number of Discoveres (excluding USA)
 
 ```{r count-on-gdp-reg-no-us}
 # No USA
