@@ -1,8 +1,8 @@
----
+
 title: Examining Driving Factors in Exoplanet Exploration
 author: by Annie, Matt, and Ethan
 output: github_document
----
+
 
 ## Summary
 Dataset: We used two different datasets for this project. The first dataset was filtered from the NASA Exoplanet Archives Planet Systems Dataset that consists of a compilation of system, stellar, and planetary parameters for known confirmed exoplanets. There are 8 categories of over 100 different variables and we chose 23 variables that were relevant to answering our research question. Then, we created two data frames for our project where one includes unfiltered data with missing values under many variables except the discovery year, and the other one includes filtered data for all 23 variables. The second dataset came from the World Bank GDP Per-Capita Dataset which includes the annual measure of GDP per-capita for every country in the world and some larger regions from 1960-2020. For our project, we focused on the most up to date data from 2020. 
