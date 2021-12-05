@@ -1154,7 +1154,7 @@ alldata_discoverymethod %>%
 ]
 
 ---
-### Multivariable model: The effect of mean distance, discovery year, dominant discovery method, and countries 2020 GDP on the number of exoplanets discovered
+### Multivariable model: The effect of mean distance, discovery year, dominant discovery method, and countries 2020 GDP per-capita on the number of exoplanets discovered
 
 ```{r add-count-and-disc_year-to-df, echo = FALSE}
 alldata_discoverymethod <- alldata_discoverymethod %>% 
