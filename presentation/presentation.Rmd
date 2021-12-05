@@ -790,9 +790,9 @@ alldataunfiltered %>%
   
 ```
 ---
-### Linear Regression of Discovery Year on Mean Distance 
+### How does the mean distance of discovered exoplanets change over time (discovery year)?
 
-```{r count-on-distance-reg-df, include = FALSE}
+```{r count-on-distance-reg-df, include = FALSE, message = FALSE}
 disc_distance <- alldataunfiltered %>% 
   group_by(disc_year) %>%
   mutate(count = n()) %>%
@@ -801,11 +801,10 @@ disc_distance <- alldataunfiltered %>%
   distinct(disc_year, .keep_all = TRUE)
 ```
 
-``` {r distance-on-time-reg}
+``` {r distance-on-time-reg, message = FALSE}
 distance_on_time_reg <- linear_reg() %>%
   set_engine("lm") %>%
   fit(mean_distance ~ disc_year, data = disc_distance)
-
 tidy(distance_on_time_reg)
 glance(distance_on_time_reg)$r.squared
 ```
@@ -815,7 +814,7 @@ $\widehat{Distance}=\beta_{0}+\beta_{1}Year$
 
 ---
 
-### Linear Regression of Discovery Year on Count
+### How does the number of discovered exoplanets change over time (discovery year)?
 ``` {r count-on-time-reg}
 time_reg <- linear_reg() %>%
   set_engine("lm") %>%
@@ -830,7 +829,7 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Year$
 
 ---
 
-### Linear Regression of Mean Distance on Count
+### How does the number of discovered exoplanets change based on the mean distance of discovered exoplanets?
 
 ```{r count-on-distance-reg}
 distance_reg <- linear_reg() %>%
@@ -849,7 +848,7 @@ $\widehat{Count}=\beta_{0}+\beta_{1}Distance$
 
 ---
 
-### Linear Regression of Mean Distance and Discovery Year on Count
+### How does the number of discovered exoplanets change based on the mean distance of discovered exoplanets over time?
 
 ``` {r count-on-time-distance-reg}
 distance_time_reg <- linear_reg() %>%
@@ -923,7 +922,7 @@ gdp_country_disc_count %>%
 ```
 
 ---
-### Linear Regression on the Relationship Between GDP and Number of Discoveres Exoplanets 
+### What is the relationship between the number of discovered exoplanets and countries GDP in 2020?
 
 ```{r gdp-vs-count-reg}
 
@@ -935,10 +934,10 @@ gdp_disc <- linear_reg() %>%
 glance(gdp_disc)$r.squared
 
 ```
-
+The r-squared value of 0.28 suggests a weak positive correlation between the number of discovered exoplanets and countries GDP in 2020.
 ---
 
-### GDP & the Number of Exoplanets Discovered (Exluding USA)
+### GDP and the Number of Exoplanets Discovered (Exluding USA)
 ```{r gdp-vs-count-without-USA, echo = FALSE, warning = FALSE, message = FALSE, results = 'hide', fig.align = "center"}
 # GDP per capita vs count (No USA)
 gdp_country_disc_count_no_USA %>%
@@ -978,7 +977,7 @@ gdp_country_disc_count_no_USA %>%
 
 ---
 
-### Linear Regression on the Relationship Between GDP and Number of Discoveres (excluding USA)
+### What is the relationship between the number of discovered exoplanets and countries GDP in 2020? (excluding USA)
 
 ```{r count-on-gdp-reg-no-us}
 # No USA
@@ -988,7 +987,7 @@ gdp_disc <- linear_reg() %>%
 
 glance(gdp_disc)$r.squared
 ```
-
+The r-squared value of 0.0000112 suggests no correlation (or an extremely weak positive correlation) between the number of discovered exoplanets and countries GDP in 2020.
 ---
 
 ### GDP Per-Capita Discussion
@@ -1153,6 +1152,28 @@ alldata_discoverymethod %>%
 .footnote[
 [*] Both graphs omit a single exoplanet with an enormous radius and mass: HD 100546 b (Mass = 239000, Radius = 77.342)
 ]
+
+---
+### Multivariable model: The effect of mean distance, discovery year, dominant discovery method, and countries 2020 GDP on the number of exoplanets discovered
+
+```{r add-count-and-disc_year-to-df, echo = FALSE}
+alldata_discoverymethod <- alldata_discoverymethod %>% 
+  group_by(disc_year) %>%
+  mutate(count = n()) %>%
+  mutate(mean_distance = mean(sy_distance))
+
+```
+
+```{r multivariable-model}
+multivariable_model <-
+  linear_reg() %>% 
+  set_engine("lm") %>%
+  fit(count ~ mean_distance + disc_year + discoverymethod + GDP_2020, data = alldata_discoverymethod)
+
+glance(multivariable_model)$r.squared
+
+```
+The r-squared is 0.75 which suggests that **75% of the variance in the number of discovered exoplanets can be predicted by the mean distance, discovery year, dominant discovery method, and countries 2020 GDP**. Thus, this multivariable model is much better and more thorough than the simple linear models we presented in the first few slides where only one or two predictor variables (e.g. year/ distance/GDP) were used to predict the outcome variable (count).
 
 ---
 
