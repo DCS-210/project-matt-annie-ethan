@@ -1,22 +1,49 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Presentation title</title>
+    <title>Exoplanet Exploration</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Team name   Names of team members" />
-    <meta name="date" content="2020-11-24" />
-    <script src="libs/header-attrs-2.5.3/header-attrs.js"></script>
+    <meta name="author" content="Annie Li, Matt Clayton, Ethan Wu" />
+    <meta name="date" content="2021-12-05" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+    <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+    <script src="libs/leaflet-providers-plugin-2.0.4.1/leaflet-providers-plugin.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Presentation title
-## Presentation subtitle (if any)
-### Team name <br> Names of team members
-### University of Edinburgh
-### 2020-11-24
+# Exoplanet Exploration
+## Examining Driving Factors in Exoplanet Exploration
+### Annie Li, Matt Clayton, Ethan Wu
+### Bates College
+### 2021-12-05
+
+---
+
+
+### Research Questions
+
+General Research Question:
+
+#### What are the main driving factors in exoplanet discovery, and how can these factors influence the future of exoplanet exploration?
+
+Sub-questions:
+
+- How has the number of discovered exoplanets changed over time (in relation to the type of discovery method, discovery facility and distance from earth)?
+
+- How does the number of discoveries vary across countries and how does the result relate to the country’s gdp?
+
 
 ---
 
@@ -28,229 +55,522 @@ class: center, middle, inverse, title-slide
 
 
 
-```r
-style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
-)
-```
 
 
-class: center, middle
 
-## A statement of the overall goal / research question
+
+
+
+
+
+
+
+
+
+
+class: inverse, center, middle
+
+# Introduction
+
+---
+
+### What is an Exoplanet?
+
+- "All of the planets in our solar system orbit around the Sun. Planets that orbit around other stars are called **exoplanets**" - Our friends at NASA.
+
+- Exoplanet discovery allows us to search for habitable planets outside of our solar system!
+
+- As of today, we have discovered over 4500 exoplanets!
+
+&lt;br&gt;
+&lt;br&gt;
+
+--
+&lt;p align="center"&gt;
+&lt;img src="https://www.pngkey.com/png/detail/969-9692789_planet-cute-saturn-jupiter-uranus-neptune-smile-cute.png" width="200" height="200" alt="#planet #cute #saturn #jupiter #uranus #neptune #smile - Cute Saturn Clipart@pngkey.com"&gt;
+&lt;/p&gt;
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# Data
 
 ---
 
-# Hello World
-
-- Click the `Knit` button to compile your presentation
-
-- Make sure to commit and push all resulting files to your GitHub repo
-
----
-
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
+### NASA Exoplanet Archives Planet Systems Dataset
 
 .pull-left[
-or text in two columns `\(^*\)`
+- Compilation of system, stellar, and planetary parameters for all known confirmed exoplanets
+
+- Data comes from from many different exoplanet transit survey programs from all around the world (and over the world!)
+
+- Notable programs include the Kepler space mission, the K2 space mission, and the CoRoT space mission 
+
+- Last Updated: April 2021
 ]
+
 .pull-right[
-- like
-- this
-]
 
-.footnote[
-[*] And add footnotes
-]
-
----
-
-# Code
-
-
-```r
-# a boring regression
-model &lt;- lm(dist ~ speed, data = cars)
-tidy(model)
-```
-
-```
-## # A tibble: 2 x 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
-## 2 speed           3.93     0.416      9.46 1.49e-12
-```
-
-```r
-glance(model)
-```
-
-```
-## # A tibble: 1 x 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
-## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
-```
-
----
-
-# Plots
-
-
-
-&lt;img src="presentation_files/figure-html/plot-iris-1.png" width="80%" /&gt;
-
----
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
-]
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
 
 &lt;table&gt;
+&lt;caption&gt;Top 5 Discovery Facilities&lt;/caption&gt;
  &lt;thead&gt;
   &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Discovery Facility &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Discoveries &lt;/th&gt;
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Kepler &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2402 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; K2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 467 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; La Silla Observatory &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 247 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Multiple Observatories &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 181 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; W. M. Keck Observatory &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 180 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
----
-
-# Images
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80" alt="Image credit: Photo by Jörg Angeli on Unsplash." width="60%" /&gt;
-&lt;p class="caption"&gt;Image credit: Photo by Jörg Angeli on Unsplash.&lt;/p&gt;
-&lt;/div&gt;
-
-Or you can also include a full page image. See next slide.
+]
 
 ---
 
-background-image: url(https://images.unsplash.com/photo-1535448033526-c0e85c9e6968?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1650&amp;q=80)
+### World Bank GDP Per-Capita Dataset
+
+.pull-left[
+
+&lt;iframe src="https://data.worldbank.org/share/widget?end=2020&amp;indicators=NY.GDP.PCAP.CD&amp;start=2020&amp;type=shaded&amp;view=map" width='550' height='366' frameBorder='0' scrolling="no" &gt;&lt;/iframe&gt;
+
+]
+
+.pull-right[
+
+- Annual measure of GDP per-capita for every country in the world and some larger regions (eg. European Union)
+
+- GDP per capita measured in USD
+
+- Data from 1960-2020
+
+- We focus on GDP per-capita from 2020
+
+]
+
+---
+### Useful Terminology
+
+- **Parsec**: A unit of distance used in astronomy equal to 3.26 light years (3.086 × 1013 kilometers) or the “mean radius of the earth's orbit subtends an angle of one second of arc.” In other words, very far! 
+
+- **GDP Per-Capita**: A country's economic output divided by its total population (indicator of how developed a country is)
+
+- **Earth Radius &amp; Earth Mass**: The radius and mass of an exoplanet is measured relative to Earth's mass and radius (eg. if a planet is twice the mass of Earth, mass = 2)
+
+- **Observatory**: Facility on Earth with telescopes and other technology used in the discovery of exoplanets
+
+- **Space Telescope**: Spacecraft launched into space that floats throughout space discovering exoplanets (eg. Kepler and Hubble)
+
+&lt;p align="center"&gt;
+&lt;img class="CSS_LIGHTBOX_SCALED_IMAGE_IMG" src="https://3.bp.blogspot.com/-cK5pFMAwvyc/UQ23Fc-g1cI/AAAAAAAAGjQ/cOLdC6cllUE/s1600/Copy+of+telescopemamme.jpg" style="width: 201px; height: 200px;"&gt;
+&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
-# Math Expressions
+### Plotting Facility Locations and Exoplanet Discovery Count
 
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
+&lt;img src="presentation_files/figure-html/mapping-facilities-1.png" width="400%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+### Exoplanet Discovery Over Time
+&lt;img src="presentation_files/figure-html/disc-distance-over-time-plot-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+### Exoplanet Discovery Over Time (Linear Fit)
+
+
+&lt;img src="presentation_files/figure-html/disc-distance-over-time-plot-linear-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+### How does the mean distance of discovered exoplanets change over time (discovery year)?
+
+
+
+
+```r
+distance_on_time_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(mean_distance ~ disc_year, data = disc_distance)
+tidy(distance_on_time_reg)
+```
 
 ```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+## # A tibble: 2 × 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) -40037.   11095.       -3.61 0.00148
+## 2 disc_year       20.1      5.54      3.64 0.00137
 ```
 
-`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
+```r
+glance(distance_on_time_reg)$r.squared
+```
 
-Limitations:
+```
+## [1] 0.3653665
+```
+&lt;br&gt;
 
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
+`\(\widehat{Distance}=\beta_{0}+\beta_{1}Year\)`
 
 ---
 
-# Feeling adventurous?
+### How does the number of discovered exoplanets change over time (discovery year)?
 
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
+```r
+time_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ disc_year, data = disc_distance)
 
-- You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+tidy(time_reg)
+```
 
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
+```
+## # A tibble: 2 × 5
+##   term        estimate std.error statistic p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept) -32164.   11366.       -2.83 0.00852
+## 2 disc_year       16.1      5.66      2.84 0.00825
+```
 
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+```r
+glance(time_reg)$r.squared
+```
+
+```
+## [1] 0.2240376
+```
+&lt;br&gt;
+
+`\(\widehat{Count}=\beta_{0}+\beta_{1}Year\)`
+
+---
+
+### How does the number of discovered exoplanets change based on the mean distance of discovered exoplanets?
+
+
+```r
+distance_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ mean_distance, data = disc_distance)
+
+tidy(distance_reg)
+```
+
+```
+## # A tibble: 2 × 5
+##   term          estimate std.error statistic p.value
+##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)    -81.0      91.9      -0.882 0.387  
+## 2 mean_distance    0.672     0.213     3.15  0.00443
+```
+
+```r
+glance(distance_reg)$r.squared
+```
+
+```
+## [1] 0.3019955
+```
+
+&lt;br&gt;
+
+
+`\(\widehat{Count}=\beta_{0}+\beta_{1}Distance\)`
+
+
+---
+
+### How does the number of discovered exoplanets change based on the mean distance of discovered exoplanets over time?
+
+
+```r
+distance_time_reg &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(count ~ mean_distance + disc_year, data = disc_distance)
+
+tidy(distance_time_reg)
+```
+
+```
+## # A tibble: 3 × 5
+##   term            estimate std.error statistic p.value
+##   &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 (Intercept)   -24291.    17454.        -1.39  0.178 
+## 2 mean_distance      0.452     0.262      1.72  0.0986
+## 3 disc_year         12.1       8.73       1.39  0.179
+```
+
+```r
+glance(distance_time_reg)$r.squared
+```
+
+```
+## [1] 0.3581314
+```
+&lt;br&gt;
+
+`\(\widehat{Count}=\beta_{0}+\beta_{1}Distance+\beta_{2}Year\)`
+
+---
+
+### Regression Results
+
+- The best model is one that includes both mean distance and discovery year, since a combined model has less omitted variable bias and a higher R-squared value
+
+- The results suggest that as the mean distance in a given year increases by 1 parsec, we can expect an increase in discoveries of approximately 0.452
+
+- The results also suggest that we can expect roughly 12 new discoveries each year on account of time alone (this likely represents technological advancements over time)
+
+---
+### Observed Future Trends
+- We may discover exoplanets that are further away from us
+
+- We may see an increase in the number of exoplanets discovered
+
+---
+
+### GDP and the Number of Exoplanets Discovered
+
+&lt;img src="presentation_files/figure-html/gdp-vs-count-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+---
+
+### GDP and the Number of Exoplanets Discovered (Linear Fit)
+
+&lt;img src="presentation_files/figure-html/gdp-vs-count-linear-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+### What is the relationship between the number of discovered exoplanets and countries GDP in 2020?
+
+
+```r
+# USA Included
+gdp_disc &lt;- linear_reg() %&gt;% 
+  set_engine("lm") %&gt;%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count)
+
+glance(gdp_disc)$r.squared
+```
+
+```
+## [1] 0.2800483
+```
+The r-squared value of 0.28 suggests a weak positive correlation between the number of discovered exoplanets and countries GDP in 2020.
+---
+
+### GDP and the Number of Exoplanets Discovered (Exluding USA)
+&lt;img src="presentation_files/figure-html/gdp-vs-count-without-USA-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### GDP &amp; the Number of Exoplanets Discovered (Exluding USA) (Linear Fit)
+&lt;img src="presentation_files/figure-html/gdp-vs-count-without-USA-linear-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### What is the relationship between the number of discovered exoplanets and countries GDP in 2020? (excluding USA)
+
+
+```r
+# No USA
+gdp_disc &lt;- linear_reg() %&gt;% 
+  set_engine("lm") %&gt;%
+  fit(count ~ GDP_2020, data = gdp_country_disc_count_no_USA)
+
+glance(gdp_disc)$r.squared
+```
+
+```
+## [1] 1.127921e-05
+```
+The r-squared value of 0.0000112 suggests no correlation (or an extremely weak positive correlation) between the number of discovered exoplanets and countries GDP in 2020.
+---
+
+### GDP Per-Capita Discussion
+
+- The United States has the highest GDP per-capita of any of the countries that have discovered exoplants and has the most discoveries by a significant amount
+
+- However, excluding the United States, GDP per-capita does not seem to have a significant impact on the number of exoplanets that a country is able to discover
+
+- All the countries in the sample are wealthly/developed countries
+
+- The United States has the best funded space program by a lot!
+
+---
+
+### Discovery Methods
+&lt;FONT COLOR=#728FCE&gt;
+- Radial velocity: Measure regular periodic changes in the star’s normal light spectrum which indicates how fast the star is moving directly towards or away from us
+
+&lt;FONT COLOR=magenta&gt;
+- Transit: Measure light curve when exoplanets pass in front of their host star and dim its light
+
+&lt;FONT COLOR=green&gt;
+- Microlensing: Measure light curve of a distant star that is not physically related to the planet/star
+
+&lt;FONT COLOR=black&gt; 
+- Imaging: Directly detect exoplanets using large telescope
+
+- Transit Timing Variations: Observe the variations in the timing of a transit
+
+- Orbital Brightness Modulation: Measure regular, periodic rises in the amount of light that space telescopes receive from the stars
+
+
+&lt;p align="center"&gt;
+&lt;img class="J9AiF" src="https://64.media.tumblr.com/fedb2fdb5c89b7d1b4cfdbfb5ac558c6/tumblr_od10f9utK81v8t5gwo1_r1_500.png" alt="#tattoo commission from indigo night"&gt;
+&lt;/p&gt;
+---
+
+### Effectiveness of Discovery Methods Over Time
+&lt;img src="presentation_files/figure-html/discovery-method-over-time-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+### Change in Distance of Discovery Over Time by Discovery Method
+&lt;p align="center"&gt;
+  &lt;iframe src="https://dcs-210.github.io/project-matt-annie-ethan/presentation/img/Ethan5.gif" width="1016" height="516" frameBorder="0"&gt;&lt;/iframe&gt;
+&lt;/p&gt;
+
+---
+### Change in Distance of Discovery Over Time by Discovery Method
+&lt;img src="presentation_files/figure-html/animate-scatter-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Discovery Methods Discussion
+
+- Prior to 2006, radial velocity is the prominent method of discovery, with a few observations coming from pulsar timing
+
+- Around 2003, microlensing began to be used, allowing us to discover slightly more exoplanets per year, and we were able to discover exoplanets much further from earth
+
+- Around 2006, when transit began to be used, the number of observations per year started to increase rapidly and we were able to discover planets that were a bit further from earth
+
+&lt;p align="center"&gt;
+&lt;img src="https://th.bing.com/th/id/OIP.qH7G8WkiADoh-P_nv188RAHaFj?pid=ImgDet&amp;amp;rs=1" alt="See the source image" class=" nofocus" tabindex="0" aria-label="See the source image"&gt;
+&lt;/p&gt;
+
+---
+### Exoplanets' Radius
+&lt;img src="presentation_files/figure-html/discovery-method-vs-planet_radius-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+### Exoplanets' Mass
+&lt;img src="presentation_files/figure-html/discovery-method-vs-planet-mass-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Radius and Mass Discussion
+
+- Around the time that the transit method started being used, we began able to discover exoplanets with smaller radii (likely small solid planets)
+
+- Technology that allows us to discover exoplanets with smaller radii has increased the amount of discoveries per year
+
+- The mass of the exoplanets we have discovered over time has stayed relatively consistent (with a few outliers around 2016)
+
+- Both graphs omit one observation*
+
+.footnote[
+[*] Both graphs omit a single exoplanet with an enormous radius and mass: HD 100546 b (Mass = 239000, Radius = 77.342)
+]
+
+---
+### Multivariable model: The effect of mean distance, discovery year, dominant discovery method, and countries 2020 GDP per-capita on the number of exoplanets discovered
+
+
+
+
+```r
+multivariable_model &lt;-
+  linear_reg() %&gt;% 
+  set_engine("lm") %&gt;%
+  fit(count ~ mean_distance + disc_year + discoverymethod + GDP_2020, data = alldata_discoverymethod)
+
+glance(multivariable_model)$r.squared
+```
+
+```
+## [1] 0.7536275
+```
+The r-squared is 0.75 which suggests that **75% of the variance in the number of discovered exoplanets can be predicted by the mean distance, discovery year, dominant discovery method, and countries 2020 GDP**. Thus, this multivariable model is much better and more thorough than the simple linear models we presented in the first few slides where only one or two predictor variables (e.g. year/ distance/GDP) were used to predict the outcome variable (count).
+
+---
+
+### Conclusion
+
+- Advancements and innovation in the technology used to discover exoplanets appears to be the main driving force in the number of planets discovered each year as well as the parameters of the range of exploration
+
+- The distance of exoplanet discovery has been shown to increase over time, due to advances in technology
+
+- The radii of exoplanets being discovered today has a larger range than it did in the early days of exoplanet exploration (we are now able to discover planets with smaller radii than before)
+
+- The mass of exoplanets being discovered today is consistent with the mass of exoplanets discovered in the early days of exoplanet exploration
+
+- The GDP per-capita of countries with established space programs does not appear to have a significant impact on the amount of exoplanets discovered by different countries, though only developed countries have established space programs
+
+---
+
+### Methods Critique and Areas of Improvement
+
+Change of research direction and recommendation for future research: 
+- Initial thought: to predict the number of exoplanet discoveries in the next 5-20 years
+- Result: innovations in discovery technology are the largest driver in new exoplanet discovery
+- Future research: what steps are currently being made in the space industry to develop new technology
+
+Reliability of the data
+- Accurate and correct information reported by NASA
+- The data did have a lot of missing values, but they pertained to variables that we did not feel were relevant to our analysis  
+
+Appropriateness of the statistical analysis
+- Regression based analyses did not have very high r-squared values, so it is likely that they were either too simple or did not show a significant correlation
+- Visual-based analyses appeared to be statistically accurate and representative of other similar literature/publications
+
+---
+class: inverse, center, middle
+
+# Questions?
+
+---
+
+### Exploring the Data: Interactive Leaflet Map (Discovery Locations)
+
+
+<div id="htmlwidget-9072af8342a550c85a89" style="width:80%;height:1112.4px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9072af8342a550c85a89">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"setView":[[-13.7,13.3],2,[]],"calls":[{"method":"addProviderTiles","args":["Stamen.Terrain",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addProviderTiles","args":["Stamen.TerrainLabels",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[40.3943825290791,50.9819709165176,34.5764724309197,19.8266109627561,19.8233558602948,37.3417120768566,-24.6277801115888,-30.1703499183914,28.6083807293131,28.4476426958213,43.9306645750985,30.6794768251479,-31.2749984036885,36.1598195792537,28.5611597517004,28.4529886875658,28.446295109468,-29.2602565571196,19.8261902014316,45.5932007374395,19.7015046217098,25.0334122473401,28.4460597595227,37.2208167323358,31.6750900508879,32.90186260876,42.476783970596,33.3578262906528,31.6754779357641,-29.0149432372557,31.9601060248545,-29.0141437523653,5.30167017631788,42.5046282028155,31.6740584667582,32.7809571542029,-23.0282254451106,31.7129683519982,31.7127444785175,31.7123644972134,-31.1616210269342,32.7015585015341,-43.9712125603812,31.6658311228806,-29.0031909511819,48.2593897258202,18.3446520057977,-33.0123464043554,-31.7995997179592,19.8231288468665,35.121334666132,19.4919090294619,28.1804519662159,28.4539722468348,-26.0312342663014,28.7570043954088,-26.0297715466351,19.8233553260341,20.4221457627565,20.7091186276224],[117.570072280462,11.7060425865619,133.590501281527,-155.473898335933,-155.475623511961,-121.6337608311,-70.409027028313,-70.8099994688022,-80.6137396368239,-80.5739622868018,5.70710352856609,-104.022737873155,149.069635885472,128.9785581976,-80.5866693879583,-17.5347503843596,-80.5685721161196,-70.7308987342249,-155.46480513586,63.3371069747346,-155.092296814272,102.787674105604,-80.5731424810065,-2.54642052801587,-110.947816446172,-105.521846856651,-71.4493286030854,-116.86786396831,-110.948103179513,-70.6827621298771,-111.605727335072,-70.6858476686686,-52.8261722118122,-71.5634728414398,-110.951964833034,-105.822960230606,-67.7584144765823,-110.598798522372,-110.610065591158,-110.592008430226,149.03275411257,-109.895401944237,170.463437651313,-110.60242941989,-70.40820774069,11.6756120000543,-66.756179639539,148.255652734066,-69.2917921664421,-155.479735065747,-111.403210044987,-155.292001052193,-16.3087975527896,-17.5158510874612,27.9334782935517,-17.9011180674779,27.9241466894351,-155.470769716666,-156.148110465251,-156.255282104607],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<strong>Xinglong Station<\/strong><br/>2 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Thueringer Landessternwarte Tautenburg<\/strong><br/>8 Discoveries<br/>Ownership: Germany<br/>Ownership Type: Public","<strong>Okayama Astrophysical Observatory<\/strong><br/>23 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>W. M. Keck Observatory<\/strong><br/>180 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Gemini Observatory<\/strong><br/>9 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Lick Observatory<\/strong><br/>33 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Paranal Observatory<\/strong><br/>36 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Cerro Tololo Inter-American Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Hubble Space Telescope<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kepler<\/strong><br/>2402 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Haute-Provence Observatory<\/strong><br/>64 Discoveries<br/>Ownership: France<br/>Ownership Type: Public","<strong>McDonald Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Anglo-Australian Telescope<\/strong><br/>37 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Bohyunsan Optical Astronomical Observatory<\/strong><br/>19 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Public","<strong>Transiting Exoplanet Survey Satellite (TESS)<\/strong><br/>159 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Roque de los Muchachos Observatory<\/strong><br/>22 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>K2<\/strong><br/>467 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>La Silla Observatory<\/strong><br/>247 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>NASA Infrared Telescope Facility (IRTF)<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CoRoT<\/strong><br/>33 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Subaru Telescope<\/strong><br/>8 Discoveries<br/>Ownership: Japan<br/>Ownership Type: Public","<strong>Yunnan Astronomical Observatory<\/strong><br/>3 Discoveries<br/>Ownership: China<br/>Ownership Type: Public","<strong>Spitzer Space Telescope<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Calar Alto Observatory<\/strong><br/>14 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>MEarth Project<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Qatar<\/strong><br/>11 Discoveries<br/>Ownership: Qatar<br/>Ownership Type: Public","<strong>Acton Sky Portal Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Palomar Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>HATNet<\/strong><br/>67 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>HATSouth<\/strong><br/>69 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Kitt Peak National Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Las Campanas Observatory<\/strong><br/>29 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>CHaracterising ExOPlanets Satellite (CHEOPS)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Oak Ridge Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Fred Lawrence Whipple Observatory<\/strong><br/>6 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>Apache Point Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Atacama Large Millimeter Array (ALMA)<\/strong><br/>1 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>KELT<\/strong><br/>10 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-South<\/strong><br/>4 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KELT-North<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>KMTNet<\/strong><br/>24 Discoveries<br/>Ownership: South Korea<br/>Ownership Type: Private","<strong>Large Binocular Telescope Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>MOA<\/strong><br/>25 Discoveries<br/>Ownership: New Zealand<br/>Ownership Type: Public","<strong>Winer Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Private","<strong>OGLE<\/strong><br/>72 Discoveries<br/>Ownership: Poland<br/>Ownership Type: Public","<strong>European Southern Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Europe<br/>Ownership Type: Public","<strong>Arecibo Observatory<\/strong><br/>3 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Parkes Observatory<\/strong><br/>2 Discoveries<br/>Ownership: Australia<br/>Ownership Type: Public","<strong>Leoncito Astronomical Complex<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Infrared Survey Facility<\/strong><br/>1 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>TrES<\/strong><br/>5 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Mauna Kea Observatory<\/strong><br/>1 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>Teide Observatory<\/strong><br/>1 Discoveries<br/>Ownership: Spain<br/>Ownership Type: Public","<strong>SuperWASP<\/strong><br/>113 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-South<\/strong><br/>32 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>SuperWASP-North<\/strong><br/>5 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>WASP-South<\/strong><br/>10 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>United Kingdom Infrared Telescope<\/strong><br/>2 Discoveries<br/>Ownership: United Kingdom<br/>Ownership Type: Public","<strong>Haleakala Observatory<\/strong><br/>2 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public","<strong>XO<\/strong><br/>7 Discoveries<br/>Ownership: United States<br/>Ownership Type: Public"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-43.9712125603812,50.9819709165176],"lng":[-156.255282104607,170.463437651313]}},"evals":[],"jsHooks":[]}</script>
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
